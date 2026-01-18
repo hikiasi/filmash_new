@@ -400,6 +400,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WHY IMPORT NOW SECTION */}
+      <section className="py-24 bg-[#0f172a] text-white relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#4380c2]/5 blur-[120px] rounded-full" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">Почему выгодно заказывать <span className="text-[#cff902]">сейчас</span>?</h2>
+            <p className="text-xl text-gray-400">Рынок меняется, и ожидание может стоить вам миллионов рублей.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-[#cff902] text-4xl font-bold mb-4">до 40%</div>
+              <h3 className="text-xl font-bold mb-4 text-white">Экономия</h3>
+              <p className="text-gray-400">Разница в цене между аналогичным авто на внутреннем рынке РФ и импортом достигает 1.5 - 2 млн рублей даже после уплаты всех пошлин.</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-[#cff902] text-4xl font-bold mb-4">100%</div>
+              <h3 className="text-xl font-bold mb-4 text-white">Прозрачная история</h3>
+              <p className="text-gray-400">Вы получаете автомобиль с оригинальным пробегом и прозрачной историей обслуживания, подтвержденной аукционным листом или дилерской базой.</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
+              <div className="text-[#cff902] text-4xl font-bold mb-4">2026</div>
+              <h3 className="text-xl font-bold mb-4 text-white">Фиксация правил</h3>
+              <p className="text-gray-400">Закажите сейчас, чтобы зафиксировать текущие таможенные условия до возможного очередного пересмотра ставок утилизационного сбора.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* REVIEWS */}
       <section id="reviews" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
@@ -428,6 +457,52 @@ export default function Home() {
               <p className="text-slate-600 mb-6 italic">"Заказывали машину жене. Все прозрачно, по договору. Цена не изменилась ни на копейку. Спасибо за честность!"</p>
               <div className="font-bold text-slate-900">Игорь В.</div>
               <div className="text-sm text-slate-400">г. Краснодар, Kia Sportage</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM / TRUST SECTION */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <div className="relative">
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#cff902] rounded-3xl -z-10" />
+                <img 
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+                  alt="Our Team" 
+                  className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-[240px]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <CheckCircle2 className="text-green-500 w-5 h-5" />
+                    <span className="font-bold">Сертификация</span>
+                  </div>
+                  <p className="text-xs text-slate-500">Все наши менеджеры прошли аттестацию по таможенному праву ЕАЭС</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-1/2">
+              <span className="text-[#4380c2] font-bold tracking-widest text-sm uppercase mb-2 block">Команда профи</span>
+              <h2 className="text-4xl font-display font-bold text-slate-900 mb-6">Мы работаем для <span className="text-[#4380c2]">людей</span>, а не для галочки</h2>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                Филмаш — это не просто логистическая компания. Это команда экспертов, которые сами любят автомобили. Мы знаем каждый нюанс: от того, как проверить толщину ЛКП в Корее, до того, как правильно оформить СБКТС без задержек.
+              </p>
+              <ul className="space-y-4">
+                <li className="flex items-center gap-3 text-slate-700">
+                  <div className="w-6 h-6 rounded-full bg-[#cff902]/20 flex items-center justify-center text-[#4380c2]">✓</div>
+                  Личный менеджер 24/7 на связи
+                </li>
+                <li className="flex items-center gap-3 text-slate-700">
+                  <div className="w-6 h-6 rounded-full bg-[#cff902]/20 flex items-center justify-center text-[#4380c2]">✓</div>
+                  Собственные юристы в штате
+                </li>
+                <li className="flex items-center gap-3 text-slate-700">
+                  <div className="w-6 h-6 rounded-full bg-[#cff902]/20 flex items-center justify-center text-[#4380c2]">✓</div>
+                  Проверка авто по 150 параметрам
+                </li>
+              </ul>
             </div>
           </div>
         </div>
