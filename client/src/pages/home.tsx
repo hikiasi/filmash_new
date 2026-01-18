@@ -292,6 +292,22 @@ export default function Home() {
                     <span className="text-xs text-slate-400">под ключ</span>
                   </div>
                 </div>
+                
+                <div className="grid grid-cols-2 gap-2 mb-6">
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Пробег: 15к км
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Компл: L&K
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Сост: Идеал
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Срок: 14 дн
+                  </div>
+                </div>
+
                 <Button variant="outline" className="w-full h-12 rounded-xl" onClick={() => scrollTo("#order")}>Хочу такую</Button>
               </div>
             </motion.div>
@@ -316,6 +332,22 @@ export default function Home() {
                     <span className="text-xs text-slate-400">под ключ</span>
                   </div>
                 </div>
+
+                <div className="grid grid-cols-2 gap-2 mb-6">
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Пробег: 40к км
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Компл: Luxe
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Сост: А1
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Срок: 20 дн
+                  </div>
+                </div>
+
                 <Button variant="outline" className="w-full h-12 rounded-xl" onClick={() => scrollTo("#order")}>Хочу такую</Button>
               </div>
             </motion.div>
@@ -340,6 +372,22 @@ export default function Home() {
                     <span className="text-xs text-slate-400">под ключ</span>
                   </div>
                 </div>
+
+                <div className="grid grid-cols-2 gap-2 mb-6">
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Пробег: 60к км
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Компл: M Sport
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Сост: S
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-600 bg-slate-50 p-2 rounded-lg">
+                    <CheckCircle2 className="w-3 h-3 text-[#4380c2]" /> Срок: 30 дн
+                  </div>
+                </div>
+
                 <Button variant="outline" className="w-full h-12 rounded-xl" onClick={() => scrollTo("#order")}>Хочу такую</Button>
               </div>
             </motion.div>
