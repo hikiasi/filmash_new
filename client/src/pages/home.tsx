@@ -84,7 +84,7 @@ export default function Home() {
                   Заказать авто
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-white border-white/20 hover:bg-white/10 hover:text-white" onClick={() => scrollTo("#consultation")}>
+                <Button size="lg" variant="outline" className="h-14 px-8 text-white border-white/20 hover:bg-[#cff902] hover:text-[#0f172a] hover:border-[#cff902] transition-all" onClick={() => scrollTo("#consultation")}>
                   Получить консультацию
                 </Button>
               </motion.div>
