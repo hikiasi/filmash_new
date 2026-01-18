@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { z } from "zod";
+import InputMask from "react-input-mask";
 
 export function OrderForm() {
   const mutation = useCreateOrder();
@@ -42,7 +43,7 @@ export function OrderForm() {
               <FormItem>
                 <FormLabel>Имя</FormLabel>
                 <FormControl>
-                  <Input placeholder="Иван Иванов" {...field} className="bg-white/50" />
+                  <Input placeholder="Иван Иванов" {...field} className="h-12 bg-white/50" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -55,7 +56,18 @@ export function OrderForm() {
               <FormItem>
                 <FormLabel>Телефон</FormLabel>
                 <FormControl>
-                  <Input placeholder="+7 (999) 000-00-00" {...field} className="bg-white/50" />
+                  <InputMask
+                    mask="+7 (999) 999-99-99"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    disabled={field.disabled}
+                  >
+                    {/* @ts-ignore */}
+                    {(inputProps) => (
+                      <Input placeholder="+7 (999) 000-00-00" {...inputProps} className="h-12 bg-white/50" />
+                    )}
+                  </InputMask>
                 </FormControl>
                 <FormMessage />
               </FormItem>
