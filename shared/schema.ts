@@ -34,6 +34,9 @@ export const insertInquirySchema = createInsertSchema(inquiries).pick({
   name: true,
   phone: true,
   message: true,
+}).extend({
+  name: z.string().min(2, "Имя слишком короткое"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
 });
 
 export const insertOrderSchema = createInsertSchema(orders).pick({
@@ -44,6 +47,11 @@ export const insertOrderSchema = createInsertSchema(orders).pick({
   year: true,
   budget: true,
   comments: true,
+}).extend({
+  name: z.string().min(2, "Имя слишком короткое"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
+  carMake: z.string().min(1, "Укажите марку автомобиля"),
+  carModel: z.string().min(1, "Укажите модель автомобиля"),
 });
 
 // === EXPLICIT TYPES ===

@@ -80,11 +80,24 @@ export default function Home() {
               </motion.p>
               
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" variant="lime" className="h-14 px-8" onClick={() => scrollTo("#order")}>
-                  Заказать авто
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                <Button 
+                  size="lg" 
+                  variant="lime" 
+                  className="h-14 px-8 group relative overflow-hidden" 
+                  onClick={() => scrollTo("#order")}
+                >
+                  <span className="relative z-10 flex items-center">
+                    Заказать авто
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/20" 
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.5 }}
+                  />
                 </Button>
-                <Button size="lg" variant="outline" className="h-14 px-8 text-white border-white bg-transparent hover:bg-white/20 hover:text-white transition-all" onClick={() => scrollTo("#consultation")}>
+                <Button size="lg" variant="outline" className="h-14 px-8 text-white border-white bg-transparent hover:bg-white/10 hover:text-white transition-all shadow-lg shadow-white/5" onClick={() => scrollTo("#consultation")}>
                   Получить консультацию
                 </Button>
               </motion.div>
@@ -212,8 +225,46 @@ export default function Home() {
         </div>
       </section>
 
+      {/* STEPS SECTION */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-display font-bold text-slate-900 mb-4">Как мы работаем</h2>
+            <p className="text-lg text-slate-600">Всего 5 простых шагов до вашего нового автомобиля</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+            {/* Connecting line for desktop */}
+            <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 z-0" />
+            
+            {[
+              { step: "01", title: "Заявка", desc: "Вы оставляете заявку, мы связываемся для уточнения деталей" },
+              { step: "02", title: "Подбор", desc: "Присылаем варианты с аукционов и стоянок под ваш бюджет" },
+              { step: "03", title: "Договор", desc: "Заключаем официальный договор с фиксацией цены" },
+              { step: "04", title: "Покупка", desc: "Выкупаем авто, готовим фото/видео отчет и везем в РФ" },
+              { step: "05", title: "Доставка", desc: "Таможим, оформляем ЭПТС и передаем вам ключи" }
+            ].map((s, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="relative z-10 text-center"
+              >
+                <div className="w-16 h-16 bg-[#4380c2] text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-xl shadow-[#4380c2]/20">
+                  {s.step}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{s.title}</h3>
+                <p className="text-sm text-slate-500">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* GALLERY SHOWCASE */}
-      <section id="gallery" className="py-24">
+      <section id="gallery" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-display font-bold text-slate-900 mb-4">Примеры привезенных авто</h2>
@@ -222,7 +273,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Car Card 1 */}
-            <motion.div whileHover={{ y: -10 }} className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover-elevate"
+            >
               <div className="aspect-[4/3] overflow-hidden relative">
                 <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&q=80&w=800" alt="Geely Monjaro" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-slate-800">В наличии</div>
@@ -243,7 +297,10 @@ export default function Home() {
             </motion.div>
 
             {/* Car Card 2 */}
-            <motion.div whileHover={{ y: -10 }} className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover-elevate"
+            >
               <div className="aspect-[4/3] overflow-hidden relative">
                 <img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?auto=format&fit=crop&q=80&w=800" alt="Toyota Camry" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute top-4 left-4 bg-green-500/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-white">Доставлен</div>
@@ -264,7 +321,10 @@ export default function Home() {
             </motion.div>
 
             {/* Car Card 3 */}
-            <motion.div whileHover={{ y: -10 }} className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300">
+            <motion.div 
+              whileHover={{ y: -10 }} 
+              className="group rounded-3xl overflow-hidden bg-white border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-300 hover-elevate"
+            >
               <div className="aspect-[4/3] overflow-hidden relative">
                 <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&q=80&w=800" alt="BMW X5" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute top-4 left-4 bg-green-500/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-white">Доставлен</div>
