@@ -30,7 +30,7 @@ export function Navbar() {
           <img 
             src={logoPng} 
             alt="Филмаш Логотип" 
-            className="h-12 w-auto object-contain invert grayscale brightness-0 hover:grayscale-0 hover:invert-0 transition-all duration-300" 
+            className="h-10 w-auto object-contain transition-all duration-300" 
           />
         </Link>
 
