@@ -8,6 +8,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { ExitIntentPopup } from "@/components/exit-intent-popup";
 import { ChatWidget } from "@/components/chat-widget";
 
+import photo_2023_02_08_13_43_57 from "@assets/photo_2023-02-08_13-43-57.jpg";
+
 export default function Home() {
   const scrollTo = (id: string) => {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -52,7 +54,6 @@ export default function Home() {
       <Navbar />
       <ExitIntentPopup />
       <ChatWidget />
-      
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#0f172a] text-white">
         {/* Abstract Background Shapes */}
@@ -130,7 +131,6 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
-
       {/* TRUST STATS SECTION */}
       <section className="py-20 border-b">
         <div className="container mx-auto px-4">
@@ -166,7 +166,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* REGULATIONS SECTION - EDUCATIONAL */}
       <section id="regulations" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
@@ -224,7 +223,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* STEPS SECTION */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
@@ -262,7 +260,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* GALLERY SHOWCASE */}
       <section id="gallery" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
@@ -394,7 +391,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* WHY US */}
       <section className="py-24 bg-[#0f172a] text-white">
         <div className="container mx-auto px-4">
@@ -422,7 +418,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* FAQ SECTION */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -447,7 +442,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* WHY IMPORT NOW SECTION */}
       <section className="py-24 bg-[#0f172a] text-white relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#4380c2]/5 blur-[120px] rounded-full" />
@@ -476,7 +470,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* REVIEWS */}
       <section id="reviews" className="py-24 bg-slate-50">
         <div className="container mx-auto px-4">
@@ -509,7 +502,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* TEAM / TRUST SECTION */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
@@ -518,7 +510,7 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#cff902] rounded-3xl -z-10" />
                 <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+                  src={photo_2023_02_08_13_43_57} 
                   alt="Our Team" 
                   className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500"
                 />
@@ -555,7 +547,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ORDER FORM SECTION */}
       <section id="order" className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-slate-50 rounded-full translate-x-1/2 -translate-y-1/2" />
@@ -573,7 +564,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* FOOTER */}
       <footer className="bg-[#0f172a] text-white py-16 border-t border-white/10">
         <div className="container mx-auto px-4">
