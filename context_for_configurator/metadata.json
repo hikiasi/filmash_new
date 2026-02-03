@@ -1,0 +1,9 @@
+
+{
+  "name": "Filmash Next-Gen Car Configurator",
+  "description": "Premium car catalog with interactive configurator, AI assistance, image generation, and a powerful admin CRM.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
