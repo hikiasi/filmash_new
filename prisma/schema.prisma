@@ -35,4 +35,18 @@ model Model {
   updated_at  DateTime @updatedAt
 
   brand Brand @relation(fields: [brand_id], references: [id])
+  trims Trim[]
+}
+
+model Trim {
+  id             String   @id @default(uuid()) @db.Uuid
+  model_id       String   @db.Uuid
+  name           String
+  base_price_cny Decimal
+  base_price_rub Decimal
+  specifications Json
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  model Model @relation(fields: [model_id], references: [id])
 }
