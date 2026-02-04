@@ -6,12 +6,11 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+  output   = "../app/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Brand {
@@ -34,62 +33,75 @@ model Model {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  brand Brand @relation(fields: [brand_id], references: [id])
+  brand Brand  @relation(fields: [brand_id], references: [id])
   trims Trim[]
+
+  @@index([brand_id])
 }
 
 model Trim {
-  id                    String    @id @default(uuid()) @db.Uuid
-  model_id              String    @db.Uuid
-  name                  String
-  base_price_cny        Decimal
-  base_price_rub        Decimal
-  specifications        Json
-  created_at            DateTime  @default(now())
-  updated_at            DateTime  @updatedAt
-  model                 Model     @relation(fields: [model_id], references: [id])
-  colors                Color[]
-  wheels                Wheel[]
-  interiors             Interior[]
-  additional_options    AdditionalOption[]
-  inquiries             Inquiry[]
+  id                 String             @id @default(uuid()) @db.Uuid
+  model_id           String             @db.Uuid
+  name               String
+  base_price_cny     Decimal
+  base_price_rub     Decimal
+  specifications     Json
+  created_at         DateTime           @default(now())
+  updated_at         DateTime           @updatedAt
+  model              Model              @relation(fields: [model_id], references: [id])
+  colors             Color[]
+  wheels             Wheel[]
+  interiors          Interior[]
+  additional_options AdditionalOption[]
+  inquiries          Inquiry[]
+
+  @@index([model_id])
 }
 
 model Color {
-  id                   String   @id @default(uuid()) @db.Uuid
-  trim_id              String   @db.Uuid
+  id                   String    @id @default(uuid()) @db.Uuid
+  trim_id              String    @db.Uuid
   name                 String
   hex_code             String
   image_url            String
   is_premium           Boolean
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime @default(now())
-  trim                 Trim     @relation(fields: [trim_id], references: [id])
+  created_at           DateTime  @default(now())
+  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  inquiries            Inquiry[]
+
+  @@index([trim_id])
 }
 
 model Wheel {
-  id                   String   @id @default(uuid()) @db.Uuid
-  trim_id              String   @db.Uuid
+  id                   String    @id @default(uuid()) @db.Uuid
+  trim_id              String    @db.Uuid
   name                 String
   size                 String
   image_url            String
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime @default(now())
-  trim                 Trim     @relation(fields: [trim_id], references: [id])
+  created_at           DateTime  @default(now())
+  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  inquiries            Inquiry[]
+
+  @@index([trim_id])
 }
 
 model Interior {
-  id                   String   @id @default(uuid()) @db.Uuid
-  trim_id              String   @db.Uuid
+  id                   String    @id @default(uuid()) @db.Uuid
+  trim_id              String    @db.Uuid
   name                 String
   material             String
   image_url            String
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime @default(now())
-  trim                 Trim     @relation(fields: [trim_id], references: [id])
+  created_at           DateTime  @default(now())
+  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  inquiries            Inquiry[]
+
+  @@index([trim_id])
 }
 
 model AdditionalOption {
@@ -103,6 +115,8 @@ model AdditionalOption {
   category    String
   created_at  DateTime @default(now())
   trim        Trim     @relation(fields: [trim_id], references: [id])
+
+  @@index([trim_id])
 }
 
 model Inquiry {
@@ -126,13 +140,19 @@ model Inquiry {
   color                  Color     @relation(fields: [color_id], references: [id])
   wheels                 Wheel?    @relation(fields: [wheels_id], references: [id])
   interior               Interior? @relation(fields: [interior_id], references: [id])
+
+  @@index([trim_id])
+  @@index([color_id])
+  @@index([wheels_id])
+  @@index([interior_id])
+  @@index([status])
 }
 
 model CurrencyRate {
-  id                 String    @id @default(uuid()) @db.Uuid
+  id                 String   @id @default(uuid()) @db.Uuid
   rate_cny_to_rub    Decimal
   source             String
   is_manual_override Boolean
   valid_from         DateTime
-  created_at         DateTime  @default(now())
+  created_at         DateTime @default(now())
 }

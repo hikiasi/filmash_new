@@ -103,19 +103,19 @@
   - [x] 2.2 Инициализировать Prisma: `npx prisma init`
   - [x] 2.3 Создать schema.prisma с моделью Brand (id, name, logo_url, country_of_origin, created_at, updated_at)
   - [x] 2.4 Создать модель Model (id, brand_id, name, body_type, year, description, created_at, updated_at) с relation к Brand
-  - [ ] 2.5 Создать модель Trim (id, model_id, name, base_price_cny, base_price_rub, specifications JSONB, created_at, updated_at) с relation к Model
-  - [ ] 2.6 Создать модель Color (id, trim_id, name, hex_code, image_url, is_premium, additional_price_cny, additional_price_rub, created_at) с relation к Trim
-  - [ ] 2.7 Создать модель Wheel (id, trim_id, name, size, image_url, additional_price_cny, additional_price_rub, created_at) с relation к Trim
-  - [ ] 2.8 Создать модель Interior (id, trim_id, name, material, image_url, additional_price_cny, additional_price_rub, created_at) с relation к Trim
-  - [ ] 2.9 Создать модель AdditionalOption (id, trim_id, name, description, is_paid, price_cny, price_rub, category, created_at) с relation к Trim
-  - [ ] 2.10 Создать модель Inquiry (id, trim_id, color_id, wheels_id, interior_id, selected_options JSONB, customer_name, customer_phone, customer_email, total_price_cny, total_price_rub, status enum, configuration_snapshot JSONB, notes, created_at, updated_at)
-  - [ ] 2.11 Создать модель CurrencyRate (id, rate_cny_to_rub, source, is_manual_override, valid_from, created_at)
-  - [ ] 2.12 Добавить индексы для оптимизации запросов (brand_id, model_id, trim_id, status)
-  - [ ] 2.13 Создать первую миграцию: `npx prisma migrate dev --name init`
-  - [ ] 2.14 Создать `lib/db.ts` с инициализацией Prisma Client (singleton pattern)
-  - [ ] 2.15 Создать seed скрипт `prisma/seed.ts` с тестовыми данными (минимум 3 бренда, 5 моделей, 15 модификаций)
-  - [ ] 2.16 Запустить seed: `npx prisma db seed`
-  - [ ] 2.17 Создать TypeScript типы из Prisma schema: `npx prisma generate`
+  - [x] 2.5 Создать модель Trim (id, model_id, name, base_price_cny, base_price_rub, specifications JSONB, created_at, updated_at) с relation к Model
+  - [x] 2.6 Создать модель Color (id, trim_id, name, hex_code, image_url, is_premium, additional_price_cny, additional_price_rub, created_at) с relation к Trim
+  - [x] 2.7 Создать модель Wheel (id, trim_id, name, size, image_url, additional_price_cny, additional_price_rub, created_at) с relation к Trim
+  - [x] 2.8 Создать модель Interior (id, trim_id, name, material, image_url, additional_price_cny, additional_price_rub, created_at) с relation к Trim
+  - [x] 2.9 Создать модель AdditionalOption (id, trim_id, name, description, is_paid, price_cny, price_rub, category, created_at) с relation к Trim
+  - [x] 2.10 Создать модель Inquiry (id, trim_id, color_id, wheels_id, interior_id, selected_options JSONB, customer_name, customer_phone, customer_email, total_price_cny, total_price_rub, status enum, configuration_snapshot JSONB, notes, created_at, updated_at)
+  - [x] 2.11 Создать модель CurrencyRate (id, rate_cny_to_rub, source, is_manual_override, valid_from, created_at)
+  - [x] 2.12 Добавить индексы для оптимизации запросов (brand_id, model_id, trim_id, status)
+  - [x] 2.13 Создать первую миграцию: `npx prisma migrate dev --name init`
+  - [x] 2.14 Создать `lib/db.ts` с инициализацией Prisma Client (singleton pattern)
+  - [x] 2.15 Создать seed скрипт `prisma/seed.ts` с тестовыми данными (минимум 3 бренда, 5 моделей, 15 модификаций)
+  - [x] 2.16 Запустить seed: `npx prisma db seed`
+  - [x] 2.17 Создать TypeScript типы из Prisma schema: `npx prisma generate`
 
 - [ ] 3.0 Реализация API для каталога автомобилей
   - [ ] 3.1 Создать `types/catalog.ts` с интерфейсами CatalogItem, CatalogFilters, CatalogResponse
