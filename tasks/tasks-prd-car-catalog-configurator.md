@@ -91,8 +91,8 @@
   - [x] 1.2 Установить зависимости: `npm install @prisma/client prisma zod react-hook-form @hookform/resolvers framer-motion lucide-react @radix-ui/react-* zustand @tanstack/react-query`
   - [x] 1.3 Установить shadcn/ui: `npx shadcn-ui@latest init` и добавить необходимые компоненты (button, input, select, dialog, accordion, checkbox, slider, label, form)
   - [x] 1.4 Настроить Tailwind config с фирменными цветами Филмаш (#CFF902, #4380C2)
-  - [ ] 1.5 Создать структуру папок проекта согласно списку Relevant Files
-  - [ ] 1.6 Настроить `.env.example` с необходимыми переменными окружения (DATABASE_URL, NEXT_PUBLIC_API_URL, EMAIL_*, CURRENCY_API_KEY)
+  - [x] 1.5 Создать структуру папок проекта согласно списку Relevant Files
+  - [x] 1.6 Настроить `.env.example` с необходимыми переменными окружения (DATABASE_URL, NEXT_PUBLIC_API_URL, EMAIL_*, CURRENCY_API_KEY)
   - [ ] 1.7 Настроить `next.config.js` для оптимизации изображений (domains, formats, sizes)
   - [ ] 1.8 Создать базовый layout с header и footer
   - [ ] 1.9 Настроить ESLint и Prettier для code style
