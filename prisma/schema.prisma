@@ -39,14 +39,100 @@ model Model {
 }
 
 model Trim {
-  id             String   @id @default(uuid()) @db.Uuid
-  model_id       String   @db.Uuid
-  name           String
-  base_price_cny Decimal
-  base_price_rub Decimal
-  specifications Json
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+  id                    String    @id @default(uuid()) @db.Uuid
+  model_id              String    @db.Uuid
+  name                  String
+  base_price_cny        Decimal
+  base_price_rub        Decimal
+  specifications        Json
+  created_at            DateTime  @default(now())
+  updated_at            DateTime  @updatedAt
+  model                 Model     @relation(fields: [model_id], references: [id])
+  colors                Color[]
+  wheels                Wheel[]
+  interiors             Interior[]
+  additional_options    AdditionalOption[]
+  inquiries             Inquiry[]
+}
 
-  model Model @relation(fields: [model_id], references: [id])
+model Color {
+  id                   String   @id @default(uuid()) @db.Uuid
+  trim_id              String   @db.Uuid
+  name                 String
+  hex_code             String
+  image_url            String
+  is_premium           Boolean
+  additional_price_cny Decimal?
+  additional_price_rub Decimal?
+  created_at           DateTime @default(now())
+  trim                 Trim     @relation(fields: [trim_id], references: [id])
+}
+
+model Wheel {
+  id                   String   @id @default(uuid()) @db.Uuid
+  trim_id              String   @db.Uuid
+  name                 String
+  size                 String
+  image_url            String
+  additional_price_cny Decimal?
+  additional_price_rub Decimal?
+  created_at           DateTime @default(now())
+  trim                 Trim     @relation(fields: [trim_id], references: [id])
+}
+
+model Interior {
+  id                   String   @id @default(uuid()) @db.Uuid
+  trim_id              String   @db.Uuid
+  name                 String
+  material             String
+  image_url            String
+  additional_price_cny Decimal?
+  additional_price_rub Decimal?
+  created_at           DateTime @default(now())
+  trim                 Trim     @relation(fields: [trim_id], references: [id])
+}
+
+model AdditionalOption {
+  id          String   @id @default(uuid()) @db.Uuid
+  trim_id     String   @db.Uuid
+  name        String
+  description String
+  is_paid     Boolean
+  price_cny   Decimal?
+  price_rub   Decimal?
+  category    String
+  created_at  DateTime @default(now())
+  trim        Trim     @relation(fields: [trim_id], references: [id])
+}
+
+model Inquiry {
+  id                     String    @id @default(uuid()) @db.Uuid
+  trim_id                String    @db.Uuid
+  color_id               String    @db.Uuid
+  wheels_id              String?   @db.Uuid
+  interior_id            String?   @db.Uuid
+  selected_options       Json
+  customer_name          String
+  customer_phone         String
+  customer_email         String
+  total_price_cny        Decimal
+  total_price_rub        Decimal
+  status                 String // ENUM equivalent: 'new', 'in_progress', 'completed', 'cancelled'
+  configuration_snapshot Json
+  notes                  String?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+  trim                   Trim      @relation(fields: [trim_id], references: [id])
+  color                  Color     @relation(fields: [color_id], references: [id])
+  wheels                 Wheel?    @relation(fields: [wheels_id], references: [id])
+  interior               Interior? @relation(fields: [interior_id], references: [id])
+}
+
+model CurrencyRate {
+  id                 String    @id @default(uuid()) @db.Uuid
+  rate_cny_to_rub    Decimal
+  source             String
+  is_manual_override Boolean
+  valid_from         DateTime
+  created_at         DateTime  @default(now())
 }
