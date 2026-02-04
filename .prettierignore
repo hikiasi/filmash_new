@@ -1,0 +1,8 @@
+# Ignore artifacts:
+.next
+node_modules
+dist
+out
+
+# Ignore config files:
+package-lock.json
