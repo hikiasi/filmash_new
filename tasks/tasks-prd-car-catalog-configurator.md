@@ -99,8 +99,8 @@
   - [x] 1.10 Инициализировать Git репозиторий и создать `.gitignore`
 
 - [ ] 2.0 Настройка базы данных PostgreSQL и Prisma ORM
-  - [ ] 2.1 Установить и настроить PostgreSQL локально или через Docker
-  - [ ] 2.2 Инициализировать Prisma: `npx prisma init`
+  - [x] 2.1 Установить и настроить PostgreSQL локально или через Docker
+  - [x] 2.2 Инициализировать Prisma: `npx prisma init`
   - [ ] 2.3 Создать schema.prisma с моделью Brand (id, name, logo_url, country_of_origin, created_at, updated_at)
   - [ ] 2.4 Создать модель Model (id, brand_id, name, body_type, year, description, created_at, updated_at) с relation к Brand
   - [ ] 2.5 Создать модель Trim (id, model_id, name, base_price_cny, base_price_rub, specifications JSONB, created_at, updated_at) с relation к Model
