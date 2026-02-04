@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { OrderForm } from "@/components/forms/order-form";
@@ -9,8 +10,6 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Info, FileText, CarFront, H
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { ExitIntentPopup } from "@/components/exit-intent-popup";
 import { ChatWidget } from "@/components/chat-widget";
-
-import photo_2023_02_08_13_43_57 from "@assets/photo_2023-02-08_13-43-57.jpg";
 
 export default function Home() {
   const scrollTo = (id: string) => {
@@ -511,9 +510,11 @@ export default function Home() {
             <div className="lg:w-1/2">
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-[#cff902] rounded-3xl -z-10" />
-                <img 
-                  src={photo_2023_02_08_13_43_57} 
-                  alt="Our Team" 
+                <Image
+                  src="/assets/photo_2023-02-08_13-43-57.jpg"
+                  alt="Our Team"
+                  width={500}
+                  height={750}
                   className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 max-w-[240px]">

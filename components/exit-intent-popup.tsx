@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { X, AlertCircle } from "lucide-react";
-import logoPng from "@assets/2aa2806e602702e8a69e25cfba32814980b2b74b4cea99571313c57f9d2ea5_1768699893879.png";
 
 export function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +43,7 @@ export function ExitIntentPopup() {
             </button>
             <div className="text-center">
               <div className="mb-6 flex justify-center">
-                <img src={logoPng} alt="Филмаш" className="h-12 w-auto object-contain" />
+                <Image src="/assets/2aa2806e602702e8a69e25cfba32814980b2b74b4cea99571313c57f9d2ea5_1768699893879.png" alt="Филмаш" width={105} height={48} className="object-contain" />
               </div>
               <h2 className="text-3xl font-display font-bold text-slate-900 mb-4">Подождите, не уходите!</h2>
               <p className="text-slate-600 mb-8 leading-relaxed">

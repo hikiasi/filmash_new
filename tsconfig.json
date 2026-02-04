@@ -26,12 +26,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "@assets/*": [
-        "./attached_assets/*"
-      ],
-      "@shared/*": [
-        "./shared/*"
       ]
     }
   },
