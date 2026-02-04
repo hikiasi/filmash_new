@@ -21,4 +21,18 @@ model Brand {
   country_of_origin String
   created_at        DateTime @default(now())
   updated_at        DateTime @updatedAt
+  models            Model[]
+}
+
+model Model {
+  id          String   @id @default(uuid()) @db.Uuid
+  brand_id    String   @db.Uuid
+  name        String
+  body_type   String
+  year        Int
+  description String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  brand Brand @relation(fields: [brand_id], references: [id])
 }
