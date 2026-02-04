@@ -1,6 +1,16 @@
+# Next.js
+.next
+out
+.vercel
+
+# Dependencies
 node_modules
 dist
+
+# System Files
 .DS_Store
+
+# Old project files
 server/public
 vite.config.ts.*
 *.tar.gz
