@@ -95,8 +95,8 @@
   - [x] 1.6 Настроить `.env.example` с необходимыми переменными окружения (DATABASE_URL, NEXT_PUBLIC_API_URL, EMAIL_*, CURRENCY_API_KEY)
   - [x] 1.7 Настроить `next.config.js` для оптимизации изображений (domains, formats, sizes)
   - [x] 1.8 Создать базовый layout с header и footer
-  - [ ] 1.9 Настроить ESLint и Prettier для code style
-  - [ ] 1.10 Инициализировать Git репозиторий и создать `.gitignore`
+  - [x] 1.9 Настроить ESLint и Prettier для code style
+  - [x] 1.10 Инициализировать Git репозиторий и создать `.gitignore`
 
 - [ ] 2.0 Настройка базы данных PostgreSQL и Prisma ORM
   - [ ] 2.1 Установить и настроить PostgreSQL локально или через Docker
