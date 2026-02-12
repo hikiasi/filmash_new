@@ -86,7 +86,7 @@
 
 ## Tasks
 
-- [ ] 1.0 Настройка проекта и базовой инфраструктуры
+- [x] 1.0 Настройка проекта и базовой инфраструктуры
   - [x] 1.1 Инициализировать Next.js 14+ проект с TypeScript и App Router (`npx create-next-app@latest filmash-catalog --typescript --tailwind --app`)
   - [x] 1.2 Установить зависимости: `npm install @prisma/client prisma zod react-hook-form @hookform/resolvers framer-motion lucide-react @radix-ui/react-* zustand @tanstack/react-query`
   - [x] 1.3 Установить shadcn/ui: `npx shadcn-ui@latest init` и добавить необходимые компоненты (button, input, select, dialog, accordion, checkbox, slider, label, form)
@@ -98,7 +98,7 @@
   - [x] 1.9 Настроить ESLint и Prettier для code style
   - [x] 1.10 Инициализировать Git репозиторий и создать `.gitignore`
 
-- [ ] 2.0 Настройка базы данных PostgreSQL и Prisma ORM
+- [x] 2.0 Настройка базы данных PostgreSQL и Prisma ORM
   - [x] 2.1 Установить и настроить PostgreSQL локально или через Docker
   - [x] 2.2 Инициализировать Prisma: `npx prisma init`
   - [x] 2.3 Создать schema.prisma с моделью Brand (id, name, logo_url, country_of_origin, created_at, updated_at)
@@ -118,7 +118,7 @@
   - [x] 2.17 Создать TypeScript типы из Prisma schema: `npx prisma generate`
 
 - [ ] 3.0 Реализация API для каталога автомобилей
-  - [ ] 3.1 Создать `types/catalog.ts` с интерфейсами CatalogItem, CatalogFilters, CatalogResponse
+  - [x] 3.1 Создать `types/catalog.ts` с интерфейсами CatalogItem, CatalogFilters, CatalogResponse
   - [ ] 3.2 Создать Zod схемы валидации в `lib/validations/filters.ts` (brand[], bodyType[], priceRange, powerRange, driveType[], engineType[])
   - [ ] 3.3 Создать `app/api/catalog/route.ts` с GET endpoint для получения каталога
   - [ ] 3.4 Реализовать логику фильтрации в API: по марке, типу кузова, диапазону цен (базовая цена минимальной модификации)
