@@ -119,8 +119,8 @@
 
 - [ ] 3.0 Реализация API для каталога автомобилей
   - [x] 3.1 Создать `types/catalog.ts` с интерфейсами CatalogItem, CatalogFilters, CatalogResponse
-  - [ ] 3.2 Создать Zod схемы валидации в `lib/validations/filters.ts` (brand[], bodyType[], priceRange, powerRange, driveType[], engineType[])
-  - [ ] 3.3 Создать `app/api/catalog/route.ts` с GET endpoint для получения каталога
+  - [x] 3.2 Создать Zod схемы валидации в `lib/validations/filters.ts` (brand[], bodyType[], priceRange, powerRange, driveType[], engineType[])
+  - [x] 3.3 Создать `app/api/catalog/route.ts` с GET endpoint для получения каталога
   - [ ] 3.4 Реализовать логику фильтрации в API: по марке, типу кузова, диапазону цен (базовая цена минимальной модификации)
   - [ ] 3.5 Реализовать логику фильтрации: по мощности (из specifications), по типу привода, по типу двигателя
   - [ ] 3.6 Реализовать поиск по названию марки и модели (case-insensitive, частичное совпадение)
