@@ -5,10 +5,16 @@ import { CatalogGrid } from '@/components/catalog/CatalogGrid';
 import { CatalogItem } from '@/types/catalog';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useCatalogFilters } from '@/lib/hooks/use-catalog-filters';
 import { CarCardSkeleton } from '@/components/catalog/CarCardSkeleton';
 
-const fetchCatalog = async ({ pageParam = 1 }) => {
-  const res = await fetch(`/api/catalog?page=${pageParam}&limit=6`);
+const fetchCatalog = async ({ pageParam = 1, queryKey }: { pageParam: number, queryKey: (string | null)[] }) => {
+  const [_key, brand] = queryKey;
+  let url = `/api/catalog?page=${pageParam}&limit=6`;
+  if (brand) {
+    url += `&brands=${brand}`;
+  }
+  const res = await fetch(url);
   if (!res.ok) {
     throw new Error('Failed to fetch catalog');
   }
@@ -18,6 +24,7 @@ const fetchCatalog = async ({ pageParam = 1 }) => {
 
 export default function CatalogClient() {
   const { ref, inView } = useInView();
+  const { brand } = useCatalogFilters();
 
   const {
     data,
@@ -27,11 +34,11 @@ export default function CatalogClient() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ['catalog'],
+    queryKey: ['catalog', brand],
     queryFn: fetchCatalog,
     getNextPageParam: (lastPage, allPages) => {
-      // If the last page had fewer items than the limit, there are no more pages.
-      return lastPage.length === 6 ? allPages.length + 1 : undefined;
+      if (lastPage.length < 6) return undefined;
+      return allPages.length + 1;
     },
     initialPageParam: 1,
   });

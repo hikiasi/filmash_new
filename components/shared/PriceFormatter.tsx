@@ -18,8 +18,8 @@ export const PriceFormatter: React.FC<PriceFormatterProps> = ({ priceCny, classN
 
   return (
     <div className={className}>
-      <div className="text-xl font-bold text-white">{priceRub.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0 })}</div>
-      <div className="text-sm text-zinc-500 font-medium">от {priceCny.toLocaleString('zh-CN', { style: 'currency', currency: 'CNY' })}</div>
+      <div className="text-2xl font-bold text-white">{priceRub.toLocaleString('ru-RU', { style: 'currency', currency: 'RUB', minimumFractionDigits: 0 })}</div>
+      <div className="text-sm text-zinc-400 font-medium text-right">от {priceCny.toLocaleString('zh-CN', { style: 'currency', currency: 'CNY' })}</div>
     </div>
   );
 };

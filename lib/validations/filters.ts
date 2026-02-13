@@ -1,7 +1,10 @@
 import { z } from 'zod';
 
 export const catalogFiltersSchema = z.object({
-  brands: z.array(z.string()).optional(),
+  brands: z.preprocess(
+      (val) => (typeof val === 'string' ? [val] : val),
+      z.array(z.string()).optional()
+    ),
   bodyTypes: z.array(z.string()).optional(),
   priceRange: z.tuple([z.number(), z.number()]).optional(),
   powerRange: z.tuple([z.number(), z.number()]).optional(),

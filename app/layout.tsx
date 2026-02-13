@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${unbounded.variable}`}>
         <Providers>
           <Navbar />
-          <main>{children}</main>
+          <main className="pt-20">{children}</main>
           <Footer />
         </Providers>
       </body>
