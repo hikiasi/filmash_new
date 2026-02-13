@@ -3,28 +3,33 @@ import prisma from '@/lib/db';
 import { catalogFiltersSchema } from '@/lib/validations/filters';
 import { CatalogItem, CatalogResponse } from '@/types/catalog';
 import { Prisma } from '@/app/generated/prisma/client';
+import { z } from 'zod';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
+    const params = Object.fromEntries(searchParams);
 
     // 1. Validate query params
-    const validatedParams = catalogFiltersSchema.safeParse(Object.fromEntries(searchParams));
+    const validatedParams = catalogFiltersSchema.safeParse(params);
     
     if (!validatedParams.success) {
       return new NextResponse(JSON.stringify(validatedParams.error.flatten().fieldErrors), { status: 400 });
     }
     
     const { brands, bodyTypes, priceRange, powerRange, driveTypes, engineTypes, search } = validatedParams.data;
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '12');
-    const sortBy = searchParams.get('sortBy') || 'base_price_rub';
-    const order = searchParams.get('order') || 'asc';
+    const page = parseInt(params.page || '1');
+    const limit = parseInt(params.limit || '12');
+    const sortBy = params.sortBy || 'year';
+    const order = params.order || 'desc';
 
     const skip = (page - 1) * limit;
 
     // 2. Construct Prisma Query Conditions
     const where: Prisma.ModelWhereInput = {};
+    const trimWhere: Prisma.TrimWhereInput = {};
+    const trimSomeFilter: Prisma.TrimWhereInput[] = [];
+
 
     if (search) {
       where.OR = [
@@ -39,67 +44,52 @@ export async function GET(request: Request) {
       where.body_type = { in: bodyTypes };
     }
     if (priceRange) {
-        where.trims = {
-            some: {
-                base_price_rub: {
-                    gte: priceRange[0],
-                    lte: priceRange[1],
-                }
-            }
-        }
+      trimSomeFilter.push({ base_price_rub: { gte: priceRange[0], lte: priceRange[1] } });
     }
-    // Note: Filtering on JSON fields can be complex. This is a simplified approach.
-    // For production, you might need raw queries or more structured JSON.
+    
     if (powerRange) {
-        where.trims = {
-            ...where.trims,
-            some: {
-                ...((where.trims as any)?.some || {}),
-                specifications: {
-                    path: ['power'],
-                    gte: powerRange[0],
-                    lte: powerRange[1],
-                }
+        trimSomeFilter.push({
+            specifications: {
+                path: ['power'],
+                gte: powerRange[0],
+                lte: powerRange[1],
             }
-        }
+        });
     }
-     if (driveTypes && driveTypes.length > 0) {
-        where.trims = {
-            ...where.trims,
-            some: {
-                ...((where.trims as any)?.some || {}),
-                specifications: {
-                    path: ['driveType'],
-                    in: driveTypes
-                }
+    if (driveTypes && driveTypes.length > 0) {
+        trimSomeFilter.push({
+          OR: driveTypes.map(dt => ({
+            specifications: {
+              path: ['driveType'],
+              equals: dt,
             }
-        }
+          }))
+        });
     }
     if (engineTypes && engineTypes.length > 0) {
-         where.trims = {
-            ...where.trims,
-            some: {
-                ...((where.trims as any)?.some || {}),
-                specifications: {
-                    path: ['engineType'],
-                    in: engineTypes
-                }
+        trimSomeFilter.push({
+          OR: engineTypes.map(et => ({
+            specifications: {
+              path: ['engineType'],
+              equals: et,
             }
-        }
+          }))
+        });
     }
 
+    if (trimSomeFilter.length > 0) {
+        where.trims = {
+            some: {
+                AND: trimSomeFilter,
+            }
+        };
+    }
 
     // 3. Sorting
     const orderBy: Prisma.ModelOrderByWithRelationInput = {};
     if (sortBy === 'name' || sortBy === 'year') {
-        orderBy[sortBy] = order;
-    } else { // Default to sorting by price on the related Trim model
-        orderBy.trims = {
-            _min: {
-                [sortBy]: order,
-            }
-        }
-    }
+        orderBy[sortBy] = order as Prisma.SortOrder;
+    } 
 
     // 4. Execute Queries
     const [models, totalCount] = await prisma.$transaction([
