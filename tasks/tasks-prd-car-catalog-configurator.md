@@ -133,17 +133,17 @@
   - [x] 3.13 Создать `app/api/catalog/[modelId]/route.ts` для получения детальной информации о модели (все модификации)
 
 - [ ] 4.0 Создание UI компонентов каталога
-  - [ ] 4.1 Создать `types/database.ts` с TypeScript типами на основе Prisma моделей
-  - [ ] 4.2 Создать `components/shared/PriceFormatter.tsx` - компонент для отображения цены в двух валютах (₽ / ¥)
-  - [ ] 4.3 Создать `components/catalog/CarCard.tsx` - карточка автомобиля с изображением, названием, ценой от, годом, краткими характеристиками
-  - [ ] 4.4 Добавить hover эффекты на CarCard (scale, shadow) через Framer Motion
-  - [ ] 4.5 Добавить Link на страницу конфигуратора в CarCard
-  - [ ] 4.6 Создать `components/catalog/CatalogGrid.tsx` - сетка карточек с responsive layout (1 колонка на mobile, 2 на tablet, 3-4 на desktop)
-  - [ ] 4.7 Реализовать infinite scroll в CatalogGrid используя Intersection Observer API
-  - [ ] 4.8 Добавить skeleton loading состояние для карточек
-  - [ ] 4.9 Создать `app/catalog/page.tsx` - главная страница каталога
-  - [ ] 4.10 Интегрировать React Query для fetching данных каталога с кэшированием (staleTime: 5 минут)
-  - [ ] 4.11 Добавить состояние загрузки и обработку ошибок на странице каталога
+  - [x] 4.1 Создать `types/database.ts` с TypeScript типами на основе Prisma моделей
+  - [x] 4.2 Создать `components/shared/PriceFormatter.tsx` - компонент для отображения цены в двух валютах (₽ / ¥)
+  - [x] 4.3 Создать `components/catalog/CarCard.tsx` - карточка автомобиля с изображением, названием, ценой от, годом, краткими характеристиками
+  - [x] 4.4 Добавить hover эффекты на CarCard (scale, shadow) через Framer Motion
+  - [x] 4.5 Добавить Link на страницу конфигуратора в CarCard
+  - [x] 4.6 Создать `components/catalog/CatalogGrid.tsx` - сетка карточек с responsive layout (1 колонка на mobile, 2 на tablet, 3-4 на desktop)
+  - [x] 4.7 Реализовать infinite scroll в CatalogGrid используя Intersection Observer API
+  - [x] 4.8 Добавить skeleton loading состояние для карточек
+  - [x] 4.9 Создать `app/catalog/page.tsx` - главная страница каталога
+  - [x] 4.10 Интегрировать React Query для fetching данных каталога с кэшированием (staleTime: 5 минут)
+  - [x] 4.11 Добавить состояние загрузки и обработку ошибок на странице каталога
   - [ ] 4.12 Настроить SEO мета-теги для страницы каталога
 
 - [ ] 5.0 Реализация системы фильтрации и поиска
