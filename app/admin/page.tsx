@@ -1,49 +1,83 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import prisma from '@/lib/db';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
-const InquiryRow = ({ id, initials, color, name, car, price, status, date }: any) => (
-  <tr className="hover:bg-zinc-800/50 transition-colors group border-b border-zinc-900 last:border-0">
-    <td className="px-4 py-4 whitespace-nowrap">
-      <input type="checkbox" className="size-4 rounded border-zinc-800 bg-transparent text-primary focus:ring-offset-zinc-950 focus:ring-primary" />
-    </td>
-    <td className="px-4 py-4 whitespace-nowrap text-sm font-bold text-primary italic uppercase tracking-tighter">{id}</td>
-    <td className="px-4 py-4 whitespace-nowrap">
-      <div className="flex items-center gap-3">
-        <div className={`size-8 rounded-lg ${color} flex items-center justify-center text-xs font-black border border-white/10 italic`}>{initials}</div>
-        <div className="text-sm font-bold text-white uppercase italic tracking-tight">{name}</div>
-      </div>
-    </td>
-    <td className="px-4 py-4 whitespace-nowrap">
-      <div className="flex flex-col">
-        <span className="text-sm text-white font-black uppercase italic tracking-tighter">{car.model}</span>
-        <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{car.detail}</span>
-      </div>
-    </td>
-    <td className="px-4 py-4 whitespace-nowrap">
-      <div className="flex flex-col">
-        <span className="text-sm font-black text-white italic">{price.rub}</span>
-        <span className="text-[10px] text-zinc-500 font-bold">{price.cny}</span>
-      </div>
-    </td>
-    <td className="px-4 py-4 whitespace-nowrap">
-      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${status.style}`}>
-        {status.dot && <span className={`size-1.5 rounded-full ${status.dotColor} mr-1.5 ${status.pulse ? 'animate-pulse' : ''}`}></span>}
-        {status.icon && <span className="material-symbols-outlined mr-1" style={{fontSize: '14px'}}>{status.icon}</span>}
-        {status.label}
-      </span>
-    </td>
-    <td className="px-4 py-4 whitespace-nowrap text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{date}</td>
-    <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
-      <Link href={`/admin/inquiries/${id.replace('#', '')}`} className="text-zinc-500 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-800 inline-block">
-        <span className="material-symbols-outlined" style={{fontSize: '20px'}}>visibility</span>
-      </Link>
-    </td>
-  </tr>
-);
+const InquiryRow = ({ inquiry }: { inquiry: any }) => {
+  const trim = inquiry.trim || {};
+  const modelName = trim.model?.name || 'Неизвестно';
+  const trimName = trim.name || '';
+  const priceRub = inquiry.total_price_rub ? `${(Number(inquiry.total_price_rub) / 1000000).toFixed(1)}M ₽` : '—';
+  const priceCny = inquiry.total_price_cny ? `${(Number(inquiry.total_price_cny) / 1000).toFixed(0)}k ¥` : '—';
 
-export default function Dashboard() {
+  const initials = inquiry.customer_name ? inquiry.customer_name.split(' ').map((n: string) => n[0]).join('').toUpperCase() : '??';
+
+  return (
+    <tr className="hover:bg-zinc-800/50 transition-colors group border-b border-zinc-900 last:border-0">
+      <td className="px-4 py-4 whitespace-nowrap text-sm font-bold text-primary italic uppercase tracking-tighter">#{inquiry.id.slice(-4)}</td>
+      <td className="px-4 py-4 whitespace-nowrap">
+        <div className="flex items-center gap-3">
+          <div className="size-8 rounded-lg bg-zinc-800 flex items-center justify-center text-xs font-black border border-white/10 italic text-zinc-400">{initials}</div>
+          <div className="text-sm font-bold text-white uppercase italic tracking-tight">{inquiry.customer_name}</div>
+        </div>
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap">
+        <div className="flex flex-col">
+          <span className="text-sm text-white font-black uppercase italic tracking-tighter">{modelName}</span>
+          <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{trimName}</span>
+        </div>
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap">
+        <div className="flex flex-col">
+          <span className="text-sm font-black text-white italic">{priceRub}</span>
+          <span className="text-[10px] text-zinc-500 font-bold">{priceCny}</span>
+        </div>
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap">
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+            inquiry.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+            inquiry.status === 'IN_PROGRESS' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+            'bg-green-500/10 text-green-400 border-green-500/20'
+        }`}>
+          {inquiry.status === 'NEW' && <span className="size-1.5 rounded-full bg-blue-400 mr-1.5"></span>}
+          {inquiry.status === 'IN_PROGRESS' && <span className="size-1.5 rounded-full bg-amber-400 mr-1.5 animate-pulse"></span>}
+          {inquiry.status === 'COMPLETED' && <span className="material-symbols-outlined mr-1" style={{fontSize: '14px'}}>check_circle</span>}
+          {inquiry.status}
+        </span>
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
+        {format(new Date(inquiry.created_at), 'dd MMM yyyy', { locale: ru })}
+      </td>
+      <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+        <Link href={`/admin/inquiries/${inquiry.id}`} className="text-zinc-500 hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-800 inline-block">
+          <span className="material-symbols-outlined" style={{fontSize: '20px'}}>visibility</span>
+        </Link>
+      </td>
+    </tr>
+  );
+};
+
+export default async function Dashboard() {
+  const inquiries = await prisma.inquiry.findMany({
+    take: 10,
+    orderBy: { created_at: 'desc' },
+    include: {
+      trim: {
+        include: {
+          model: true
+        }
+      }
+    }
+  });
+
+  const stats = {
+    total: await prisma.inquiry.count(),
+    new: await prisma.inquiry.count({ where: { status: 'NEW' } }),
+    models: await prisma.model.count(),
+    brands: await prisma.brand.count(),
+  };
+
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
@@ -58,33 +92,34 @@ export default function Dashboard() {
                 <span className="material-symbols-outlined text-[18px]">file_download</span>
                 Экспорт
               </button>
-              <button className="flex items-center gap-2 h-10 px-4 rounded-xl bg-primary hover:opacity-90 text-black text-xs font-black uppercase tracking-widest shadow-lg shadow-primary/20 transition-all">
-                <span className="material-symbols-outlined text-[18px]">add</span>
-                Новая заявка
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between mt-2">
-            <div className="relative w-full lg:max-w-md group">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span className="material-symbols-outlined text-zinc-600 group-focus-within:text-primary transition-colors">search</span>
-              </div>
-              <input className="block w-full pl-10 pr-3 py-3 border border-zinc-800 rounded-xl bg-zinc-950 text-white placeholder-zinc-700 focus:outline-none focus:ring-1 focus:ring-primary text-sm font-bold" placeholder="Поиск по ID, клиенту или авто..." type="text" />
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              {['Статус: Все', 'Марка: Все', 'Период: 30 дней'].map((filter) => (
-                <button key={filter} className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white text-[10px] font-black uppercase tracking-widest transition-all">
-                  <span>{filter}</span>
-                  <span className="material-symbols-outlined text-zinc-600" style={{fontSize: '18px'}}>arrow_drop_down</span>
-                </button>
-              ))}
             </div>
           </div>
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-6 pt-0">
+      <div className="flex-1 overflow-auto p-6 space-y-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { label: 'Всего заявок', val: stats.total, icon: 'inbox', color: 'text-primary' },
+              { label: 'Новых', val: stats.new, icon: 'notifications_active', color: 'text-blue-500' },
+              { label: 'Моделей в базе', val: stats.models, icon: 'directions_car', color: 'text-zinc-400' },
+              { label: 'Брендов', val: stats.brands, icon: 'stars', color: 'text-amber-500' },
+            ].map(stat => (
+              <div key={stat.label} className="bg-zinc-950 border border-zinc-900 p-6 rounded-2xl shadow-xl">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className={`material-symbols-outlined ${stat.color} text-xl`}>{stat.icon}</span>
+                  <span className="text-[10px] font-black text-zinc-600 uppercase tracking-widest">{stat.label}</span>
+                </div>
+                <div className="text-3xl font-black text-white italic">{stat.val}</div>
+              </div>
+            ))}
+        </div>
+
         <div className="border border-zinc-900 rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl">
+          <div className="px-6 py-4 border-b border-zinc-900 bg-zinc-900/30 flex items-center justify-between">
+             <h3 className="text-sm font-black text-white uppercase italic tracking-widest">Последние заявки</h3>
+             <Link href="/admin/inquiries" className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline italic">Все заявки</Link>
+          </div>
           <table className="min-w-full divide-y divide-zinc-900">
             <thead className="bg-zinc-900/50">
               <tr>
@@ -95,34 +130,16 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-900">
-              <InquiryRow
-                id="#1024" initials="ИП" color="bg-indigo-500/20 text-indigo-400" name="Иван Петров"
-                car={{model: 'Li Auto L9 Max', detail: 'Черный / Оранжевый салон'}}
-                price={{rub: '7.2M ₽', cny: '540k ¥'}}
-                status={{label: 'Новая', style: 'bg-blue-500/10 text-blue-400 border-blue-500/20', dot: true, dotColor: 'bg-blue-400'}}
-                date="24 Окт 2023"
-              />
-              <InquiryRow
-                id="#1023" initials="ЕС" color="bg-pink-500/20 text-pink-400" name="Елена Смирнова"
-                car={{model: 'Zeekr 001 FR', detail: 'Белый / Серый салон'}}
-                price={{rub: '9.5M ₽', cny: '760k ¥'}}
-                status={{label: 'В работе', style: 'bg-amber-500/10 text-amber-400 border-amber-500/20', dot: true, dotColor: 'bg-amber-400', pulse: true}}
-                date="23 Окт 2023"
-              />
-               <InquiryRow
-                id="#1022" initials="ДВ" color="bg-emerald-500/20 text-emerald-400" name="Дмитрий Волков"
-                car={{model: 'Geely Monjaro', detail: 'Изумрудный / Черный'}}
-                price={{rub: '3.8M ₽', cny: '280k ¥'}}
-                status={{label: 'Заказан', style: 'bg-purple-500/10 text-purple-400 border-purple-500/20', dot: true, dotColor: 'bg-purple-400'}}
-                date="22 Окт 2023"
-              />
-               <InquiryRow
-                id="#1021" initials="АС" color="bg-orange-500/20 text-orange-400" name="Алексей Соколов"
-                car={{model: 'Voyah Free', detail: 'Зеленый / Кремовый'}}
-                price={{rub: '5.1M ₽', cny: '390k ¥'}}
-                status={{label: 'Доставлен', style: 'bg-green-500/10 text-green-400 border-green-500/20', icon: 'check_circle'}}
-                date="20 Окт 2023"
-              />
+              {inquiries.map((inquiry: any) => (
+                <InquiryRow key={inquiry.id} inquiry={inquiry} />
+              ))}
+              {inquiries.length === 0 && (
+                <tr>
+                  <td colSpan={8} className="px-4 py-20 text-center">
+                    <p className="text-zinc-600 font-black uppercase italic tracking-widest">Заявок пока нет</p>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
