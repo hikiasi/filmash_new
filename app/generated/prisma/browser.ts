@@ -48,6 +48,16 @@ export type Wheel = Prisma.WheelModel
  */
 export type Interior = Prisma.InteriorModel
 /**
+ * Model SteeringWheel
+ *
+ */
+export type SteeringWheel = Prisma.SteeringWheelModel
+/**
+ * Model ConfigurationImage
+ *
+ */
+export type ConfigurationImage = Prisma.ConfigurationImageModel
+/**
  * Model AdditionalOption
  * 
  */

@@ -2,6 +2,7 @@
 
 import { useConfiguratorStore } from '@/lib/store/configurator-store';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export function WheelSelector() {
   const { selectedTrim, selectedWheels, setSelectedWheels } = useConfiguratorStore();
@@ -9,32 +10,37 @@ export function WheelSelector() {
   if (!selectedTrim) return null;
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500">Диски</h3>
-      <div className="grid grid-cols-1 gap-2">
-        {selectedTrim.wheels?.map((wheel: any) => (
-          <button
-            key={wheel.id}
-            onClick={() => setSelectedWheels(wheel)}
-            className={cn(
-              "flex items-center justify-between px-5 py-4 rounded-2xl border transition-all text-left",
-              selectedWheels?.id === wheel.id
-                ? "bg-zinc-100 text-black border-white"
-                : "bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:border-zinc-700"
-            )}
-          >
-            <div className="flex flex-col">
-                <span className="font-bold text-sm">{wheel.name}</span>
-                <span className="text-[10px] opacity-70">{wheel.size}</span>
-            </div>
-            <span className={cn(
-              "text-xs",
-              selectedWheels?.id === wheel.id ? "text-zinc-600" : "text-zinc-500"
-            )}>
-              {wheel.additional_price_rub > 0 ? `+${Number(wheel.additional_price_rub).toLocaleString()} ₽` : 'Стандарт'}
-            </span>
-          </button>
-        ))}
+    <div className="space-y-6">
+      <div className="flex justify-between items-end">
+        <h3 className="text-sm font-black uppercase tracking-widest text-zinc-500 italic">Колеса</h3>
+        <span className="text-xs font-black text-white uppercase italic tracking-tight">{selectedWheels?.name}</span>
+      </div>
+      <div className="flex flex-wrap items-center gap-4">
+        {selectedTrim.wheels?.map((wheel: any) => {
+          const isSelected = selectedWheels?.id === wheel.id;
+          return (
+            <button
+              key={wheel.id}
+              onClick={() => setSelectedWheels(wheel)}
+              className={cn(
+                "relative rounded-2xl border-2 transition-all duration-500 flex items-center justify-center overflow-hidden bg-zinc-900",
+                isSelected
+                    ? "border-primary shadow-[0_0_20px_rgba(207,249,2,0.3)] z-10"
+                    : "border-zinc-800 opacity-60 hover:opacity-100"
+              )}
+              style={{
+                width: isSelected ? '67px' : '53px',
+                height: isSelected ? '67px' : '53px',
+              }}
+            >
+              {wheel.image_url ? (
+                  <Image src={wheel.image_url} alt={wheel.name} fill className="object-cover" />
+              ) : (
+                  <span className="material-symbols-outlined text-zinc-700">tire_repair</span>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

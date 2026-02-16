@@ -244,8 +244,10 @@ export type TrimWhereInput = {
   colors?: Prisma.ColorListRelationFilter
   wheels?: Prisma.WheelListRelationFilter
   interiors?: Prisma.InteriorListRelationFilter
+  steering_wheels?: Prisma.SteeringWheelListRelationFilter
   additional_options?: Prisma.AdditionalOptionListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }
 
 export type TrimOrderByWithRelationInput = {
@@ -261,8 +263,10 @@ export type TrimOrderByWithRelationInput = {
   colors?: Prisma.ColorOrderByRelationAggregateInput
   wheels?: Prisma.WheelOrderByRelationAggregateInput
   interiors?: Prisma.InteriorOrderByRelationAggregateInput
+  steering_wheels?: Prisma.SteeringWheelOrderByRelationAggregateInput
   additional_options?: Prisma.AdditionalOptionOrderByRelationAggregateInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
+  config_images?: Prisma.ConfigurationImageOrderByRelationAggregateInput
 }
 
 export type TrimWhereUniqueInput = Prisma.AtLeast<{
@@ -281,8 +285,10 @@ export type TrimWhereUniqueInput = Prisma.AtLeast<{
   colors?: Prisma.ColorListRelationFilter
   wheels?: Prisma.WheelListRelationFilter
   interiors?: Prisma.InteriorListRelationFilter
+  steering_wheels?: Prisma.SteeringWheelListRelationFilter
   additional_options?: Prisma.AdditionalOptionListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }, "id">
 
 export type TrimOrderByWithAggregationInput = {
@@ -327,8 +333,10 @@ export type TrimCreateInput = {
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateInput = {
@@ -343,8 +351,10 @@ export type TrimUncheckedCreateInput = {
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUpdateInput = {
@@ -359,8 +369,10 @@ export type TrimUpdateInput = {
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateInput = {
@@ -375,8 +387,10 @@ export type TrimUncheckedUpdateInput = {
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimCreateManyInput = {
@@ -559,6 +573,34 @@ export type TrimUpdateOneRequiredWithoutInteriorsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TrimUpdateToOneWithWhereWithoutInteriorsInput, Prisma.TrimUpdateWithoutInteriorsInput>, Prisma.TrimUncheckedUpdateWithoutInteriorsInput>
 }
 
+export type TrimCreateNestedOneWithoutSteering_wheelsInput = {
+  create?: Prisma.XOR<Prisma.TrimCreateWithoutSteering_wheelsInput, Prisma.TrimUncheckedCreateWithoutSteering_wheelsInput>
+  connectOrCreate?: Prisma.TrimCreateOrConnectWithoutSteering_wheelsInput
+  connect?: Prisma.TrimWhereUniqueInput
+}
+
+export type TrimUpdateOneRequiredWithoutSteering_wheelsNestedInput = {
+  create?: Prisma.XOR<Prisma.TrimCreateWithoutSteering_wheelsInput, Prisma.TrimUncheckedCreateWithoutSteering_wheelsInput>
+  connectOrCreate?: Prisma.TrimCreateOrConnectWithoutSteering_wheelsInput
+  upsert?: Prisma.TrimUpsertWithoutSteering_wheelsInput
+  connect?: Prisma.TrimWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrimUpdateToOneWithWhereWithoutSteering_wheelsInput, Prisma.TrimUpdateWithoutSteering_wheelsInput>, Prisma.TrimUncheckedUpdateWithoutSteering_wheelsInput>
+}
+
+export type TrimCreateNestedOneWithoutConfig_imagesInput = {
+  create?: Prisma.XOR<Prisma.TrimCreateWithoutConfig_imagesInput, Prisma.TrimUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.TrimCreateOrConnectWithoutConfig_imagesInput
+  connect?: Prisma.TrimWhereUniqueInput
+}
+
+export type TrimUpdateOneRequiredWithoutConfig_imagesNestedInput = {
+  create?: Prisma.XOR<Prisma.TrimCreateWithoutConfig_imagesInput, Prisma.TrimUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.TrimCreateOrConnectWithoutConfig_imagesInput
+  upsert?: Prisma.TrimUpsertWithoutConfig_imagesInput
+  connect?: Prisma.TrimWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TrimUpdateToOneWithWhereWithoutConfig_imagesInput, Prisma.TrimUpdateWithoutConfig_imagesInput>, Prisma.TrimUncheckedUpdateWithoutConfig_imagesInput>
+}
+
 export type TrimCreateNestedOneWithoutAdditional_optionsInput = {
   create?: Prisma.XOR<Prisma.TrimCreateWithoutAdditional_optionsInput, Prisma.TrimUncheckedCreateWithoutAdditional_optionsInput>
   connectOrCreate?: Prisma.TrimCreateOrConnectWithoutAdditional_optionsInput
@@ -598,8 +640,10 @@ export type TrimCreateWithoutModelInput = {
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutModelInput = {
@@ -613,8 +657,10 @@ export type TrimUncheckedCreateWithoutModelInput = {
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutModelInput = {
@@ -668,8 +714,10 @@ export type TrimCreateWithoutColorsInput = {
   model: Prisma.ModelCreateNestedOneWithoutTrimsInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutColorsInput = {
@@ -683,8 +731,10 @@ export type TrimUncheckedCreateWithoutColorsInput = {
   updated_at?: Date | string
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutColorsInput = {
@@ -714,8 +764,10 @@ export type TrimUpdateWithoutColorsInput = {
   model?: Prisma.ModelUpdateOneRequiredWithoutTrimsNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutColorsInput = {
@@ -729,8 +781,10 @@ export type TrimUncheckedUpdateWithoutColorsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimCreateWithoutWheelsInput = {
@@ -744,8 +798,10 @@ export type TrimCreateWithoutWheelsInput = {
   model: Prisma.ModelCreateNestedOneWithoutTrimsInput
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutWheelsInput = {
@@ -759,8 +815,10 @@ export type TrimUncheckedCreateWithoutWheelsInput = {
   updated_at?: Date | string
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutWheelsInput = {
@@ -790,8 +848,10 @@ export type TrimUpdateWithoutWheelsInput = {
   model?: Prisma.ModelUpdateOneRequiredWithoutTrimsNestedInput
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutWheelsInput = {
@@ -805,8 +865,10 @@ export type TrimUncheckedUpdateWithoutWheelsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimCreateWithoutInteriorsInput = {
@@ -820,8 +882,10 @@ export type TrimCreateWithoutInteriorsInput = {
   model: Prisma.ModelCreateNestedOneWithoutTrimsInput
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutInteriorsInput = {
@@ -835,8 +899,10 @@ export type TrimUncheckedCreateWithoutInteriorsInput = {
   updated_at?: Date | string
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutInteriorsInput = {
@@ -866,8 +932,10 @@ export type TrimUpdateWithoutInteriorsInput = {
   model?: Prisma.ModelUpdateOneRequiredWithoutTrimsNestedInput
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutInteriorsInput = {
@@ -881,6 +949,176 @@ export type TrimUncheckedUpdateWithoutInteriorsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
+  additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
+}
+
+export type TrimCreateWithoutSteering_wheelsInput = {
+  id?: string
+  name: string
+  base_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Date | string
+  updated_at?: Date | string
+  model: Prisma.ModelCreateNestedOneWithoutTrimsInput
+  colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
+  wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
+  interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
+}
+
+export type TrimUncheckedCreateWithoutSteering_wheelsInput = {
+  id?: string
+  model_id: string
+  name: string
+  base_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Date | string
+  updated_at?: Date | string
+  colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
+  wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
+  interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
+}
+
+export type TrimCreateOrConnectWithoutSteering_wheelsInput = {
+  where: Prisma.TrimWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrimCreateWithoutSteering_wheelsInput, Prisma.TrimUncheckedCreateWithoutSteering_wheelsInput>
+}
+
+export type TrimUpsertWithoutSteering_wheelsInput = {
+  update: Prisma.XOR<Prisma.TrimUpdateWithoutSteering_wheelsInput, Prisma.TrimUncheckedUpdateWithoutSteering_wheelsInput>
+  create: Prisma.XOR<Prisma.TrimCreateWithoutSteering_wheelsInput, Prisma.TrimUncheckedCreateWithoutSteering_wheelsInput>
+  where?: Prisma.TrimWhereInput
+}
+
+export type TrimUpdateToOneWithWhereWithoutSteering_wheelsInput = {
+  where?: Prisma.TrimWhereInput
+  data: Prisma.XOR<Prisma.TrimUpdateWithoutSteering_wheelsInput, Prisma.TrimUncheckedUpdateWithoutSteering_wheelsInput>
+}
+
+export type TrimUpdateWithoutSteering_wheelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  base_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  model?: Prisma.ModelUpdateOneRequiredWithoutTrimsNestedInput
+  colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
+  wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
+  interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
+}
+
+export type TrimUncheckedUpdateWithoutSteering_wheelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  model_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  base_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
+  wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
+  interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
+}
+
+export type TrimCreateWithoutConfig_imagesInput = {
+  id?: string
+  name: string
+  base_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Date | string
+  updated_at?: Date | string
+  model: Prisma.ModelCreateNestedOneWithoutTrimsInput
+  colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
+  wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
+  interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
+  additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+}
+
+export type TrimUncheckedCreateWithoutConfig_imagesInput = {
+  id?: string
+  model_id: string
+  name: string
+  base_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Date | string
+  updated_at?: Date | string
+  colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
+  wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
+  interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
+  additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+}
+
+export type TrimCreateOrConnectWithoutConfig_imagesInput = {
+  where: Prisma.TrimWhereUniqueInput
+  create: Prisma.XOR<Prisma.TrimCreateWithoutConfig_imagesInput, Prisma.TrimUncheckedCreateWithoutConfig_imagesInput>
+}
+
+export type TrimUpsertWithoutConfig_imagesInput = {
+  update: Prisma.XOR<Prisma.TrimUpdateWithoutConfig_imagesInput, Prisma.TrimUncheckedUpdateWithoutConfig_imagesInput>
+  create: Prisma.XOR<Prisma.TrimCreateWithoutConfig_imagesInput, Prisma.TrimUncheckedCreateWithoutConfig_imagesInput>
+  where?: Prisma.TrimWhereInput
+}
+
+export type TrimUpdateToOneWithWhereWithoutConfig_imagesInput = {
+  where?: Prisma.TrimWhereInput
+  data: Prisma.XOR<Prisma.TrimUpdateWithoutConfig_imagesInput, Prisma.TrimUncheckedUpdateWithoutConfig_imagesInput>
+}
+
+export type TrimUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  base_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  model?: Prisma.ModelUpdateOneRequiredWithoutTrimsNestedInput
+  colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
+  wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
+  interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
+  additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+}
+
+export type TrimUncheckedUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  model_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  base_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  base_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  specifications?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
+  wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
+  interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
 }
@@ -897,7 +1135,9 @@ export type TrimCreateWithoutAdditional_optionsInput = {
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutAdditional_optionsInput = {
@@ -912,7 +1152,9 @@ export type TrimUncheckedCreateWithoutAdditional_optionsInput = {
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutAdditional_optionsInput = {
@@ -943,7 +1185,9 @@ export type TrimUpdateWithoutAdditional_optionsInput = {
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutAdditional_optionsInput = {
@@ -958,7 +1202,9 @@ export type TrimUncheckedUpdateWithoutAdditional_optionsInput = {
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimCreateWithoutInquiriesInput = {
@@ -973,7 +1219,9 @@ export type TrimCreateWithoutInquiriesInput = {
   colors?: Prisma.ColorCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutTrimInput
 }
 
 export type TrimUncheckedCreateWithoutInquiriesInput = {
@@ -988,7 +1236,9 @@ export type TrimUncheckedCreateWithoutInquiriesInput = {
   colors?: Prisma.ColorUncheckedCreateNestedManyWithoutTrimInput
   wheels?: Prisma.WheelUncheckedCreateNestedManyWithoutTrimInput
   interiors?: Prisma.InteriorUncheckedCreateNestedManyWithoutTrimInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedCreateNestedManyWithoutTrimInput
   additional_options?: Prisma.AdditionalOptionUncheckedCreateNestedManyWithoutTrimInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutTrimInput
 }
 
 export type TrimCreateOrConnectWithoutInquiriesInput = {
@@ -1019,7 +1269,9 @@ export type TrimUpdateWithoutInquiriesInput = {
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutInquiriesInput = {
@@ -1034,7 +1286,9 @@ export type TrimUncheckedUpdateWithoutInquiriesInput = {
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimCreateManyModelInput = {
@@ -1058,8 +1312,10 @@ export type TrimUpdateWithoutModelInput = {
   colors?: Prisma.ColorUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateWithoutModelInput = {
@@ -1073,8 +1329,10 @@ export type TrimUncheckedUpdateWithoutModelInput = {
   colors?: Prisma.ColorUncheckedUpdateManyWithoutTrimNestedInput
   wheels?: Prisma.WheelUncheckedUpdateManyWithoutTrimNestedInput
   interiors?: Prisma.InteriorUncheckedUpdateManyWithoutTrimNestedInput
+  steering_wheels?: Prisma.SteeringWheelUncheckedUpdateManyWithoutTrimNestedInput
   additional_options?: Prisma.AdditionalOptionUncheckedUpdateManyWithoutTrimNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutTrimNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutTrimNestedInput
 }
 
 export type TrimUncheckedUpdateManyWithoutModelInput = {
@@ -1096,16 +1354,20 @@ export type TrimCountOutputType = {
   colors: number
   wheels: number
   interiors: number
+  steering_wheels: number
   additional_options: number
   inquiries: number
+  config_images: number
 }
 
 export type TrimCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   colors?: boolean | TrimCountOutputTypeCountColorsArgs
   wheels?: boolean | TrimCountOutputTypeCountWheelsArgs
   interiors?: boolean | TrimCountOutputTypeCountInteriorsArgs
+  steering_wheels?: boolean | TrimCountOutputTypeCountSteering_wheelsArgs
   additional_options?: boolean | TrimCountOutputTypeCountAdditional_optionsArgs
   inquiries?: boolean | TrimCountOutputTypeCountInquiriesArgs
+  config_images?: boolean | TrimCountOutputTypeCountConfig_imagesArgs
 }
 
 /**
@@ -1142,6 +1404,13 @@ export type TrimCountOutputTypeCountInteriorsArgs<ExtArgs extends runtime.Types.
 /**
  * TrimCountOutputType without action
  */
+export type TrimCountOutputTypeCountSteering_wheelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SteeringWheelWhereInput
+}
+
+/**
+ * TrimCountOutputType without action
+ */
 export type TrimCountOutputTypeCountAdditional_optionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AdditionalOptionWhereInput
 }
@@ -1151,6 +1420,13 @@ export type TrimCountOutputTypeCountAdditional_optionsArgs<ExtArgs extends runti
  */
 export type TrimCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InquiryWhereInput
+}
+
+/**
+ * TrimCountOutputType without action
+ */
+export type TrimCountOutputTypeCountConfig_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConfigurationImageWhereInput
 }
 
 
@@ -1167,8 +1443,10 @@ export type TrimSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   colors?: boolean | Prisma.Trim$colorsArgs<ExtArgs>
   wheels?: boolean | Prisma.Trim$wheelsArgs<ExtArgs>
   interiors?: boolean | Prisma.Trim$interiorsArgs<ExtArgs>
+  steering_wheels?: boolean | Prisma.Trim$steering_wheelsArgs<ExtArgs>
   additional_options?: boolean | Prisma.Trim$additional_optionsArgs<ExtArgs>
   inquiries?: boolean | Prisma.Trim$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Trim$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.TrimCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["trim"]>
 
@@ -1213,8 +1491,10 @@ export type TrimInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   colors?: boolean | Prisma.Trim$colorsArgs<ExtArgs>
   wheels?: boolean | Prisma.Trim$wheelsArgs<ExtArgs>
   interiors?: boolean | Prisma.Trim$interiorsArgs<ExtArgs>
+  steering_wheels?: boolean | Prisma.Trim$steering_wheelsArgs<ExtArgs>
   additional_options?: boolean | Prisma.Trim$additional_optionsArgs<ExtArgs>
   inquiries?: boolean | Prisma.Trim$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Trim$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.TrimCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TrimIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1231,8 +1511,10 @@ export type $TrimPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     colors: Prisma.$ColorPayload<ExtArgs>[]
     wheels: Prisma.$WheelPayload<ExtArgs>[]
     interiors: Prisma.$InteriorPayload<ExtArgs>[]
+    steering_wheels: Prisma.$SteeringWheelPayload<ExtArgs>[]
     additional_options: Prisma.$AdditionalOptionPayload<ExtArgs>[]
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
+    config_images: Prisma.$ConfigurationImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1641,8 +1923,10 @@ export interface Prisma__TrimClient<T, Null = never, ExtArgs extends runtime.Typ
   colors<T extends Prisma.Trim$colorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$colorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   wheels<T extends Prisma.Trim$wheelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$wheelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WheelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   interiors<T extends Prisma.Trim$interiorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$interiorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InteriorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  steering_wheels<T extends Prisma.Trim$steering_wheelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$steering_wheelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SteeringWheelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   additional_options<T extends Prisma.Trim$additional_optionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$additional_optionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdditionalOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inquiries<T extends Prisma.Trim$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  config_images<T extends Prisma.Trim$config_imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Trim$config_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConfigurationImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2148,6 +2432,30 @@ export type Trim$interiorsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * Trim.steering_wheels
+ */
+export type Trim$steering_wheelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SteeringWheel
+   */
+  select?: Prisma.SteeringWheelSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SteeringWheel
+   */
+  omit?: Prisma.SteeringWheelOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SteeringWheelInclude<ExtArgs> | null
+  where?: Prisma.SteeringWheelWhereInput
+  orderBy?: Prisma.SteeringWheelOrderByWithRelationInput | Prisma.SteeringWheelOrderByWithRelationInput[]
+  cursor?: Prisma.SteeringWheelWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SteeringWheelScalarFieldEnum | Prisma.SteeringWheelScalarFieldEnum[]
+}
+
+/**
  * Trim.additional_options
  */
 export type Trim$additional_optionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2193,6 +2501,30 @@ export type Trim$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.InquiryScalarFieldEnum | Prisma.InquiryScalarFieldEnum[]
+}
+
+/**
+ * Trim.config_images
+ */
+export type Trim$config_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConfigurationImage
+   */
+  select?: Prisma.ConfigurationImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConfigurationImage
+   */
+  omit?: Prisma.ConfigurationImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConfigurationImageInclude<ExtArgs> | null
+  where?: Prisma.ConfigurationImageWhereInput
+  orderBy?: Prisma.ConfigurationImageOrderByWithRelationInput | Prisma.ConfigurationImageOrderByWithRelationInput[]
+  cursor?: Prisma.ConfigurationImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConfigurationImageScalarFieldEnum | Prisma.ConfigurationImageScalarFieldEnum[]
 }
 
 /**

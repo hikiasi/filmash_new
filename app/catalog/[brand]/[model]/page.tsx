@@ -3,6 +3,7 @@ import prisma from '@/lib/db';
 import { notFound } from 'next/navigation';
 import ConfiguratorClient from './ConfiguratorClient';
 import { Metadata } from 'next';
+import { serializePrisma } from '@/lib/utils/serialization';
 
 interface ConfiguratorPageProps {
   params: Promise<{
@@ -84,7 +85,7 @@ export default async function ConfiguratorPage({ params }: ConfiguratorPageProps
       />
 
       <Suspense fallback={<div className="h-screen flex items-center justify-center text-primary font-bold animate-pulse">ЗАГРУЗКА КОНФИГУРАТОРА...</div>}>
-        <ConfiguratorClient model={model} />
+        <ConfiguratorClient model={serializePrisma(model)} />
       </Suspense>
     </div>
   );

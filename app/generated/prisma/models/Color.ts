@@ -254,6 +254,7 @@ export type ColorWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Color"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }
 
 export type ColorOrderByWithRelationInput = {
@@ -268,6 +269,7 @@ export type ColorOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   trim?: Prisma.TrimOrderByWithRelationInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
+  config_images?: Prisma.ConfigurationImageOrderByRelationAggregateInput
 }
 
 export type ColorWhereUniqueInput = Prisma.AtLeast<{
@@ -285,6 +287,7 @@ export type ColorWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"Color"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }, "id">
 
 export type ColorOrderByWithAggregationInput = {
@@ -330,6 +333,7 @@ export type ColorCreateInput = {
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutColorsInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutColorInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutColorInput
 }
 
 export type ColorUncheckedCreateInput = {
@@ -343,6 +347,7 @@ export type ColorUncheckedCreateInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutColorInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutColorInput
 }
 
 export type ColorUpdateInput = {
@@ -356,6 +361,7 @@ export type ColorUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutColorsNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutColorNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutColorNestedInput
 }
 
 export type ColorUncheckedUpdateInput = {
@@ -369,6 +375,7 @@ export type ColorUncheckedUpdateInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutColorNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutColorNestedInput
 }
 
 export type ColorCreateManyInput = {
@@ -462,6 +469,11 @@ export type ColorSumOrderByAggregateInput = {
   additional_price_rub?: Prisma.SortOrder
 }
 
+export type ColorNullableScalarRelationFilter = {
+  is?: Prisma.ColorWhereInput | null
+  isNot?: Prisma.ColorWhereInput | null
+}
+
 export type ColorScalarRelationFilter = {
   is?: Prisma.ColorWhereInput
   isNot?: Prisma.ColorWhereInput
@@ -521,6 +533,22 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type ColorCreateNestedOneWithoutConfig_imagesInput = {
+  create?: Prisma.XOR<Prisma.ColorCreateWithoutConfig_imagesInput, Prisma.ColorUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.ColorCreateOrConnectWithoutConfig_imagesInput
+  connect?: Prisma.ColorWhereUniqueInput
+}
+
+export type ColorUpdateOneWithoutConfig_imagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ColorCreateWithoutConfig_imagesInput, Prisma.ColorUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.ColorCreateOrConnectWithoutConfig_imagesInput
+  upsert?: Prisma.ColorUpsertWithoutConfig_imagesInput
+  disconnect?: Prisma.ColorWhereInput | boolean
+  delete?: Prisma.ColorWhereInput | boolean
+  connect?: Prisma.ColorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ColorUpdateToOneWithWhereWithoutConfig_imagesInput, Prisma.ColorUpdateWithoutConfig_imagesInput>, Prisma.ColorUncheckedUpdateWithoutConfig_imagesInput>
+}
+
 export type ColorCreateNestedOneWithoutInquiriesInput = {
   create?: Prisma.XOR<Prisma.ColorCreateWithoutInquiriesInput, Prisma.ColorUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.ColorCreateOrConnectWithoutInquiriesInput
@@ -545,6 +573,7 @@ export type ColorCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryCreateNestedManyWithoutColorInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutColorInput
 }
 
 export type ColorUncheckedCreateWithoutTrimInput = {
@@ -557,6 +586,7 @@ export type ColorUncheckedCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutColorInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutColorInput
 }
 
 export type ColorCreateOrConnectWithoutTrimInput = {
@@ -600,6 +630,74 @@ export type ColorScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Color"> | Date | string
 }
 
+export type ColorCreateWithoutConfig_imagesInput = {
+  id?: string
+  name: string
+  hex_code: string
+  image_url: string
+  is_premium: boolean
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  trim: Prisma.TrimCreateNestedOneWithoutColorsInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutColorInput
+}
+
+export type ColorUncheckedCreateWithoutConfig_imagesInput = {
+  id?: string
+  trim_id: string
+  name: string
+  hex_code: string
+  image_url: string
+  is_premium: boolean
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutColorInput
+}
+
+export type ColorCreateOrConnectWithoutConfig_imagesInput = {
+  where: Prisma.ColorWhereUniqueInput
+  create: Prisma.XOR<Prisma.ColorCreateWithoutConfig_imagesInput, Prisma.ColorUncheckedCreateWithoutConfig_imagesInput>
+}
+
+export type ColorUpsertWithoutConfig_imagesInput = {
+  update: Prisma.XOR<Prisma.ColorUpdateWithoutConfig_imagesInput, Prisma.ColorUncheckedUpdateWithoutConfig_imagesInput>
+  create: Prisma.XOR<Prisma.ColorCreateWithoutConfig_imagesInput, Prisma.ColorUncheckedCreateWithoutConfig_imagesInput>
+  where?: Prisma.ColorWhereInput
+}
+
+export type ColorUpdateToOneWithWhereWithoutConfig_imagesInput = {
+  where?: Prisma.ColorWhereInput
+  data: Prisma.XOR<Prisma.ColorUpdateWithoutConfig_imagesInput, Prisma.ColorUncheckedUpdateWithoutConfig_imagesInput>
+}
+
+export type ColorUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  hex_code?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  is_premium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trim?: Prisma.TrimUpdateOneRequiredWithoutColorsNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutColorNestedInput
+}
+
+export type ColorUncheckedUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  hex_code?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  is_premium?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutColorNestedInput
+}
+
 export type ColorCreateWithoutInquiriesInput = {
   id?: string
   name: string
@@ -610,6 +708,7 @@ export type ColorCreateWithoutInquiriesInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutColorsInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutColorInput
 }
 
 export type ColorUncheckedCreateWithoutInquiriesInput = {
@@ -622,6 +721,7 @@ export type ColorUncheckedCreateWithoutInquiriesInput = {
   additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutColorInput
 }
 
 export type ColorCreateOrConnectWithoutInquiriesInput = {
@@ -650,6 +750,7 @@ export type ColorUpdateWithoutInquiriesInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutColorsNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutColorNestedInput
 }
 
 export type ColorUncheckedUpdateWithoutInquiriesInput = {
@@ -662,6 +763,7 @@ export type ColorUncheckedUpdateWithoutInquiriesInput = {
   additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutColorNestedInput
 }
 
 export type ColorCreateManyTrimInput = {
@@ -685,6 +787,7 @@ export type ColorUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUpdateManyWithoutColorNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutColorNestedInput
 }
 
 export type ColorUncheckedUpdateWithoutTrimInput = {
@@ -697,6 +800,7 @@ export type ColorUncheckedUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutColorNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutColorNestedInput
 }
 
 export type ColorUncheckedUpdateManyWithoutTrimInput = {
@@ -717,10 +821,12 @@ export type ColorUncheckedUpdateManyWithoutTrimInput = {
 
 export type ColorCountOutputType = {
   inquiries: number
+  config_images: number
 }
 
 export type ColorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inquiries?: boolean | ColorCountOutputTypeCountInquiriesArgs
+  config_images?: boolean | ColorCountOutputTypeCountConfig_imagesArgs
 }
 
 /**
@@ -740,6 +846,13 @@ export type ColorCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Types
   where?: Prisma.InquiryWhereInput
 }
 
+/**
+ * ColorCountOutputType without action
+ */
+export type ColorCountOutputTypeCountConfig_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConfigurationImageWhereInput
+}
+
 
 export type ColorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -753,6 +866,7 @@ export type ColorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   created_at?: boolean
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Color$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Color$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ColorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["color"]>
 
@@ -798,6 +912,7 @@ export type ColorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type ColorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Color$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Color$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.ColorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ColorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -812,6 +927,7 @@ export type $ColorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     trim: Prisma.$TrimPayload<ExtArgs>
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
+    config_images: Prisma.$ConfigurationImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1219,6 +1335,7 @@ export interface Prisma__ColorClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   trim<T extends Prisma.TrimDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrimDefaultArgs<ExtArgs>>): Prisma.Prisma__TrimClient<runtime.Types.Result.GetResult<Prisma.$TrimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   inquiries<T extends Prisma.Color$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Color$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  config_images<T extends Prisma.Color$config_imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Color$config_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConfigurationImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1674,6 +1791,30 @@ export type Color$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.InquiryScalarFieldEnum | Prisma.InquiryScalarFieldEnum[]
+}
+
+/**
+ * Color.config_images
+ */
+export type Color$config_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConfigurationImage
+   */
+  select?: Prisma.ConfigurationImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConfigurationImage
+   */
+  omit?: Prisma.ConfigurationImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConfigurationImageInclude<ExtArgs> | null
+  where?: Prisma.ConfigurationImageWhereInput
+  orderBy?: Prisma.ConfigurationImageOrderByWithRelationInput | Prisma.ConfigurationImageOrderByWithRelationInput[]
+  cursor?: Prisma.ConfigurationImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConfigurationImageScalarFieldEnum | Prisma.ConfigurationImageScalarFieldEnum[]
 }
 
 /**

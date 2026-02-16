@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -40,68 +37,110 @@ model Model {
 }
 
 model Trim {
-  id                 String             @id @default(uuid()) @db.Uuid
-  model_id           String             @db.Uuid
-  name               String
-  base_price_cny     Decimal
-  base_price_rub     Decimal
-  specifications     Json
-  created_at         DateTime           @default(now())
-  updated_at         DateTime           @updatedAt
-  model              Model              @relation(fields: [model_id], references: [id])
-  colors             Color[]
-  wheels             Wheel[]
-  interiors          Interior[]
-  additional_options AdditionalOption[]
-  inquiries          Inquiry[]
+  id                  String               @id @default(uuid()) @db.Uuid
+  model_id            String               @db.Uuid
+  name                String
+  base_price_cny      Decimal
+  base_price_rub      Decimal
+  specifications      Json
+  created_at          DateTime             @default(now())
+  updated_at          DateTime             @updatedAt
+  model               Model                @relation(fields: [model_id], references: [id])
+  colors              Color[]
+  wheels              Wheel[]
+  interiors           Interior[]
+  steering_wheels     SteeringWheel[]
+  additional_options  AdditionalOption[]
+  inquiries           Inquiry[]
+  config_images       ConfigurationImage[]
 
   @@index([model_id])
 }
 
 model Color {
-  id                   String    @id @default(uuid()) @db.Uuid
-  trim_id              String    @db.Uuid
+  id                   String               @id @default(uuid()) @db.Uuid
+  trim_id              String               @db.Uuid
   name                 String
   hex_code             String
-  image_url            String
+  image_url            String // Thumbnail/Icon
   is_premium           Boolean
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime  @default(now())
-  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  created_at           DateTime             @default(now())
+  trim                 Trim                 @relation(fields: [trim_id], references: [id])
   inquiries            Inquiry[]
+  config_images        ConfigurationImage[]
 
   @@index([trim_id])
 }
 
 model Wheel {
-  id                   String    @id @default(uuid()) @db.Uuid
-  trim_id              String    @db.Uuid
+  id                   String               @id @default(uuid()) @db.Uuid
+  trim_id              String               @db.Uuid
   name                 String
   size                 String
-  image_url            String
+  image_url            String // Thumbnail/Icon
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime  @default(now())
-  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  created_at           DateTime             @default(now())
+  trim                 Trim                 @relation(fields: [trim_id], references: [id])
   inquiries            Inquiry[]
+  config_images        ConfigurationImage[]
 
   @@index([trim_id])
 }
 
 model Interior {
-  id                   String    @id @default(uuid()) @db.Uuid
-  trim_id              String    @db.Uuid
+  id                   String               @id @default(uuid()) @db.Uuid
+  trim_id              String               @db.Uuid
   name                 String
   material             String
-  image_url            String
+  image_url            String // Background/Inside view
   additional_price_cny Decimal?
   additional_price_rub Decimal?
-  created_at           DateTime  @default(now())
-  trim                 Trim      @relation(fields: [trim_id], references: [id])
+  created_at           DateTime             @default(now())
+  trim                 Trim                 @relation(fields: [trim_id], references: [id])
   inquiries            Inquiry[]
+  config_images        ConfigurationImage[]
 
   @@index([trim_id])
+}
+
+model SteeringWheel {
+  id                   String               @id @default(uuid()) @db.Uuid
+  trim_id              String               @db.Uuid
+  name                 String
+  image_url            String // Icon
+  additional_price_cny Decimal?
+  additional_price_rub Decimal?
+  created_at           DateTime             @default(now())
+  trim                 Trim                 @relation(fields: [trim_id], references: [id])
+  config_images        ConfigurationImage[]
+
+  @@index([trim_id])
+}
+
+model ConfigurationImage {
+  id                String  @id @default(uuid()) @db.Uuid
+  trim_id           String  @db.Uuid
+  color_id          String? @db.Uuid
+  wheel_id          String? @db.Uuid
+  interior_id       String? @db.Uuid
+  steering_wheel_id String? @db.Uuid
+  image_url         String
+  type              String  // 'exterior', 'interior'
+
+  trim           Trim           @relation(fields: [trim_id], references: [id])
+  color          Color?         @relation(fields: [color_id], references: [id])
+  wheel          Wheel?         @relation(fields: [wheel_id], references: [id])
+  interior       Interior?      @relation(fields: [interior_id], references: [id])
+  steering_wheel SteeringWheel? @relation(fields: [steering_wheel_id], references: [id])
+
+  @@index([trim_id])
+  @@index([color_id])
+  @@index([wheel_id])
+  @@index([interior_id])
+  @@index([steering_wheel_id])
 }
 
 model AdditionalOption {

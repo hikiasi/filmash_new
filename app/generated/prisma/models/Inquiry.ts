@@ -771,10 +771,6 @@ export type InquiryUncheckedUpdateManyWithoutInteriorNestedInput = {
   deleteMany?: Prisma.InquiryScalarWhereInput | Prisma.InquiryScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type InquiryCreateWithoutTrimInput = {
   id?: string
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
