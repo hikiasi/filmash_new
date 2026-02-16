@@ -6,26 +6,25 @@ interface PopularBrandsProps {
   brands: string[];
 }
 
-const PopularBrands: React.FC<PopularBrandsProps> = ({ brands }) => {
-  const { brand: activeBrand, setBrand } = useCatalogFilters();
+const PopularBrands: React.FC<PopularBrandsProps> = ({ brands: availableBrands }) => {
+  const { brands: activeBrands, setBrands } = useCatalogFilters();
 
   const handleBrandClick = (brandName: string) => {
-    // If clicking the same brand again, toggle it off.
-    if (activeBrand === brandName) {
-      setBrand(null);
+    if (activeBrands?.includes(brandName)) {
+      setBrands(activeBrands.filter(b => b !== brandName));
     } else {
-      setBrand(brandName);
+      setBrands([...(activeBrands || []), brandName]);
     }
   };
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {brands.map((brandName) => (
+      {availableBrands.map((brandName) => (
         <button
           key={brandName}
           onClick={() => handleBrandClick(brandName)}
           className={`text-2xl font-bold p-8 rounded-2xl text-left transition-all border
-            ${activeBrand === brandName 
+            ${activeBrands?.includes(brandName)
               ? 'bg-primary/90 text-white border-blue-400' 
               : 'bg-zinc-900 border-zinc-800 text-white hover:bg-zinc-800 hover:border-zinc-700'
             }`}

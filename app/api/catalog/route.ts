@@ -11,7 +11,11 @@ export async function GET(request: Request) {
     const params = Object.fromEntries(searchParams);
 
     // 1. Validate query params
-    const validatedParams = catalogFiltersSchema.safeParse(params);
+    const validatedParams = catalogFiltersSchema.safeParse({
+        ...params,
+        priceRange: params.priceRange ? params.priceRange.split(',').map(Number) : undefined,
+        powerRange: params.powerRange ? params.powerRange.split(',').map(Number) : undefined,
+    });
     
     if (!validatedParams.success) {
       return new NextResponse(JSON.stringify(validatedParams.error.flatten().fieldErrors), { status: 400 });
@@ -27,9 +31,7 @@ export async function GET(request: Request) {
 
     // 2. Construct Prisma Query Conditions
     const where: Prisma.ModelWhereInput = {};
-    const trimWhere: Prisma.TrimWhereInput = {};
     const trimSomeFilter: Prisma.TrimWhereInput[] = [];
-
 
     if (search) {
       where.OR = [
@@ -54,8 +56,9 @@ export async function GET(request: Request) {
                 gte: powerRange[0],
                 lte: powerRange[1],
             }
-        });
+        } as any); // Using 'any' as some Prisma versions might have strict JSON typing but this path logic works in 5.2+
     }
+
     if (driveTypes && driveTypes.length > 0) {
         trimSomeFilter.push({
           OR: driveTypes.map(dt => ({
@@ -64,7 +67,7 @@ export async function GET(request: Request) {
               equals: dt,
             }
           }))
-        });
+        } as any);
     }
     if (engineTypes && engineTypes.length > 0) {
         trimSomeFilter.push({
@@ -74,7 +77,7 @@ export async function GET(request: Request) {
               equals: et,
             }
           }))
-        });
+        } as any);
     }
 
     if (trimSomeFilter.length > 0) {
@@ -89,7 +92,9 @@ export async function GET(request: Request) {
     const orderBy: Prisma.ModelOrderByWithRelationInput = {};
     if (sortBy === 'name' || sortBy === 'year') {
         orderBy[sortBy] = order as Prisma.SortOrder;
-    } 
+    } else if (sortBy === 'price') {
+        orderBy['year'] = order as Prisma.SortOrder;
+    }
 
     // 4. Execute Queries
     const [models, totalCount] = await prisma.$transaction([
@@ -101,6 +106,11 @@ export async function GET(request: Request) {
             orderBy: {
               base_price_rub: 'asc',
             },
+            include: {
+                colors: {
+                    take: 1,
+                }
+            }
           },
         },
         skip,
@@ -113,7 +123,7 @@ export async function GET(request: Request) {
     // 5. Format Response
     const catalogItems: CatalogItem[] = models.map((model) => {
       const minPriceTrim = model.trims[0];
-      const getSpec = (key: string) => (minPriceTrim && typeof minPriceTrim.specifications === 'object' && minPriceTrim.specifications !== null && key in minPriceTrim.specifications) ? (minPriceTrim.specifications as any)[key] : undefined;
+      const getSpec = (key: string) => (minPriceTrim && typeof minPriceTrim.specifications === 'object' && minPriceTrim.specifications !== null && key in (minPriceTrim.specifications as any)) ? (minPriceTrim.specifications as any)[key] : undefined;
 
       return {
         id: model.id,
@@ -122,7 +132,7 @@ export async function GET(request: Request) {
         model: model.name,
         year: model.year,
         bodyType: model.body_type,
-        imageUrl: '', // Placeholder
+        imageUrl: minPriceTrim?.colors?.[0]?.image_url || '',
         minPriceCny: minPriceTrim ? Number(minPriceTrim.base_price_cny) : 0,
         minPriceRub: minPriceTrim ? Number(minPriceTrim.base_price_rub) : 0,
         specifications: {
