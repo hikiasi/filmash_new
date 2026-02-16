@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Unbounded } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -20,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="!scroll-smooth">
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      </head>
       <body className={`${inter.variable} ${unbounded.variable}`}>
         <Providers>
           <Navbar />
