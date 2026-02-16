@@ -3,28 +3,25 @@ import prisma from '@/lib/db';
 
 export async function GET(
   request: Request,
-  { params }: { params: { modelId: string } }
+  { params }: { params: Promise<{ modelId: string }> }
 ) {
   try {
-    const { modelId } = params;
-
-    if (!modelId) {
-      return new NextResponse('Model ID is required', { status: 400 });
-    }
+    const { modelId } = await params;
 
     const model = await prisma.model.findUnique({
-      where: {
-        id: modelId,
-      },
+      where: { id: modelId },
       include: {
         brand: true,
         trims: {
+          orderBy: {
+            base_price_rub: 'asc',
+          },
           include: {
             colors: true,
             wheels: true,
             interiors: true,
             additional_options: true,
-          },
+          }
         },
       },
     });
@@ -34,7 +31,6 @@ export async function GET(
     }
 
     return NextResponse.json(model, { status: 200 });
-
   } catch (error) {
     console.error('[MODEL_GET]', error);
     return new NextResponse('Internal error', { status: 500 });

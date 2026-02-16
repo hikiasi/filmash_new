@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-// This is a placeholder for the actual API call that will be implemented in Task 10
 const fetchCurrencyRate = async () => {
-  // In a real scenario, this would fetch from '/api/currency'
-  // For now, return a static rate.
-  await new Promise(resolve => setTimeout(resolve, 500)); // Simulate network delay
-  return { rate: 13.5 }; 
+  const res = await fetch('/api/currency');
+  if (!res.ok) {
+    throw new Error('Failed to fetch currency rate');
+  }
+  const data = await res.json();
+  return data as { rate: number };
 };
 
 export const useCurrency = () => {

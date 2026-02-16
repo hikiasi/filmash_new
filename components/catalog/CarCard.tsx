@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ChevronRight, Zap, Compass } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import PriceFormatter from '@/components/shared/PriceFormatter';
 import { CatalogItem } from '@/types/catalog';
+import ImageOptimized from '@/components/shared/ImageOptimized';
 
 interface CarCardProps {
   car: CatalogItem;
@@ -23,18 +23,13 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <Link href={carLink} className="flex flex-col h-full">
         {/* Image Section */}
         <div className="aspect-[16/10] overflow-hidden bg-zinc-800 relative">
-          {car.imageUrl ? (
-            <Image
-              src={car.imageUrl}
-              alt={`${car.brand} ${car.name}`}
-              fill
-              className="object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-800 flex items-center justify-center text-zinc-600">
-               <span className="material-symbols-outlined text-5xl">directions_car</span>
-            </div>
-          )}
+          <ImageOptimized
+            src={car.imageUrl || '/placeholder-car.jpg'}
+            alt={`${car.brand} ${car.name}`}
+            fill
+            imgClassName="object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
+            className="w-full h-full"
+          />
         </div>
         
         <div className="p-6 flex-1 flex flex-col">
