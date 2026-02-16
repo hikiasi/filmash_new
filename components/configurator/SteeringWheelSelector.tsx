@@ -4,24 +4,24 @@ import { useConfiguratorStore } from '@/lib/store/configurator-store';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
-export function InteriorSelector() {
-  const { selectedTrim, selectedInterior, setSelectedInterior } = useConfiguratorStore();
+export function SteeringWheelSelector() {
+  const { selectedTrim, selectedSteeringWheel, setSelectedSteeringWheel } = useConfiguratorStore();
 
-  if (!selectedTrim) return null;
+  if (!selectedTrim || !selectedTrim.steering_wheels?.length) return null;
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-end">
-        <h3 className="text-sm font-black uppercase tracking-widest text-zinc-500 italic">Интерьер</h3>
-        <span className="text-xs font-black text-white uppercase italic tracking-tight">{selectedInterior?.name}</span>
+        <h3 className="text-sm font-black uppercase tracking-widest text-zinc-500 italic">Рулевое колесо</h3>
+        <span className="text-xs font-black text-white uppercase italic tracking-tight">{selectedSteeringWheel?.name}</span>
       </div>
       <div className="flex flex-wrap items-center gap-4">
-        {selectedTrim.interiors?.map((interior: any) => {
-          const isSelected = selectedInterior?.id === interior.id;
+        {selectedTrim.steering_wheels.map((sw: any) => {
+          const isSelected = selectedSteeringWheel?.id === sw.id;
           return (
             <button
-              key={interior.id}
-              onClick={() => setSelectedInterior(interior)}
+              key={sw.id}
+              onClick={() => setSelectedSteeringWheel(sw)}
               className={cn(
                 "relative rounded-2xl border-2 transition-all duration-500 flex items-center justify-center overflow-hidden bg-zinc-900",
                 isSelected
@@ -33,10 +33,10 @@ export function InteriorSelector() {
                 height: isSelected ? '67px' : '53px',
               }}
             >
-              {interior.image_url ? (
-                  <Image src={interior.image_url} alt={interior.name} fill className="object-cover" />
+              {sw.image_url ? (
+                  <Image src={sw.image_url} alt={sw.name} fill className="object-cover" />
               ) : (
-                  <span className="material-symbols-outlined text-zinc-700">chair</span>
+                  <span className="material-symbols-outlined text-zinc-700">steering</span>
               )}
             </button>
           );

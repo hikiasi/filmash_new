@@ -19,7 +19,7 @@ export function TrimSelector({ trims }: TrimSelectorProps) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-500">Модификация</h3>
+      <h3 className="text-sm font-black uppercase tracking-widest text-zinc-500 italic">Модель</h3>
       <div className="grid grid-cols-1 gap-2">
         {trims.map((trim) => (
           <button

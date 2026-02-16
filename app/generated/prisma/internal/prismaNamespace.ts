@@ -390,6 +390,8 @@ export const ModelName = {
   Color: 'Color',
   Wheel: 'Wheel',
   Interior: 'Interior',
+  SteeringWheel: 'SteeringWheel',
+  ConfigurationImage: 'ConfigurationImage',
   AdditionalOption: 'AdditionalOption',
   Inquiry: 'Inquiry',
   CurrencyRate: 'CurrencyRate'
@@ -408,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "model" | "trim" | "color" | "wheel" | "interior" | "additionalOption" | "inquiry" | "currencyRate"
+    modelProps: "brand" | "model" | "trim" | "color" | "wheel" | "interior" | "steeringWheel" | "configurationImage" | "additionalOption" | "inquiry" | "currencyRate"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -856,6 +858,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SteeringWheel: {
+      payload: Prisma.$SteeringWheelPayload<ExtArgs>
+      fields: Prisma.SteeringWheelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SteeringWheelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SteeringWheelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        findFirst: {
+          args: Prisma.SteeringWheelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SteeringWheelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        findMany: {
+          args: Prisma.SteeringWheelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>[]
+        }
+        create: {
+          args: Prisma.SteeringWheelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        createMany: {
+          args: Prisma.SteeringWheelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SteeringWheelCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>[]
+        }
+        delete: {
+          args: Prisma.SteeringWheelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        update: {
+          args: Prisma.SteeringWheelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        deleteMany: {
+          args: Prisma.SteeringWheelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SteeringWheelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SteeringWheelUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>[]
+        }
+        upsert: {
+          args: Prisma.SteeringWheelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SteeringWheelPayload>
+        }
+        aggregate: {
+          args: Prisma.SteeringWheelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSteeringWheel>
+        }
+        groupBy: {
+          args: Prisma.SteeringWheelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SteeringWheelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SteeringWheelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SteeringWheelCountAggregateOutputType> | number
+        }
+      }
+    }
+    ConfigurationImage: {
+      payload: Prisma.$ConfigurationImagePayload<ExtArgs>
+      fields: Prisma.ConfigurationImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ConfigurationImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ConfigurationImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        findFirst: {
+          args: Prisma.ConfigurationImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ConfigurationImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        findMany: {
+          args: Prisma.ConfigurationImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>[]
+        }
+        create: {
+          args: Prisma.ConfigurationImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        createMany: {
+          args: Prisma.ConfigurationImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ConfigurationImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>[]
+        }
+        delete: {
+          args: Prisma.ConfigurationImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        update: {
+          args: Prisma.ConfigurationImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.ConfigurationImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ConfigurationImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ConfigurationImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.ConfigurationImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConfigurationImagePayload>
+        }
+        aggregate: {
+          args: Prisma.ConfigurationImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConfigurationImage>
+        }
+        groupBy: {
+          args: Prisma.ConfigurationImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConfigurationImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ConfigurationImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ConfigurationImageCountAggregateOutputType> | number
+        }
+      }
+    }
     AdditionalOption: {
       payload: Prisma.$AdditionalOptionPayload<ExtArgs>
       fields: Prisma.AdditionalOptionFieldRefs
@@ -1200,6 +1350,33 @@ export const InteriorScalarFieldEnum = {
 export type InteriorScalarFieldEnum = (typeof InteriorScalarFieldEnum)[keyof typeof InteriorScalarFieldEnum]
 
 
+export const SteeringWheelScalarFieldEnum = {
+  id: 'id',
+  trim_id: 'trim_id',
+  name: 'name',
+  image_url: 'image_url',
+  additional_price_cny: 'additional_price_cny',
+  additional_price_rub: 'additional_price_rub',
+  created_at: 'created_at'
+} as const
+
+export type SteeringWheelScalarFieldEnum = (typeof SteeringWheelScalarFieldEnum)[keyof typeof SteeringWheelScalarFieldEnum]
+
+
+export const ConfigurationImageScalarFieldEnum = {
+  id: 'id',
+  trim_id: 'trim_id',
+  color_id: 'color_id',
+  wheel_id: 'wheel_id',
+  interior_id: 'interior_id',
+  steering_wheel_id: 'steering_wheel_id',
+  image_url: 'image_url',
+  type: 'type'
+} as const
+
+export type ConfigurationImageScalarFieldEnum = (typeof ConfigurationImageScalarFieldEnum)[keyof typeof ConfigurationImageScalarFieldEnum]
+
+
 export const AdditionalOptionScalarFieldEnum = {
   id: 'id',
   trim_id: 'trim_id',
@@ -1486,6 +1663,8 @@ export type GlobalOmitConfig = {
   color?: Prisma.ColorOmit
   wheel?: Prisma.WheelOmit
   interior?: Prisma.InteriorOmit
+  steeringWheel?: Prisma.SteeringWheelOmit
+  configurationImage?: Prisma.ConfigurationImageOmit
   additionalOption?: Prisma.AdditionalOptionOmit
   inquiry?: Prisma.InquiryOmit
   currencyRate?: Prisma.CurrencyRateOmit

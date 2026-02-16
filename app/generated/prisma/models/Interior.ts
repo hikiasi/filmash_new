@@ -246,6 +246,7 @@ export type InteriorWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Interior"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }
 
 export type InteriorOrderByWithRelationInput = {
@@ -259,6 +260,7 @@ export type InteriorOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   trim?: Prisma.TrimOrderByWithRelationInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
+  config_images?: Prisma.ConfigurationImageOrderByRelationAggregateInput
 }
 
 export type InteriorWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +277,7 @@ export type InteriorWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"Interior"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }, "id">
 
 export type InteriorOrderByWithAggregationInput = {
@@ -317,6 +320,7 @@ export type InteriorCreateInput = {
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutInteriorsInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutInteriorInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorUncheckedCreateInput = {
@@ -329,6 +333,7 @@ export type InteriorUncheckedCreateInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutInteriorInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorUpdateInput = {
@@ -341,6 +346,7 @@ export type InteriorUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutInteriorsNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutInteriorNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type InteriorUncheckedUpdateInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutInteriorNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorCreateManyInput = {
@@ -487,6 +494,22 @@ export type InteriorUncheckedUpdateManyWithoutTrimNestedInput = {
   deleteMany?: Prisma.InteriorScalarWhereInput | Prisma.InteriorScalarWhereInput[]
 }
 
+export type InteriorCreateNestedOneWithoutConfig_imagesInput = {
+  create?: Prisma.XOR<Prisma.InteriorCreateWithoutConfig_imagesInput, Prisma.InteriorUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.InteriorCreateOrConnectWithoutConfig_imagesInput
+  connect?: Prisma.InteriorWhereUniqueInput
+}
+
+export type InteriorUpdateOneWithoutConfig_imagesNestedInput = {
+  create?: Prisma.XOR<Prisma.InteriorCreateWithoutConfig_imagesInput, Prisma.InteriorUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.InteriorCreateOrConnectWithoutConfig_imagesInput
+  upsert?: Prisma.InteriorUpsertWithoutConfig_imagesInput
+  disconnect?: Prisma.InteriorWhereInput | boolean
+  delete?: Prisma.InteriorWhereInput | boolean
+  connect?: Prisma.InteriorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InteriorUpdateToOneWithWhereWithoutConfig_imagesInput, Prisma.InteriorUpdateWithoutConfig_imagesInput>, Prisma.InteriorUncheckedUpdateWithoutConfig_imagesInput>
+}
+
 export type InteriorCreateNestedOneWithoutInquiriesInput = {
   create?: Prisma.XOR<Prisma.InteriorCreateWithoutInquiriesInput, Prisma.InteriorUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.InteriorCreateOrConnectWithoutInquiriesInput
@@ -512,6 +535,7 @@ export type InteriorCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryCreateNestedManyWithoutInteriorInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorUncheckedCreateWithoutTrimInput = {
@@ -523,6 +547,7 @@ export type InteriorUncheckedCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutInteriorInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorCreateOrConnectWithoutTrimInput = {
@@ -565,6 +590,70 @@ export type InteriorScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Interior"> | Date | string
 }
 
+export type InteriorCreateWithoutConfig_imagesInput = {
+  id?: string
+  name: string
+  material: string
+  image_url: string
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  trim: Prisma.TrimCreateNestedOneWithoutInteriorsInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutInteriorInput
+}
+
+export type InteriorUncheckedCreateWithoutConfig_imagesInput = {
+  id?: string
+  trim_id: string
+  name: string
+  material: string
+  image_url: string
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutInteriorInput
+}
+
+export type InteriorCreateOrConnectWithoutConfig_imagesInput = {
+  where: Prisma.InteriorWhereUniqueInput
+  create: Prisma.XOR<Prisma.InteriorCreateWithoutConfig_imagesInput, Prisma.InteriorUncheckedCreateWithoutConfig_imagesInput>
+}
+
+export type InteriorUpsertWithoutConfig_imagesInput = {
+  update: Prisma.XOR<Prisma.InteriorUpdateWithoutConfig_imagesInput, Prisma.InteriorUncheckedUpdateWithoutConfig_imagesInput>
+  create: Prisma.XOR<Prisma.InteriorCreateWithoutConfig_imagesInput, Prisma.InteriorUncheckedCreateWithoutConfig_imagesInput>
+  where?: Prisma.InteriorWhereInput
+}
+
+export type InteriorUpdateToOneWithWhereWithoutConfig_imagesInput = {
+  where?: Prisma.InteriorWhereInput
+  data: Prisma.XOR<Prisma.InteriorUpdateWithoutConfig_imagesInput, Prisma.InteriorUncheckedUpdateWithoutConfig_imagesInput>
+}
+
+export type InteriorUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  material?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trim?: Prisma.TrimUpdateOneRequiredWithoutInteriorsNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutInteriorNestedInput
+}
+
+export type InteriorUncheckedUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  material?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutInteriorNestedInput
+}
+
 export type InteriorCreateWithoutInquiriesInput = {
   id?: string
   name: string
@@ -574,6 +663,7 @@ export type InteriorCreateWithoutInquiriesInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutInteriorsInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorUncheckedCreateWithoutInquiriesInput = {
@@ -585,6 +675,7 @@ export type InteriorUncheckedCreateWithoutInquiriesInput = {
   additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutInteriorInput
 }
 
 export type InteriorCreateOrConnectWithoutInquiriesInput = {
@@ -612,6 +703,7 @@ export type InteriorUpdateWithoutInquiriesInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutInteriorsNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorUncheckedUpdateWithoutInquiriesInput = {
@@ -623,6 +715,7 @@ export type InteriorUncheckedUpdateWithoutInquiriesInput = {
   additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorCreateManyTrimInput = {
@@ -644,6 +737,7 @@ export type InteriorUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUpdateManyWithoutInteriorNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorUncheckedUpdateWithoutTrimInput = {
@@ -655,6 +749,7 @@ export type InteriorUncheckedUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutInteriorNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutInteriorNestedInput
 }
 
 export type InteriorUncheckedUpdateManyWithoutTrimInput = {
@@ -674,10 +769,12 @@ export type InteriorUncheckedUpdateManyWithoutTrimInput = {
 
 export type InteriorCountOutputType = {
   inquiries: number
+  config_images: number
 }
 
 export type InteriorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inquiries?: boolean | InteriorCountOutputTypeCountInquiriesArgs
+  config_images?: boolean | InteriorCountOutputTypeCountConfig_imagesArgs
 }
 
 /**
@@ -697,6 +794,13 @@ export type InteriorCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.InquiryWhereInput
 }
 
+/**
+ * InteriorCountOutputType without action
+ */
+export type InteriorCountOutputTypeCountConfig_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConfigurationImageWhereInput
+}
+
 
 export type InteriorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -709,6 +813,7 @@ export type InteriorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   created_at?: boolean
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Interior$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Interior$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.InteriorCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["interior"]>
 
@@ -751,6 +856,7 @@ export type InteriorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type InteriorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Interior$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Interior$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.InteriorCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type InteriorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -765,6 +871,7 @@ export type $InteriorPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     trim: Prisma.$TrimPayload<ExtArgs>
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
+    config_images: Prisma.$ConfigurationImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1171,6 +1278,7 @@ export interface Prisma__InteriorClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   trim<T extends Prisma.TrimDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrimDefaultArgs<ExtArgs>>): Prisma.Prisma__TrimClient<runtime.Types.Result.GetResult<Prisma.$TrimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   inquiries<T extends Prisma.Interior$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interior$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  config_images<T extends Prisma.Interior$config_imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Interior$config_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConfigurationImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1625,6 +1733,30 @@ export type Interior$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.InquiryScalarFieldEnum | Prisma.InquiryScalarFieldEnum[]
+}
+
+/**
+ * Interior.config_images
+ */
+export type Interior$config_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConfigurationImage
+   */
+  select?: Prisma.ConfigurationImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConfigurationImage
+   */
+  omit?: Prisma.ConfigurationImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConfigurationImageInclude<ExtArgs> | null
+  where?: Prisma.ConfigurationImageWhereInput
+  orderBy?: Prisma.ConfigurationImageOrderByWithRelationInput | Prisma.ConfigurationImageOrderByWithRelationInput[]
+  cursor?: Prisma.ConfigurationImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConfigurationImageScalarFieldEnum | Prisma.ConfigurationImageScalarFieldEnum[]
 }
 
 /**

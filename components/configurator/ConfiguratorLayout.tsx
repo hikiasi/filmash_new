@@ -6,6 +6,7 @@ import { TrimSelector } from './TrimSelector';
 import { ColorSelector } from './ColorSelector';
 import { WheelSelector } from './WheelSelector';
 import { InteriorSelector } from './InteriorSelector';
+import { SteeringWheelSelector } from './SteeringWheelSelector';
 import { AdditionalOptions } from './AdditionalOptions';
 import { PriceDisplay } from './PriceDisplay';
 import { SpecificationsAccordion } from './SpecificationsAccordion';
@@ -29,9 +30,13 @@ export function ConfiguratorLayout({ model, onOrderClick }: ConfiguratorLayoutPr
       {/* Right Column: Controls */}
       <div className="lg:w-1/3 space-y-8">
         <div className="sticky top-8 space-y-8">
-          <div className="space-y-2">
-            <h2 className="text-xs uppercase tracking-widest text-primary font-bold">{model.brand.name}</h2>
-            <h1 className="text-5xl font-black text-white">{model.name}</h1>
+          <div className="space-y-2 relative">
+            <h2 className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-black italic">{model.brand.name}</h2>
+            <h1 className="text-6xl font-black text-white uppercase italic tracking-tighter leading-none drop-shadow-2xl">
+                {model.name.split(' ').map((word: string, i: number) => (
+                    <span key={i} className={i === 0 ? "text-white" : "text-zinc-700"}>{word} </span>
+                ))}
+            </h1>
           </div>
 
           <PriceDisplay />
@@ -49,6 +54,7 @@ export function ConfiguratorLayout({ model, onOrderClick }: ConfiguratorLayoutPr
             <ColorSelector />
             <WheelSelector />
             <InteriorSelector />
+            <SteeringWheelSelector />
             <AdditionalOptions />
           </div>
         </div>

@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useState } from 'react';
 import { CheckCircle2, Loader2 } from 'lucide-react';
-import ReactInputMask from 'react-input-mask';
+import { DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface InquiryFormProps {
   onComplete: () => void;
@@ -27,7 +27,6 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Calculate prices for the snapshot
   const totalPriceCNY = (Number(selectedTrim?.base_price_cny) || 0) +
     (Number(selectedColor?.additional_price_cny) || 0) +
     (Number(selectedWheels?.additional_price_cny) || 0) +
@@ -87,38 +86,52 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
     }
   };
 
+  const formatPhone = (value: string) => {
+    if (!value) return value;
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    if (phoneNumberLength < 2) return '+' + phoneNumber;
+    if (phoneNumberLength < 5) return '+' + phoneNumber.slice(0, 1) + ' (' + phoneNumber.slice(1);
+    if (phoneNumberLength < 8) return '+' + phoneNumber.slice(0, 1) + ' (' + phoneNumber.slice(1, 4) + ') ' + phoneNumber.slice(4);
+    return '+' + phoneNumber.slice(0, 1) + ' (' + phoneNumber.slice(1, 4) + ') ' + phoneNumber.slice(4, 7) + '-' + phoneNumber.slice(7, 9) + '-' + phoneNumber.slice(9, 11);
+  };
+
   if (isSuccess) {
     return (
       <div className="p-12 text-center space-y-4">
         <div className="flex justify-center">
           <CheckCircle2 className="size-16 text-primary animate-bounce" />
         </div>
-        <h2 className="text-2xl font-bold text-white">Заявка отправлена!</h2>
-        <p className="text-zinc-400">Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.</p>
-        <Button onClick={onComplete} className="mt-6">Закрыть</Button>
+        <h2 className="text-2xl font-black text-white uppercase italic tracking-tighter">Заявка отправлена!</h2>
+        <p className="text-zinc-500 font-bold uppercase text-[10px] tracking-widest">Наш менеджер свяжется с вами в ближайшее время.</p>
+        <Button onClick={onComplete} className="mt-8 bg-white text-black font-black uppercase tracking-widest px-10 h-14 rounded-2xl">Закрыть</Button>
       </div>
     );
   }
 
   return (
-    <div className="p-8">
-      <div className="mb-8">
-        <h2 className="text-2xl font-black text-white uppercase tracking-tight">Оформить заявку</h2>
-        <p className="text-zinc-500 text-sm mt-1">Оставьте свои контакты, и мы подготовим расчет для {selectedTrim?.name}</p>
-      </div>
+    <div className="p-10 bg-zinc-950">
+      <DialogHeader className="mb-10">
+        <DialogTitle className="text-3xl font-black text-white uppercase italic tracking-tighter leading-none">
+            ОФОРМИТЬ <span className="text-primary">ЗАЯВКУ</span>
+        </DialogTitle>
+        <p className="text-zinc-500 font-bold uppercase text-[10px] tracking-[0.2em] mt-2">
+            Персональный расчет для {selectedTrim?.name}
+        </p>
+      </DialogHeader>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-400 uppercase text-[10px] font-bold tracking-widest">Ваше имя</FormLabel>
+              <FormItem className="space-y-3">
+                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Ваше имя</FormLabel>
                 <FormControl>
-                  <Input placeholder="Александр" {...field} className="bg-zinc-900 border-zinc-800 h-12 rounded-xl focus:ring-primary" />
+                  <Input placeholder="АЛЕКСАНДР" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800" />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
               </FormItem>
             )}
           />
@@ -127,26 +140,17 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-400 uppercase text-[10px] font-bold tracking-widest">Телефон</FormLabel>
+              <FormItem className="space-y-3">
+                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Телефон</FormLabel>
                 <FormControl>
-                  <ReactInputMask
-                    mask="+7 (999) 999-99-99"
-                    value={field.value}
-                    onChange={field.onChange}
-                    onBlur={field.onBlur}
-                  >
-                    {((inputProps: any) => (
-                      <Input
-                        {...inputProps}
-                        type="tel"
+                    <Input
                         placeholder="+7 (___) ___-__-__"
-                        className="bg-zinc-900 border-zinc-800 h-12 rounded-xl focus:ring-primary"
-                      />
-                    )) as any}
-                  </ReactInputMask>
+                        {...field}
+                        onChange={(e) => field.onChange(formatPhone(e.target.value))}
+                        className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800"
+                    />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
               </FormItem>
             )}
           />
@@ -155,32 +159,32 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             control={form.control}
             name="email"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-zinc-400 uppercase text-[10px] font-bold tracking-widest">Email</FormLabel>
+              <FormItem className="space-y-3">
+                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="example@mail.com" {...field} className="bg-zinc-900 border-zinc-800 h-12 rounded-xl focus:ring-primary" />
+                  <Input placeholder="EXAMPLE@MAIL.COM" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800" />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
               </FormItem>
             )}
           />
 
-          <div className="pt-4">
+          <div className="pt-6">
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-14 bg-white text-black hover:bg-zinc-200 font-bold rounded-2xl text-lg transition-all"
+              className="w-full h-16 bg-primary text-black hover:opacity-90 font-black rounded-[1.5rem] text-lg uppercase italic tracking-widest transition-all shadow-lg shadow-primary/10"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="mr-3 h-5 w-5 animate-spin" />
                   ОТПРАВКА...
                 </>
               ) : (
                 'ОТПРАВИТЬ ЗАЯВКУ'
               )}
             </Button>
-            <p className="text-[10px] text-zinc-600 text-center mt-4 uppercase tracking-widest">
+            <p className="text-[9px] text-zinc-700 text-center mt-6 uppercase font-bold tracking-[0.2em] leading-relaxed">
               Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
             </p>
           </div>

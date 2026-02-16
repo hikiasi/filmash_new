@@ -10,10 +10,11 @@ const PopularBrands: React.FC<PopularBrandsProps> = ({ brands: availableBrands }
   const { brands: activeBrands, setBrands } = useCatalogFilters();
 
   const handleBrandClick = (brandName: string) => {
+    // Single selection logic: if already selected, deselect. If not, select only this one.
     if (activeBrands?.includes(brandName)) {
-      setBrands(activeBrands.filter(b => b !== brandName));
+      setBrands([]);
     } else {
-      setBrands([...(activeBrands || []), brandName]);
+      setBrands([brandName]);
     }
   };
 
@@ -23,9 +24,9 @@ const PopularBrands: React.FC<PopularBrandsProps> = ({ brands: availableBrands }
         <button
           key={brandName}
           onClick={() => handleBrandClick(brandName)}
-          className={`text-2xl font-bold p-8 rounded-2xl text-left transition-all border
+          className={`text-2xl font-black p-8 rounded-3xl text-left transition-all border uppercase italic
             ${activeBrands?.includes(brandName)
-              ? 'bg-primary/90 text-white border-blue-400' 
+              ? 'bg-primary text-black border-primary shadow-[0_0_20px_rgba(207,249,2,0.3)]'
               : 'bg-zinc-900 border-zinc-800 text-white hover:bg-zinc-800 hover:border-zinc-700'
             }`}
         >

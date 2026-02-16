@@ -57,6 +57,8 @@ export const ModelName = {
   Color: 'Color',
   Wheel: 'Wheel',
   Interior: 'Interior',
+  SteeringWheel: 'SteeringWheel',
+  ConfigurationImage: 'ConfigurationImage',
   AdditionalOption: 'AdditionalOption',
   Inquiry: 'Inquiry',
   CurrencyRate: 'CurrencyRate'
@@ -159,6 +161,33 @@ export const InteriorScalarFieldEnum = {
 } as const
 
 export type InteriorScalarFieldEnum = (typeof InteriorScalarFieldEnum)[keyof typeof InteriorScalarFieldEnum]
+
+
+export const SteeringWheelScalarFieldEnum = {
+  id: 'id',
+  trim_id: 'trim_id',
+  name: 'name',
+  image_url: 'image_url',
+  additional_price_cny: 'additional_price_cny',
+  additional_price_rub: 'additional_price_rub',
+  created_at: 'created_at'
+} as const
+
+export type SteeringWheelScalarFieldEnum = (typeof SteeringWheelScalarFieldEnum)[keyof typeof SteeringWheelScalarFieldEnum]
+
+
+export const ConfigurationImageScalarFieldEnum = {
+  id: 'id',
+  trim_id: 'trim_id',
+  color_id: 'color_id',
+  wheel_id: 'wheel_id',
+  interior_id: 'interior_id',
+  steering_wheel_id: 'steering_wheel_id',
+  image_url: 'image_url',
+  type: 'type'
+} as const
+
+export type ConfigurationImageScalarFieldEnum = (typeof ConfigurationImageScalarFieldEnum)[keyof typeof ConfigurationImageScalarFieldEnum]
 
 
 export const AdditionalOptionScalarFieldEnum = {

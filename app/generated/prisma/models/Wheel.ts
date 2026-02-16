@@ -246,6 +246,7 @@ export type WheelWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Wheel"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }
 
 export type WheelOrderByWithRelationInput = {
@@ -259,6 +260,7 @@ export type WheelOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   trim?: Prisma.TrimOrderByWithRelationInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
+  config_images?: Prisma.ConfigurationImageOrderByRelationAggregateInput
 }
 
 export type WheelWhereUniqueInput = Prisma.AtLeast<{
@@ -275,6 +277,7 @@ export type WheelWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"Wheel"> | Date | string
   trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
   inquiries?: Prisma.InquiryListRelationFilter
+  config_images?: Prisma.ConfigurationImageListRelationFilter
 }, "id">
 
 export type WheelOrderByWithAggregationInput = {
@@ -317,6 +320,7 @@ export type WheelCreateInput = {
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutWheelsInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutWheelsInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutWheelInput
 }
 
 export type WheelUncheckedCreateInput = {
@@ -329,6 +333,7 @@ export type WheelUncheckedCreateInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutWheelsInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutWheelInput
 }
 
 export type WheelUpdateInput = {
@@ -341,6 +346,7 @@ export type WheelUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutWheelsNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutWheelsNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelUncheckedUpdateInput = {
@@ -353,6 +359,7 @@ export type WheelUncheckedUpdateInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutWheelsNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelCreateManyInput = {
@@ -487,6 +494,22 @@ export type WheelUncheckedUpdateManyWithoutTrimNestedInput = {
   deleteMany?: Prisma.WheelScalarWhereInput | Prisma.WheelScalarWhereInput[]
 }
 
+export type WheelCreateNestedOneWithoutConfig_imagesInput = {
+  create?: Prisma.XOR<Prisma.WheelCreateWithoutConfig_imagesInput, Prisma.WheelUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.WheelCreateOrConnectWithoutConfig_imagesInput
+  connect?: Prisma.WheelWhereUniqueInput
+}
+
+export type WheelUpdateOneWithoutConfig_imagesNestedInput = {
+  create?: Prisma.XOR<Prisma.WheelCreateWithoutConfig_imagesInput, Prisma.WheelUncheckedCreateWithoutConfig_imagesInput>
+  connectOrCreate?: Prisma.WheelCreateOrConnectWithoutConfig_imagesInput
+  upsert?: Prisma.WheelUpsertWithoutConfig_imagesInput
+  disconnect?: Prisma.WheelWhereInput | boolean
+  delete?: Prisma.WheelWhereInput | boolean
+  connect?: Prisma.WheelWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WheelUpdateToOneWithWhereWithoutConfig_imagesInput, Prisma.WheelUpdateWithoutConfig_imagesInput>, Prisma.WheelUncheckedUpdateWithoutConfig_imagesInput>
+}
+
 export type WheelCreateNestedOneWithoutInquiriesInput = {
   create?: Prisma.XOR<Prisma.WheelCreateWithoutInquiriesInput, Prisma.WheelUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.WheelCreateOrConnectWithoutInquiriesInput
@@ -512,6 +535,7 @@ export type WheelCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryCreateNestedManyWithoutWheelsInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutWheelInput
 }
 
 export type WheelUncheckedCreateWithoutTrimInput = {
@@ -523,6 +547,7 @@ export type WheelUncheckedCreateWithoutTrimInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutWheelsInput
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutWheelInput
 }
 
 export type WheelCreateOrConnectWithoutTrimInput = {
@@ -565,6 +590,70 @@ export type WheelScalarWhereInput = {
   created_at?: Prisma.DateTimeFilter<"Wheel"> | Date | string
 }
 
+export type WheelCreateWithoutConfig_imagesInput = {
+  id?: string
+  name: string
+  size: string
+  image_url: string
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  trim: Prisma.TrimCreateNestedOneWithoutWheelsInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutWheelsInput
+}
+
+export type WheelUncheckedCreateWithoutConfig_imagesInput = {
+  id?: string
+  trim_id: string
+  name: string
+  size: string
+  image_url: string
+  additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Date | string
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutWheelsInput
+}
+
+export type WheelCreateOrConnectWithoutConfig_imagesInput = {
+  where: Prisma.WheelWhereUniqueInput
+  create: Prisma.XOR<Prisma.WheelCreateWithoutConfig_imagesInput, Prisma.WheelUncheckedCreateWithoutConfig_imagesInput>
+}
+
+export type WheelUpsertWithoutConfig_imagesInput = {
+  update: Prisma.XOR<Prisma.WheelUpdateWithoutConfig_imagesInput, Prisma.WheelUncheckedUpdateWithoutConfig_imagesInput>
+  create: Prisma.XOR<Prisma.WheelCreateWithoutConfig_imagesInput, Prisma.WheelUncheckedCreateWithoutConfig_imagesInput>
+  where?: Prisma.WheelWhereInput
+}
+
+export type WheelUpdateToOneWithWhereWithoutConfig_imagesInput = {
+  where?: Prisma.WheelWhereInput
+  data: Prisma.XOR<Prisma.WheelUpdateWithoutConfig_imagesInput, Prisma.WheelUncheckedUpdateWithoutConfig_imagesInput>
+}
+
+export type WheelUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  size?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trim?: Prisma.TrimUpdateOneRequiredWithoutWheelsNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutWheelsNestedInput
+}
+
+export type WheelUncheckedUpdateWithoutConfig_imagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  size?: Prisma.StringFieldUpdateOperationsInput | string
+  image_url?: Prisma.StringFieldUpdateOperationsInput | string
+  additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutWheelsNestedInput
+}
+
 export type WheelCreateWithoutInquiriesInput = {
   id?: string
   name: string
@@ -574,6 +663,7 @@ export type WheelCreateWithoutInquiriesInput = {
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
   trim: Prisma.TrimCreateNestedOneWithoutWheelsInput
+  config_images?: Prisma.ConfigurationImageCreateNestedManyWithoutWheelInput
 }
 
 export type WheelUncheckedCreateWithoutInquiriesInput = {
@@ -585,6 +675,7 @@ export type WheelUncheckedCreateWithoutInquiriesInput = {
   additional_price_cny?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedCreateNestedManyWithoutWheelInput
 }
 
 export type WheelCreateOrConnectWithoutInquiriesInput = {
@@ -612,6 +703,7 @@ export type WheelUpdateWithoutInquiriesInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trim?: Prisma.TrimUpdateOneRequiredWithoutWheelsNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelUncheckedUpdateWithoutInquiriesInput = {
@@ -623,6 +715,7 @@ export type WheelUncheckedUpdateWithoutInquiriesInput = {
   additional_price_cny?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelCreateManyTrimInput = {
@@ -644,6 +737,7 @@ export type WheelUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUpdateManyWithoutWheelsNestedInput
+  config_images?: Prisma.ConfigurationImageUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelUncheckedUpdateWithoutTrimInput = {
@@ -655,6 +749,7 @@ export type WheelUncheckedUpdateWithoutTrimInput = {
   additional_price_rub?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutWheelsNestedInput
+  config_images?: Prisma.ConfigurationImageUncheckedUpdateManyWithoutWheelNestedInput
 }
 
 export type WheelUncheckedUpdateManyWithoutTrimInput = {
@@ -674,10 +769,12 @@ export type WheelUncheckedUpdateManyWithoutTrimInput = {
 
 export type WheelCountOutputType = {
   inquiries: number
+  config_images: number
 }
 
 export type WheelCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   inquiries?: boolean | WheelCountOutputTypeCountInquiriesArgs
+  config_images?: boolean | WheelCountOutputTypeCountConfig_imagesArgs
 }
 
 /**
@@ -697,6 +794,13 @@ export type WheelCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Types
   where?: Prisma.InquiryWhereInput
 }
 
+/**
+ * WheelCountOutputType without action
+ */
+export type WheelCountOutputTypeCountConfig_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConfigurationImageWhereInput
+}
+
 
 export type WheelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -709,6 +813,7 @@ export type WheelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   created_at?: boolean
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Wheel$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Wheel$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.WheelCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["wheel"]>
 
@@ -751,6 +856,7 @@ export type WheelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type WheelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
   inquiries?: boolean | Prisma.Wheel$inquiriesArgs<ExtArgs>
+  config_images?: boolean | Prisma.Wheel$config_imagesArgs<ExtArgs>
   _count?: boolean | Prisma.WheelCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WheelIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -765,6 +871,7 @@ export type $WheelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     trim: Prisma.$TrimPayload<ExtArgs>
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
+    config_images: Prisma.$ConfigurationImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1171,6 +1278,7 @@ export interface Prisma__WheelClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   trim<T extends Prisma.TrimDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrimDefaultArgs<ExtArgs>>): Prisma.Prisma__TrimClient<runtime.Types.Result.GetResult<Prisma.$TrimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   inquiries<T extends Prisma.Wheel$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wheel$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  config_images<T extends Prisma.Wheel$config_imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Wheel$config_imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConfigurationImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1625,6 +1733,30 @@ export type Wheel$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.InquiryScalarFieldEnum | Prisma.InquiryScalarFieldEnum[]
+}
+
+/**
+ * Wheel.config_images
+ */
+export type Wheel$config_imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConfigurationImage
+   */
+  select?: Prisma.ConfigurationImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ConfigurationImage
+   */
+  omit?: Prisma.ConfigurationImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConfigurationImageInclude<ExtArgs> | null
+  where?: Prisma.ConfigurationImageWhereInput
+  orderBy?: Prisma.ConfigurationImageOrderByWithRelationInput | Prisma.ConfigurationImageOrderByWithRelationInput[]
+  cursor?: Prisma.ConfigurationImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConfigurationImageScalarFieldEnum | Prisma.ConfigurationImageScalarFieldEnum[]
 }
 
 /**

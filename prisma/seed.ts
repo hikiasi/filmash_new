@@ -11,8 +11,8 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-  // Create Brands
-  const brand1 = await prisma.brand.create({
+  // Create Brand
+  const tesla = await prisma.brand.create({
     data: {
       name: 'Tesla',
       logo_url: 'https://example.com/tesla_logo.png',
@@ -20,131 +20,157 @@ async function main() {
     },
   });
 
-  const brand2 = await prisma.brand.create({
+  // Create Model
+  const modelX = await prisma.model.create({
     data: {
-      name: 'BYD',
-      logo_url: 'https://example.com/byd_logo.png',
-      country_of_origin: 'China',
-    },
-  });
-
-  const brand3 = await prisma.brand.create({
-    data: {
-      name: 'NIO',
-      logo_url: 'https://example.com/nio_logo.png',
-      country_of_origin: 'China',
-    },
-  });
-
-  // Create Models
-  const model1 = await prisma.model.create({
-    data: {
-      brand_id: brand1.id,
-      name: 'Model S',
-      body_type: 'Sedan',
-      year: 2023,
-      description: 'A premium electric sedan.',
-    },
-  });
-
-  const model2 = await prisma.model.create({
-    data: {
-      brand_id: brand1.id,
+      brand_id: tesla.id,
       name: 'Model X',
-      body_type: 'SUV',
-      year: 2023,
-      description: 'A premium electric SUV with Falcon Wing doors.',
+      body_type: 'Кроссовер',
+      year: 2024,
+      description: 'The most capable SUV ever built.',
     },
   });
 
-  const model3 = await prisma.model.create({
+  const specs = {
+    brand: 'Tesla',
+    power: 670,
+    battery: '100 кВт·ч',
+    length: '5 057',
+    width: '2 271',
+    height: '1 680',
+    wheelbase: '2 965',
+    seats: '5/6/7',
+    engine_type: 'Электрический',
+    range: '576 км',
+    acceleration: '3.9 сек',
+    top_speed: '250 км/ч',
+    total_power: '500 кВт',
+    drive: 'Полный (AWD)',
+  };
+
+  const plaidSpecs = {
+    ...specs,
+    power: 1020,
+    acceleration: '2.6 сек',
+    top_speed: '262 км/ч',
+    total_power: '760 кВт',
+  };
+
+  // Trims
+  const standardTrim = await prisma.trim.create({
     data: {
-      brand_id: brand2.id,
-      name: 'Han',
-      body_type: 'Sedan',
-      year: 2023,
-      description: 'A stylish and powerful electric sedan from BYD.',
+      model_id: modelX.id,
+      name: 'Model X',
+      base_price_cny: 720000,
+      base_price_rub: 9500000,
+      specifications: specs,
     },
   });
 
-  const model4 = await prisma.model.create({
+  const plaidTrim = await prisma.trim.create({
     data: {
-      brand_id: brand2.id,
-      name: 'Tang',
-      body_type: 'SUV',
-      year: 2023,
-      description: 'A spacious and versatile electric SUV from BYD.',
+      model_id: modelX.id,
+      name: 'Plaid',
+      base_price_cny: 850000,
+      base_price_rub: 11500000,
+      specifications: plaidSpecs,
     },
   });
 
-  const model5 = await prisma.model.create({
-    data: {
-      brand_id: brand3.id,
-      name: 'ET7',
-      body_type: 'Sedan',
-      year: 2023,
-      description: 'A smart electric flagship sedan from NIO.',
-    },
-  });
+  const trims = [standardTrim, plaidTrim];
 
-  // Create Trims (15 total)
-  const trims = [];
-  for (let i = 0; i < 3; i++) {
-    trims.push(
-      await prisma.trim.create({
+  for (const trim of trims) {
+    // Colors
+    const colorsData = [
+      { name: 'Mercury (Ртуть)', hex: '#7D7F7D' },
+      { name: 'Gray (Серый)', hex: '#4B4D4E' },
+      { name: 'Red (Красный)', hex: '#A11622' },
+      { name: 'Blue (Синий)', hex: '#1C315E' },
+      { name: 'Black (Черный)', hex: '#111111' },
+      { name: 'White (Белый)', hex: '#F0F0F0' },
+    ];
+
+    const colors = [];
+    for (const c of colorsData) {
+      colors.push(await prisma.color.create({
         data: {
-          model_id: model1.id,
-          name: `Model S Trim ${i + 1}`,
-          base_price_cny: 700000 + i * 50000,
-          base_price_rub: 8000000 + i * 600000,
-          specifications: { power: 670 + i * 100, range: 650 + i * 50 },
-        },
-      })
-    );
-    trims.push(
-      await prisma.trim.create({
+          trim_id: trim.id,
+          name: c.name,
+          hex_code: c.hex,
+          image_url: `https://example.com/icons/color_${c.hex.replace('#','')}.png`,
+          is_premium: false,
+        }
+      }));
+    }
+
+    // Wheels
+    const wheelsData = [
+      { name: '22" Turbine Wheels', size: '22"' },
+      { name: '20" Cyber Wheels', size: '20"' },
+    ];
+
+    const wheels = [];
+    for (const w of wheelsData) {
+      wheels.push(await prisma.wheel.create({
         data: {
-          model_id: model2.id,
-          name: `Model X Trim ${i + 1}`,
-          base_price_cny: 800000 + i * 50000,
-          base_price_rub: 9000000 + i * 600000,
-          specifications: { power: 670 + i * 100, range: 580 + i * 40 },
-        },
-      })
-    );
-    trims.push(
-      await prisma.trim.create({
-        data: {
-          model_id: model3.id,
-          name: `Han Trim ${i + 1}`,
-          base_price_cny: 250000 + i * 30000,
-          base_price_rub: 3000000 + i * 400000,
-          specifications: { power: 220 + i * 50, range: 600 + i * 50 },
-        },
-      })
-    );
-    trims.push(
-      await prisma.trim.create({
-        data: {
-          model_id: model4.id,
-          name: `Tang Trim ${i + 1}`,
-          base_price_cny: 300000 + i * 30000,
-          base_price_rub: 3500000 + i * 400000,
-          specifications: { power: 250 + i * 50, range: 550 + i * 50 },
-        },
-      })
-    );
-    trims.push(
-      await prisma.trim.create({
-        data: {
-          model_id: model5.id,
-          name: `ET7 Trim ${i + 1}`,
-          base_price_cny: 450000 + i * 40000,
-          base_price_rub: 5000000 + i * 500000,
-          specifications: { power: 644, range: 500 + i * 100 },
-        },
-      })
-    );
+          trim_id: trim.id,
+          name: w.name,
+          size: w.size,
+          image_url: `https://example.com/icons/wheel_${w.size.replace('"','')}.png`,
+        }
+      }));
+    }
+
+    // Interiors
+    const interiorsData = [
+        { name: 'White', material: 'Nappa Leather', img: 'https://example.com/int_white.jpg' },
+        { name: 'Black', material: 'Premium', img: 'https://example.com/int_black.jpg' },
+        { name: 'Beige', material: 'Walnut', img: 'https://example.com/int_beige.jpg' },
+    ];
+
+    for (const int of interiorsData) {
+        await prisma.interior.create({
+            data: {
+                trim_id: trim.id,
+                name: int.name,
+                material: int.material,
+                image_url: int.img,
+            }
+        });
+    }
+
+    // Steering Wheels (for Plaid)
+    if (trim.name === 'Plaid') {
+        await prisma.steeringWheel.create({
+            data: {
+                trim_id: trim.id,
+                name: 'Standard Steering Wheel',
+                image_url: 'https://example.com/steering_std.png',
+            }
+        });
+        await prisma.steeringWheel.create({
+            data: {
+                trim_id: trim.id,
+                name: 'Yoke Steering',
+                image_url: 'https://example.com/steering_yoke.png',
+            }
+        });
+    }
+
+    // Configuration Images (Combinations)
+    for (const wheel of wheels) {
+        for (const color of colors) {
+            await prisma.configurationImage.create({
+                data: {
+                    trim_id: trim.id,
+                    color_id: color.id,
+                    wheel_id: wheel.id,
+                    image_url: `https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200`, // Placeholder
+                    type: 'exterior'
+                }
+            });
+        }
+    }
   }
 
   console.log('Seeding finished.');

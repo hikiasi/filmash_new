@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
+import { serializePrisma } from '@/lib/utils/serialization';
 
 export async function GET(
   request: Request,
@@ -27,7 +28,7 @@ export async function GET(
       return new NextResponse('Trim not found', { status: 404 });
     }
 
-    return NextResponse.json(trim, { status: 200 });
+    return NextResponse.json(serializePrisma(trim), { status: 200 });
   } catch (error) {
     console.error('[CONFIGURATOR_GET]', error);
     return new NextResponse('Internal error', { status: 500 });

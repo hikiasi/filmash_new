@@ -8,60 +8,70 @@ import { z } from 'zod';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const params = Object.fromEntries(searchParams);
 
-    // 1. Validate query params
+    const brands = searchParams.getAll('brands');
+    const bodyTypes = searchParams.getAll('bodyTypes');
+    const driveTypes = searchParams.getAll('driveTypes');
+    const engineTypes = searchParams.getAll('engineTypes');
+    const priceRange = searchParams.get('priceRange')?.split(',').map(Number);
+    const powerRange = searchParams.get('powerRange')?.split(',').map(Number);
+    const search = searchParams.get('search') || undefined;
+    const page = parseInt(searchParams.get('page') || '1');
+    const limit = parseInt(searchParams.get('limit') || '12');
+    const sortBy = searchParams.get('sortBy') || 'year';
+    const order = searchParams.get('order') || 'desc';
+
+    // Validate
     const validatedParams = catalogFiltersSchema.safeParse({
-        ...params,
-        priceRange: params.priceRange ? params.priceRange.split(',').map(Number) : undefined,
-        powerRange: params.powerRange ? params.powerRange.split(',').map(Number) : undefined,
+        brands,
+        bodyTypes,
+        priceRange,
+        powerRange,
+        driveTypes,
+        engineTypes,
+        search,
     });
     
     if (!validatedParams.success) {
       return new NextResponse(JSON.stringify(validatedParams.error.flatten().fieldErrors), { status: 400 });
     }
     
-    const { brands, bodyTypes, priceRange, powerRange, driveTypes, engineTypes, search } = validatedParams.data;
-    const page = parseInt(params.page || '1');
-    const limit = parseInt(params.limit || '12');
-    const sortBy = params.sortBy || 'year';
-    const order = params.order || 'desc';
-
+    const data = validatedParams.data;
     const skip = (page - 1) * limit;
 
     // 2. Construct Prisma Query Conditions
     const where: Prisma.ModelWhereInput = {};
     const trimSomeFilter: Prisma.TrimWhereInput[] = [];
 
-    if (search) {
+    if (data.search) {
       where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { brand: { name: { contains: search, mode: 'insensitive' } } },
+        { name: { contains: data.search, mode: 'insensitive' } },
+        { brand: { name: { contains: data.search, mode: 'insensitive' } } },
       ];
     }
-    if (brands && brands.length > 0) {
-      where.brand = { name: { in: brands } };
+    if (data.brands && data.brands.length > 0) {
+      where.brand = { name: { in: data.brands } };
     }
-    if (bodyTypes && bodyTypes.length > 0) {
-      where.body_type = { in: bodyTypes };
+    if (data.bodyTypes && data.bodyTypes.length > 0) {
+      where.body_type = { in: data.bodyTypes };
     }
-    if (priceRange) {
-      trimSomeFilter.push({ base_price_rub: { gte: priceRange[0], lte: priceRange[1] } });
+    if (data.priceRange) {
+      trimSomeFilter.push({ base_price_rub: { gte: data.priceRange[0], lte: data.priceRange[1] } });
     }
     
-    if (powerRange) {
+    if (data.powerRange) {
         trimSomeFilter.push({
             specifications: {
                 path: ['power'],
-                gte: powerRange[0],
-                lte: powerRange[1],
+                gte: data.powerRange[0],
+                lte: data.powerRange[1],
             }
-        } as any); // Using 'any' as some Prisma versions might have strict JSON typing but this path logic works in 5.2+
+        } as any);
     }
 
-    if (driveTypes && driveTypes.length > 0) {
+    if (data.driveTypes && data.driveTypes.length > 0) {
         trimSomeFilter.push({
-          OR: driveTypes.map(dt => ({
+          OR: data.driveTypes.map(dt => ({
             specifications: {
               path: ['driveType'],
               equals: dt,
@@ -69,9 +79,9 @@ export async function GET(request: Request) {
           }))
         } as any);
     }
-    if (engineTypes && engineTypes.length > 0) {
+    if (data.engineTypes && data.engineTypes.length > 0) {
         trimSomeFilter.push({
-          OR: engineTypes.map(et => ({
+          OR: data.engineTypes.map(et => ({
             specifications: {
               path: ['engineType'],
               equals: et,
@@ -91,7 +101,7 @@ export async function GET(request: Request) {
     // 3. Sorting
     const orderBy: Prisma.ModelOrderByWithRelationInput = {};
     if (sortBy === 'name' || sortBy === 'year') {
-        orderBy[sortBy] = order as Prisma.SortOrder;
+        orderBy[sortBy as keyof Prisma.ModelOrderByWithRelationInput] = order as Prisma.SortOrder;
     } else if (sortBy === 'price') {
         orderBy['year'] = order as Prisma.SortOrder;
     }
@@ -154,9 +164,6 @@ export async function GET(request: Request) {
 
   } catch (error) {
     console.error('[CATALOG_GET]', error);
-    if (error instanceof z.ZodError) {
-        return new NextResponse(JSON.stringify(error.issues), { status: 400 });
-    }
     return new NextResponse('Internal error', { status: 500 });
   }
 }
