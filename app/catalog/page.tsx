@@ -26,7 +26,7 @@ export default async function CatalogPage() {
     <div className="container mx-auto px-4 py-8 relative">
       <div className="mb-12 relative">
         <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-4 uppercase italic leading-none">
-          <span className="text-zinc-100">КАТАЛОГ</span> <br/>
+          <span className="text-zinc-900">КАТАЛОГ</span> <br/>
           <span className="text-zinc-400">АВТОМОБИЛЕЙ</span>
         </h1>
         <p className="text-zinc-600 max-w-2xl text-lg font-bold uppercase tracking-tight italic">
