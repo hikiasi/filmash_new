@@ -101,11 +101,17 @@ export async function GET(request: Request) {
     }
 
     // 3. Sorting
-    const orderBy: Prisma.ModelOrderByWithRelationInput = {};
+    let orderBy: Prisma.ModelOrderByWithRelationInput | Prisma.ModelOrderByWithRelationInput[] = {};
     if (sortBy === 'name' || sortBy === 'year') {
-        orderBy[sortBy as keyof Prisma.ModelOrderByWithRelationInput] = order as Prisma.SortOrder;
+        orderBy = { [sortBy]: order as Prisma.SortOrder };
     } else if (sortBy === 'price') {
-        orderBy['year'] = order as Prisma.SortOrder;
+        orderBy = {
+          trims: {
+            _min: {
+              base_price_rub: order as Prisma.SortOrder
+            }
+          }
+        };
     }
 
     // 4. Execute Queries

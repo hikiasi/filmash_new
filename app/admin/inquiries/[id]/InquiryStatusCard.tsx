@@ -26,9 +26,42 @@ export default function InquiryStatusCard({ inquiryId, currentStatus }: { inquir
     }
   };
 
+  const handleStartLogistics = async () => {
+    setIsUpdating(true);
+    try {
+      const res = await fetch('/api/admin/deliveries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            inquiry_id: inquiryId,
+            status: 'PURCHASED'
+        }),
+      });
+      if (res.ok) {
+        router.push('/admin/logistics');
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
   return (
     <div className="bg-zinc-950 rounded-3xl border border-zinc-900 p-8 shadow-2xl flex flex-col gap-4">
       <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-4 italic">Статус заявки</h3>
+
+      {currentStatus === 'COMPLETED' && (
+        <button
+            onClick={handleStartLogistics}
+            disabled={isUpdating}
+            className="w-full h-14 mb-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-200 transition-all italic shadow-lg flex items-center justify-center gap-2"
+        >
+            <span className="material-symbols-outlined text-sm">local_shipping</span>
+            Запустить логистику
+        </button>
+      )}
+
       <select
         value={status}
         onChange={(e) => setStatus(e.target.value)}

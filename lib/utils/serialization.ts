@@ -1,4 +1,7 @@
 export function serializePrisma<T>(data: T): T {
+  if (data === undefined) return undefined as any;
+  if (data === null) return null as any;
+
   return JSON.parse(
     JSON.stringify(data, (key, value) => {
       if (typeof value === "bigint") {

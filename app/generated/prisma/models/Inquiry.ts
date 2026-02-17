@@ -304,6 +304,7 @@ export type InquiryWhereInput = {
   color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   wheels?: Prisma.XOR<Prisma.WheelNullableScalarRelationFilter, Prisma.WheelWhereInput> | null
   interior?: Prisma.XOR<Prisma.InteriorNullableScalarRelationFilter, Prisma.InteriorWhereInput> | null
+  delivery?: Prisma.XOR<Prisma.DeliveryNullableScalarRelationFilter, Prisma.DeliveryWhereInput> | null
 }
 
 export type InquiryOrderByWithRelationInput = {
@@ -327,6 +328,7 @@ export type InquiryOrderByWithRelationInput = {
   color?: Prisma.ColorOrderByWithRelationInput
   wheels?: Prisma.WheelOrderByWithRelationInput
   interior?: Prisma.InteriorOrderByWithRelationInput
+  delivery?: Prisma.DeliveryOrderByWithRelationInput
 }
 
 export type InquiryWhereUniqueInput = Prisma.AtLeast<{
@@ -353,6 +355,7 @@ export type InquiryWhereUniqueInput = Prisma.AtLeast<{
   color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   wheels?: Prisma.XOR<Prisma.WheelNullableScalarRelationFilter, Prisma.WheelWhereInput> | null
   interior?: Prisma.XOR<Prisma.InteriorNullableScalarRelationFilter, Prisma.InteriorWhereInput> | null
+  delivery?: Prisma.XOR<Prisma.DeliveryNullableScalarRelationFilter, Prisma.DeliveryWhereInput> | null
 }, "id">
 
 export type InquiryOrderByWithAggregationInput = {
@@ -418,6 +421,7 @@ export type InquiryCreateInput = {
   color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
+  delivery?: Prisma.DeliveryCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUncheckedCreateInput = {
@@ -437,6 +441,7 @@ export type InquiryUncheckedCreateInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  delivery?: Prisma.DeliveryUncheckedCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUpdateInput = {
@@ -456,6 +461,7 @@ export type InquiryUpdateInput = {
   color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
+  delivery?: Prisma.DeliveryUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateInput = {
@@ -475,6 +481,7 @@ export type InquiryUncheckedUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delivery?: Prisma.DeliveryUncheckedUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryCreateManyInput = {
@@ -601,6 +608,11 @@ export type InquiryMinOrderByAggregateInput = {
 export type InquirySumOrderByAggregateInput = {
   total_price_cny?: Prisma.SortOrder
   total_price_rub?: Prisma.SortOrder
+}
+
+export type InquiryNullableScalarRelationFilter = {
+  is?: Prisma.InquiryWhereInput | null
+  isNot?: Prisma.InquiryWhereInput | null
 }
 
 export type InquiryCreateNestedManyWithoutTrimInput = {
@@ -771,6 +783,22 @@ export type InquiryUncheckedUpdateManyWithoutInteriorNestedInput = {
   deleteMany?: Prisma.InquiryScalarWhereInput | Prisma.InquiryScalarWhereInput[]
 }
 
+export type InquiryCreateNestedOneWithoutDeliveryInput = {
+  create?: Prisma.XOR<Prisma.InquiryCreateWithoutDeliveryInput, Prisma.InquiryUncheckedCreateWithoutDeliveryInput>
+  connectOrCreate?: Prisma.InquiryCreateOrConnectWithoutDeliveryInput
+  connect?: Prisma.InquiryWhereUniqueInput
+}
+
+export type InquiryUpdateOneWithoutDeliveryNestedInput = {
+  create?: Prisma.XOR<Prisma.InquiryCreateWithoutDeliveryInput, Prisma.InquiryUncheckedCreateWithoutDeliveryInput>
+  connectOrCreate?: Prisma.InquiryCreateOrConnectWithoutDeliveryInput
+  upsert?: Prisma.InquiryUpsertWithoutDeliveryInput
+  disconnect?: Prisma.InquiryWhereInput | boolean
+  delete?: Prisma.InquiryWhereInput | boolean
+  connect?: Prisma.InquiryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.InquiryUpdateToOneWithWhereWithoutDeliveryInput, Prisma.InquiryUpdateWithoutDeliveryInput>, Prisma.InquiryUncheckedUpdateWithoutDeliveryInput>
+}
+
 export type InquiryCreateWithoutTrimInput = {
   id?: string
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -787,6 +815,7 @@ export type InquiryCreateWithoutTrimInput = {
   color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
+  delivery?: Prisma.DeliveryCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUncheckedCreateWithoutTrimInput = {
@@ -805,6 +834,7 @@ export type InquiryUncheckedCreateWithoutTrimInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  delivery?: Prisma.DeliveryUncheckedCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryCreateOrConnectWithoutTrimInput = {
@@ -871,6 +901,7 @@ export type InquiryCreateWithoutColorInput = {
   trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
+  delivery?: Prisma.DeliveryCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUncheckedCreateWithoutColorInput = {
@@ -889,6 +920,7 @@ export type InquiryUncheckedCreateWithoutColorInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  delivery?: Prisma.DeliveryUncheckedCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryCreateOrConnectWithoutColorInput = {
@@ -933,6 +965,7 @@ export type InquiryCreateWithoutWheelsInput = {
   trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
   color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
+  delivery?: Prisma.DeliveryCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUncheckedCreateWithoutWheelsInput = {
@@ -951,6 +984,7 @@ export type InquiryUncheckedCreateWithoutWheelsInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  delivery?: Prisma.DeliveryUncheckedCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryCreateOrConnectWithoutWheelsInput = {
@@ -995,6 +1029,7 @@ export type InquiryCreateWithoutInteriorInput = {
   trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
   color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
+  delivery?: Prisma.DeliveryCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryUncheckedCreateWithoutInteriorInput = {
@@ -1013,6 +1048,7 @@ export type InquiryUncheckedCreateWithoutInteriorInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
+  delivery?: Prisma.DeliveryUncheckedCreateNestedOneWithoutInquiryInput
 }
 
 export type InquiryCreateOrConnectWithoutInteriorInput = {
@@ -1039,6 +1075,98 @@ export type InquiryUpdateWithWhereUniqueWithoutInteriorInput = {
 export type InquiryUpdateManyWithWhereWithoutInteriorInput = {
   where: Prisma.InquiryScalarWhereInput
   data: Prisma.XOR<Prisma.InquiryUpdateManyMutationInput, Prisma.InquiryUncheckedUpdateManyWithoutInteriorInput>
+}
+
+export type InquiryCreateWithoutDeliveryInput = {
+  id?: string
+  selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customer_name: string
+  customer_phone: string
+  customer_email: string
+  total_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status: string
+  configuration_snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
+  color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
+  wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
+  interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
+}
+
+export type InquiryUncheckedCreateWithoutDeliveryInput = {
+  id?: string
+  trim_id?: string | null
+  color_id?: string | null
+  wheels_id?: string | null
+  interior_id?: string | null
+  selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customer_name: string
+  customer_phone: string
+  customer_email: string
+  total_price_cny: runtime.Decimal | runtime.DecimalJsLike | number | string
+  total_price_rub: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status: string
+  configuration_snapshot: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  notes?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+}
+
+export type InquiryCreateOrConnectWithoutDeliveryInput = {
+  where: Prisma.InquiryWhereUniqueInput
+  create: Prisma.XOR<Prisma.InquiryCreateWithoutDeliveryInput, Prisma.InquiryUncheckedCreateWithoutDeliveryInput>
+}
+
+export type InquiryUpsertWithoutDeliveryInput = {
+  update: Prisma.XOR<Prisma.InquiryUpdateWithoutDeliveryInput, Prisma.InquiryUncheckedUpdateWithoutDeliveryInput>
+  create: Prisma.XOR<Prisma.InquiryCreateWithoutDeliveryInput, Prisma.InquiryUncheckedCreateWithoutDeliveryInput>
+  where?: Prisma.InquiryWhereInput
+}
+
+export type InquiryUpdateToOneWithWhereWithoutDeliveryInput = {
+  where?: Prisma.InquiryWhereInput
+  data: Prisma.XOR<Prisma.InquiryUpdateWithoutDeliveryInput, Prisma.InquiryUncheckedUpdateWithoutDeliveryInput>
+}
+
+export type InquiryUpdateWithoutDeliveryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  customer_phone?: Prisma.StringFieldUpdateOperationsInput | string
+  customer_email?: Prisma.StringFieldUpdateOperationsInput | string
+  total_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  configuration_snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
+  color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
+  wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
+  interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
+}
+
+export type InquiryUncheckedUpdateWithoutDeliveryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  customer_phone?: Prisma.StringFieldUpdateOperationsInput | string
+  customer_email?: Prisma.StringFieldUpdateOperationsInput | string
+  total_price_cny?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  total_price_rub?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  configuration_snapshot?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type InquiryCreateManyTrimInput = {
@@ -1075,6 +1203,7 @@ export type InquiryUpdateWithoutTrimInput = {
   color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
+  delivery?: Prisma.DeliveryUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutTrimInput = {
@@ -1093,6 +1222,7 @@ export type InquiryUncheckedUpdateWithoutTrimInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delivery?: Prisma.DeliveryUncheckedUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateManyWithoutTrimInput = {
@@ -1147,6 +1277,7 @@ export type InquiryUpdateWithoutColorInput = {
   trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
+  delivery?: Prisma.DeliveryUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutColorInput = {
@@ -1165,6 +1296,7 @@ export type InquiryUncheckedUpdateWithoutColorInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delivery?: Prisma.DeliveryUncheckedUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateManyWithoutColorInput = {
@@ -1219,6 +1351,7 @@ export type InquiryUpdateWithoutWheelsInput = {
   trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
   color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
+  delivery?: Prisma.DeliveryUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutWheelsInput = {
@@ -1237,6 +1370,7 @@ export type InquiryUncheckedUpdateWithoutWheelsInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delivery?: Prisma.DeliveryUncheckedUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateManyWithoutWheelsInput = {
@@ -1291,6 +1425,7 @@ export type InquiryUpdateWithoutInteriorInput = {
   trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
   color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
+  delivery?: Prisma.DeliveryUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutInteriorInput = {
@@ -1309,6 +1444,7 @@ export type InquiryUncheckedUpdateWithoutInteriorInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  delivery?: Prisma.DeliveryUncheckedUpdateOneWithoutInquiryNestedInput
 }
 
 export type InquiryUncheckedUpdateManyWithoutInteriorInput = {
@@ -1352,6 +1488,7 @@ export type InquirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
+  delivery?: boolean | Prisma.Inquiry$deliveryArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
 
 export type InquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1425,6 +1562,7 @@ export type InquiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
+  delivery?: boolean | Prisma.Inquiry$deliveryArgs<ExtArgs>
 }
 export type InquiryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
@@ -1446,6 +1584,7 @@ export type $InquiryPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     color: Prisma.$ColorPayload<ExtArgs> | null
     wheels: Prisma.$WheelPayload<ExtArgs> | null
     interior: Prisma.$InteriorPayload<ExtArgs> | null
+    delivery: Prisma.$DeliveryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1862,6 +2001,7 @@ export interface Prisma__InquiryClient<T, Null = never, ExtArgs extends runtime.
   color<T extends Prisma.Inquiry$colorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$colorArgs<ExtArgs>>): Prisma.Prisma__ColorClient<runtime.Types.Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   wheels<T extends Prisma.Inquiry$wheelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$wheelsArgs<ExtArgs>>): Prisma.Prisma__WheelClient<runtime.Types.Result.GetResult<Prisma.$WheelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   interior<T extends Prisma.Inquiry$interiorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$interiorArgs<ExtArgs>>): Prisma.Prisma__InteriorClient<runtime.Types.Result.GetResult<Prisma.$InteriorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  delivery<T extends Prisma.Inquiry$deliveryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$deliveryArgs<ExtArgs>>): Prisma.Prisma__DeliveryClient<runtime.Types.Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2376,6 +2516,25 @@ export type Inquiry$interiorArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   include?: Prisma.InteriorInclude<ExtArgs> | null
   where?: Prisma.InteriorWhereInput
+}
+
+/**
+ * Inquiry.delivery
+ */
+export type Inquiry$deliveryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Delivery
+   */
+  select?: Prisma.DeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Delivery
+   */
+  omit?: Prisma.DeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliveryInclude<ExtArgs> | null
+  where?: Prisma.DeliveryWhereInput
 }
 
 /**
