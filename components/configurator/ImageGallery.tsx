@@ -9,16 +9,31 @@ export function ImageGallery() {
   const { selectedColor, selectedWheels, selectedInterior, selectedSteeringWheel, selectedTrim } = useConfiguratorStore();
   const [view, setView] = useState<'exterior' | 'interior'>('exterior');
 
-  const exteriorImage = selectedTrim?.config_images?.find((img: any) =>
-    img.type === 'exterior' &&
-    img.color_id === selectedColor?.id &&
-    img.wheel_id === selectedWheels?.id
+  // Improved logic: try to find exact match, then fallback to just color/interior match
+  const exteriorImage = (
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'exterior' &&
+      img.color_id === selectedColor?.id &&
+      img.wheel_id === selectedWheels?.id
+    ) ||
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'exterior' &&
+      img.color_id === selectedColor?.id &&
+      !img.wheel_id
+    )
   )?.image_url || selectedColor?.image_url || selectedTrim?.colors?.[0]?.image_url;
 
-  const interiorImage = selectedTrim?.config_images?.find((img: any) =>
-    img.type === 'interior' &&
-    img.interior_id === selectedInterior?.id &&
-    (selectedSteeringWheel ? img.steering_wheel_id === selectedSteeringWheel.id : true)
+  const interiorImage = (
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'interior' &&
+      img.interior_id === selectedInterior?.id &&
+      img.steering_wheel_id === selectedSteeringWheel?.id
+    ) ||
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'interior' &&
+      img.interior_id === selectedInterior?.id &&
+      !img.steering_wheel_id
+    )
   )?.image_url || selectedInterior?.image_url;
 
   const currentImage = view === 'exterior' ? exteriorImage : interiorImage;

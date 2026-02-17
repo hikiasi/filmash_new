@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import VisualOptionsEditor from '../../VisualOptionsEditor';
+import ConfigImageEditor from './ConfigImageEditor';
 import { serializePrisma } from '@/lib/utils/serialization';
 
 export default function TrimEditorClient({ trim, modelId }: { trim: any, modelId: string }) {
@@ -132,6 +133,15 @@ export default function TrimEditorClient({ trim, modelId }: { trim: any, modelId
                     ))}
                 </div>
             </section>
+
+            <ConfigImageEditor
+                trimId={trim.id}
+                configImages={serializePrisma(trim.config_images)}
+                colors={serializePrisma(trim.colors)}
+                wheels={serializePrisma(trim.wheels)}
+                interiors={serializePrisma(trim.interiors)}
+                steeringWheels={serializePrisma(trim.steering_wheels)}
+            />
 
             <VisualOptionsEditor
                 initialColors={serializePrisma(trim.colors)}

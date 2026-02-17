@@ -267,7 +267,9 @@ export default function VisualOptionsEditor({
             )}
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-2">Изображение</Label>
+              <Label className="text-[10px] font-black uppercase tracking-widest text-zinc-500 ml-2">
+                {activeModal === 'color' ? 'Иконка цвета (кружочек)' : 'Изображение'}
+              </Label>
               <div className="flex gap-4">
                  <Input
                     value={formData.image_url || ''}
