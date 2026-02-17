@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import prisma from '@/lib/db';
 import { notFound } from 'next/navigation';
+import VisualOptionsEditor from './VisualOptionsEditor';
 
 export default async function ModelEditorPage({ params }: { params: Promise<{ modelId: string }> }) {
   const { modelId } = await params;
@@ -16,6 +17,8 @@ export default async function ModelEditorPage({ params }: { params: Promise<{ mo
             colors: true,
             wheels: true,
             interiors: true,
+            steering_wheels: true,
+            additional_options: true,
         }
       },
     }
@@ -25,9 +28,12 @@ export default async function ModelEditorPage({ params }: { params: Promise<{ mo
     notFound();
   }
 
-  // Aggregate unique colors/wheels from all trims of this model for the UI
-  const allColors = Array.from(new Map(model.trims.flatMap(t => t.colors).map(c => [c.hex_code, c])).values());
-  const allWheels = Array.from(new Map(model.trims.flatMap(t => t.wheels).map(w => [w.name, w])).values());
+  // Aggregate unique colors/wheels/interiors from all trims of this model for the UI
+  const allColors = Array.from(new Map(model.trims.flatMap((t: any) => t.colors).map((c: any) => [c.hex_code, c])).values());
+  const allWheels = Array.from(new Map(model.trims.flatMap((t: any) => t.wheels).map((w: any) => [w.name, w])).values());
+  const allInteriors = Array.from(new Map(model.trims.flatMap((t: any) => t.interiors).map((i: any) => [i.name, i])).values());
+  const allSteering = Array.from(new Map(model.trims.flatMap((t: any) => t.steering_wheels).map((s: any) => [s.name, s])).values());
+  const allOptions = Array.from(new Map(model.trims.flatMap((t: any) => t.additional_options).map((o: any) => [o.name, o])).values());
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-black">
@@ -116,58 +122,14 @@ export default async function ModelEditorPage({ params }: { params: Promise<{ mo
                 </div>
             </section>
 
-            {/* Visual Options */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                {/* Colors */}
-                <section className="bg-zinc-950 border border-zinc-900 p-10 rounded-[2.5rem] shadow-2xl">
-                    <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-black text-white uppercase italic tracking-tighter flex items-center gap-3">
-                            <span className="material-symbols-outlined text-primary">palette</span>
-                            Цвета модели
-                        </h3>
-                    </div>
-                    <div className="space-y-3">
-                        {allColors.map((color: any) => (
-                            <div key={color.id} className="flex items-center gap-4 p-4 bg-zinc-900/50 border border-zinc-900 rounded-2xl">
-                                <div className="size-8 rounded-full border border-zinc-800" style={{ backgroundColor: color.hex_code }}></div>
-                                <div className="flex-1">
-                                    <p className="text-white text-[10px] font-black uppercase tracking-widest">{color.name}</p>
-                                    <p className="text-[10px] text-zinc-600">{color.hex_code}</p>
-                                </div>
-                                <button className="text-zinc-600 hover:text-red-500 transition-colors">
-                                    <span className="material-symbols-outlined text-lg">close</span>
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* Wheels */}
-                <section className="bg-zinc-950 border border-zinc-900 p-10 rounded-[2.5rem] shadow-2xl">
-                    <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-lg font-black text-white uppercase italic tracking-tighter flex items-center gap-3">
-                            <span className="material-symbols-outlined text-primary">tire_repair</span>
-                            Диски модели
-                        </h3>
-                    </div>
-                    <div className="space-y-3">
-                        {allWheels.map((wheel: any) => (
-                            <div key={wheel.id} className="flex items-center gap-4 p-4 bg-zinc-900/50 border border-zinc-900 rounded-2xl">
-                                <div className="size-10 bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
-                                    {wheel.image_url && <img src={wheel.image_url} alt={wheel.name} className="w-full h-full object-cover" />}
-                                </div>
-                                <div className="flex-1">
-                                    <p className="text-white text-[10px] font-black uppercase tracking-widest">{wheel.name}</p>
-                                    <p className="text-[10px] text-zinc-600">{wheel.size}</p>
-                                </div>
-                                <button className="text-zinc-600 hover:text-red-500 transition-colors">
-                                    <span className="material-symbols-outlined text-lg">close</span>
-                                </button>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            </div>
+            <VisualOptionsEditor
+                initialColors={allColors}
+                initialWheels={allWheels}
+                initialInteriors={allInteriors}
+                initialSteering={allSteering}
+                initialOptions={allOptions}
+                modelId={model.id}
+            />
         </div>
       </div>
     </div>

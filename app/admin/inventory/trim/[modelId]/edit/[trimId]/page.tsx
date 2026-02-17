@@ -19,22 +19,24 @@ export default async function TrimEditorPage({ params }: { params: Promise<{ mod
     notFound();
   }
 
+  const s = (trim.specifications as any) || {};
+
   const specs = [
-    { label: 'Мощность (л.с.)', key: 'power', type: 'number', val: trim.power },
-    { label: 'Емкость батареи', key: 'batteryCapacity', type: 'text', val: trim.batteryCapacity },
-    { label: 'Запас хода (км)', key: 'range', type: 'number', val: trim.range },
-    { label: 'Разгон 0-100 (сек)', key: 'acceleration', type: 'number', val: Number(trim.acceleration) },
-    { label: 'Макс. скорость (км/ч)', key: 'topSpeed', type: 'number', val: trim.topSpeed },
-    { label: 'Привод', key: 'driveType', type: 'text', val: trim.driveType },
-    { label: 'Двигатель', key: 'engineType', type: 'text', val: trim.engineType },
-    { label: 'Длина (мм)', key: 'length', type: 'number', val: trim.length },
-    { label: 'Ширина (мм)', key: 'width', type: 'number', val: trim.width },
-    { label: 'Высота (мм)', key: 'height', type: 'number', val: trim.height },
-    { label: 'Колесная база (мм)', key: 'wheelbase', type: 'number', val: trim.wheelbase },
-    { label: 'Масса (кг)', key: 'curbWeight', type: 'number', val: trim.curbWeight },
-    { label: 'Мест', key: 'seats', type: 'number', val: trim.seats },
-    { label: 'Объем багажника (л)', key: 'trunkVolume', type: 'number', val: trim.trunkVolume },
-    { label: 'Клиренс (мм)', key: 'groundClearance', type: 'number', val: trim.groundClearance },
+    { label: 'Мощность (л.с.)', key: 'power', type: 'number', val: s.power },
+    { label: 'Емкость батареи', key: 'battery', type: 'text', val: s.battery },
+    { label: 'Запас хода (км)', key: 'range', type: 'text', val: s.range },
+    { label: 'Разгон 0-100 (сек)', key: 'acceleration', type: 'text', val: s.acceleration },
+    { label: 'Макс. скорость (км/ч)', key: 'top_speed', type: 'text', val: s.top_speed },
+    { label: 'Привод', key: 'drive', type: 'text', val: s.drive },
+    { label: 'Двигатель', key: 'engine_type', type: 'text', val: s.engine_type },
+    { label: 'Длина (мм)', key: 'length', type: 'text', val: s.length },
+    { label: 'Ширина (мм)', key: 'width', type: 'text', val: s.width },
+    { label: 'Высота (мм)', key: 'height', type: 'text', val: s.height },
+    { label: 'Колесная база (мм)', key: 'wheelbase', type: 'text', val: s.wheelbase },
+    { label: 'Масса (кг)', key: 'curb_weight', type: 'text', val: s.curb_weight },
+    { label: 'Мест', key: 'seats', type: 'text', val: s.seats },
+    { label: 'Объем багажника (л)', key: 'trunk_volume', type: 'text', val: s.trunk_volume },
+    { label: 'Клиренс (мм)', key: 'ground_clearance', type: 'text', val: s.ground_clearance },
   ];
 
   return (
@@ -65,7 +67,7 @@ export default async function TrimEditorPage({ params }: { params: Promise<{ mod
                     </div>
                     <div className="space-y-3">
                         <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Базовая цена (CNY)</label>
-                        <input type="number" defaultValue={Number(trim.basePrice)} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary" />
+                        <input type="number" defaultValue={Number(trim.base_price_cny)} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary" />
                     </div>
                     {specs.map(spec => (
                         <div key={spec.key} className="space-y-3">

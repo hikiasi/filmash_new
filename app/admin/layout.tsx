@@ -41,7 +41,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
           <nav className="flex flex-col gap-1">
             <SidebarItem href="/admin" icon="dashboard" label="Дашборд" />
-            <SidebarItem href="/admin/inquiries" icon="inbox" label="Заявки" badge={12} />
+            <SidebarItem href="/admin/inquiries" icon="inbox" label="Заявки" />
             <SidebarItem href="/admin/logistics" icon="local_shipping" label="Логистика" />
             <SidebarItem href="/admin/inventory" icon="directions_car" label="Каталог авто" />
             <SidebarItem href="/admin/finance" icon="payments" label="Финансы" />
@@ -62,7 +62,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col h-screen overflow-hidden relative bg-black">
+      <main className="flex-1 relative overflow-hidden bg-black flex flex-col">
         {children}
       </main>
     </div>

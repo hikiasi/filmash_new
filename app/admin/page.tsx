@@ -15,6 +15,9 @@ const InquiryRow = ({ inquiry }: { inquiry: any }) => {
 
   return (
     <tr className="hover:bg-zinc-800/50 transition-colors group border-b border-zinc-900 last:border-0">
+      <td className="px-4 py-4 whitespace-nowrap">
+        <input type="checkbox" className="size-4 rounded border-zinc-800 bg-transparent text-primary focus:ring-offset-zinc-950 focus:ring-primary" />
+      </td>
       <td className="px-4 py-4 whitespace-nowrap text-sm font-bold text-primary italic uppercase tracking-tighter">#{inquiry.id.slice(-4)}</td>
       <td className="px-4 py-4 whitespace-nowrap">
         <div className="flex items-center gap-3">
@@ -88,10 +91,14 @@ export default async function Dashboard() {
               <p className="text-zinc-500 text-xs font-bold uppercase tracking-[0.2em] mt-1">Управление входящими запросами</p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 h-10 px-4 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-white text-xs font-bold uppercase tracking-widest transition-all">
+              <a
+                href="/api/admin/inquiries/export"
+                download
+                className="flex items-center gap-2 h-10 px-4 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-white text-xs font-bold uppercase tracking-widest transition-all"
+              >
                 <span className="material-symbols-outlined text-[18px]">file_download</span>
                 Экспорт
-              </button>
+              </a>
             </div>
           </div>
         </div>

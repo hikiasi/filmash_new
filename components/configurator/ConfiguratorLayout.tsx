@@ -32,9 +32,9 @@ export function ConfiguratorLayout({ model, onOrderClick }: ConfiguratorLayoutPr
         <div className="sticky top-8 space-y-8">
           <div className="space-y-2 relative">
             <h2 className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 font-black italic">{model.brand.name}</h2>
-            <h1 className="text-6xl font-black text-white uppercase italic tracking-tighter leading-none drop-shadow-2xl">
+            <h1 className="text-6xl font-black text-white uppercase italic tracking-tighter leading-none">
                 {model.name.split(' ').map((word: string, i: number) => (
-                    <span key={i} className={i === 0 ? "text-white" : "text-zinc-700"}>{word} </span>
+                    <span key={i} className={i === 0 ? "text-white" : "text-zinc-500"}>{word} </span>
                 ))}
             </h1>
           </div>

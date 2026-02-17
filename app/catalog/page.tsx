@@ -29,10 +29,10 @@ export default async function CatalogPage() {
 
       <div className="mb-12 relative">
         <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-4 uppercase italic leading-none">
-          <span className="text-zinc-100 drop-shadow-xl">КАТАЛОГ</span> <br/>
-          <span className="text-primary drop-shadow-[0_0_15px_rgba(207,249,2,0.2)]">АВТОМОБИЛЕЙ</span>
+          <span className="text-zinc-100">КАТАЛОГ</span> <br/>
+          <span className="text-zinc-400">АВТОМОБИЛЕЙ</span>
         </h1>
-        <p className="text-zinc-500 max-w-2xl text-lg font-bold uppercase tracking-tight">
+        <p className="text-zinc-600 max-w-2xl text-lg font-bold uppercase tracking-tight italic">
           Выбирайте из лучших предложений китайского автопрома. <br/>
           <span className="text-zinc-400">Каждая модель доступна для полной кастомизации под ваш стиль.</span>
         </p>

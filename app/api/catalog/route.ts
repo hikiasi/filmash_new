@@ -73,8 +73,8 @@ export async function GET(request: Request) {
         trimSomeFilter.push({
           OR: data.driveTypes.map(dt => ({
             specifications: {
-              path: ['driveType'],
-              equals: dt,
+              path: ['drive'],
+              string_contains: dt,
             }
           }))
         } as any);
@@ -83,8 +83,8 @@ export async function GET(request: Request) {
         trimSomeFilter.push({
           OR: data.engineTypes.map(et => ({
             specifications: {
-              path: ['engineType'],
-              equals: et,
+              path: ['engine_type'],
+              string_contains: et,
             }
           }))
         } as any);
@@ -148,8 +148,8 @@ export async function GET(request: Request) {
         specifications: {
           power: getSpec('power'),
           range: getSpec('range'),
-          driveType: getSpec('driveType'),
-          engineType: getSpec('engineType'),
+          driveType: getSpec('drive'),
+          engineType: getSpec('engine_type'),
         },
       };
     });

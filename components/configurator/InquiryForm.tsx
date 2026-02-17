@@ -127,9 +127,9 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             name="name"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Ваше имя</FormLabel>
+                <FormLabel className="text-zinc-400 uppercase text-[10px] font-black tracking-[0.3em] italic">Ваше имя</FormLabel>
                 <FormControl>
-                  <Input placeholder="АЛЕКСАНДР" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800" />
+                  <Input placeholder="АЛЕКСАНДР" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white font-black uppercase italic placeholder:text-zinc-600 outline-none" />
                 </FormControl>
                 <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
               </FormItem>
@@ -141,13 +141,13 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             name="phone"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Телефон</FormLabel>
+                <FormLabel className="text-zinc-400 uppercase text-[10px] font-black tracking-[0.3em] italic">Телефон</FormLabel>
                 <FormControl>
                     <Input
                         placeholder="+7 (___) ___-__-__"
                         {...field}
                         onChange={(e) => field.onChange(formatPhone(e.target.value))}
-                        className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800"
+                        className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white font-black uppercase italic placeholder:text-zinc-600 outline-none"
                     />
                 </FormControl>
                 <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
@@ -160,9 +160,9 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             name="email"
             render={({ field }) => (
               <FormItem className="space-y-3">
-                <FormLabel className="text-zinc-600 uppercase text-[10px] font-black tracking-[0.3em]">Email</FormLabel>
+                <FormLabel className="text-zinc-400 uppercase text-[10px] font-black tracking-[0.3em] italic">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="EXAMPLE@MAIL.COM" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary font-black uppercase italic placeholder:text-zinc-800" />
+                  <Input placeholder="EXAMPLE@MAIL.COM" {...field} className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white font-black uppercase italic placeholder:text-zinc-600 outline-none" />
                 </FormControl>
                 <FormMessage className="text-[10px] font-black uppercase text-red-500 tracking-widest" />
               </FormItem>
@@ -173,7 +173,7 @@ export function InquiryForm({ onComplete }: InquiryFormProps) {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full h-16 bg-primary text-black hover:opacity-90 font-black rounded-[1.5rem] text-lg uppercase italic tracking-widest transition-all shadow-lg shadow-primary/10"
+              className="w-full h-16 bg-zinc-100 text-black hover:bg-white font-black rounded-[1.5rem] text-lg uppercase italic tracking-widest transition-all shadow-lg active:scale-[0.98]"
             >
               {isSubmitting ? (
                 <>
