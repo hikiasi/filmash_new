@@ -24,9 +24,6 @@ export default async function CatalogPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      {/* Background accents */}
-      <div className="absolute top-0 left-1/4 size-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
       <div className="mb-12 relative">
         <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-4 uppercase italic leading-none">
           <span className="text-zinc-100">КАТАЛОГ</span> <br/>

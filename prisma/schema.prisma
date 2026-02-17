@@ -160,8 +160,8 @@ model AdditionalOption {
 
 model Inquiry {
   id                     String    @id @default(uuid()) @db.Uuid
-  trim_id                String    @db.Uuid
-  color_id               String    @db.Uuid
+  trim_id                String?   @db.Uuid
+  color_id               String?   @db.Uuid
   wheels_id              String?   @db.Uuid
   interior_id            String?   @db.Uuid
   selected_options       Json
@@ -175,8 +175,8 @@ model Inquiry {
   notes                  String?
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt
-  trim                   Trim      @relation(fields: [trim_id], references: [id])
-  color                  Color     @relation(fields: [color_id], references: [id])
+  trim                   Trim?     @relation(fields: [trim_id], references: [id])
+  color                  Color?    @relation(fields: [color_id], references: [id])
   wheels                 Wheel?    @relation(fields: [wheels_id], references: [id])
   interior               Interior? @relation(fields: [interior_id], references: [id])
 

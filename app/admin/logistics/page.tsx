@@ -1,7 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import ImageOptimized from '@/components/shared/ImageOptimized';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 const KanbanColumn = ({ title, count, color, children }: { title: string, count: number, color: string, children?: React.ReactNode }) => (
   <div className="flex flex-col w-80 shrink-0 bg-zinc-950 border border-zinc-900 rounded-[2.5rem] overflow-hidden h-full shadow-2xl">
@@ -20,7 +30,14 @@ const KanbanColumn = ({ title, count, color, children }: { title: string, count:
 
 const KanbanCard = ({ id, title, subtitle, icon, statusColor, image, onClick }: any) => (
   <div onClick={onClick} className="group relative flex flex-col justify-end h-64 rounded-[2rem] overflow-hidden border border-zinc-900 hover:border-primary/50 transition-all cursor-pointer shadow-xl">
-    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" style={{ backgroundImage: `url("${image}")` }}></div>
+    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+      <ImageOptimized
+        src={image}
+        alt={title}
+        fill
+        imgClassName="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+      />
+    </div>
     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
     <div className="relative z-10 p-6">
       <div className="flex justify-between items-start mb-3">
@@ -37,6 +54,8 @@ const KanbanCard = ({ id, title, subtitle, icon, statusColor, image, onClick }: 
 
 export default function LogisticsPage() {
   const [selectedCar, setSelectedCar] = useState<any>(null);
+  const [isNewDeliveryOpen, setIsNewDeliveryOpen] = useState(false);
+  const [newDelivery, setNewDelivery] = useState({ id: '', title: '', status: '' });
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-black">
@@ -50,7 +69,10 @@ export default function LogisticsPage() {
             <button className="h-14 px-8 bg-zinc-900 text-zinc-400 text-xs font-black uppercase tracking-widest rounded-2xl hover:text-white transition-all italic border border-zinc-800">
                Фильтры
             </button>
-            <button className="h-14 px-10 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10">
+            <button
+              onClick={() => setIsNewDeliveryOpen(true)}
+              className="h-14 px-10 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10"
+            >
                Новая поставка
             </button>
           </div>
@@ -81,11 +103,19 @@ export default function LogisticsPage() {
           </KanbanColumn>
         </div>
       </div>
+
       <Dialog open={!!selectedCar} onOpenChange={() => setSelectedCar(null)}>
         <DialogContent className="bg-zinc-950 border-zinc-900 text-white max-w-2xl rounded-[2.5rem] p-0 overflow-hidden shadow-2xl">
           {selectedCar && (
             <div className="flex flex-col md:flex-row h-full">
-              <div className="md:w-1/2 h-64 md:h-auto bg-cover bg-center" style={{ backgroundImage: `url("${selectedCar.image}")` }}></div>
+              <div className="md:w-1/2 h-64 md:h-auto relative overflow-hidden">
+                <ImageOptimized
+                  src={selectedCar.image}
+                  alt={selectedCar.title}
+                  fill
+                  imgClassName="object-cover"
+                />
+              </div>
               <div className="md:w-1/2 p-10 flex flex-col gap-6">
                 <DialogHeader>
                   <div className="text-primary text-[10px] font-black uppercase tracking-widest mb-2 italic">{selectedCar.id}</div>
@@ -114,6 +144,42 @@ export default function LogisticsPage() {
               </div>
             </div>
           )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isNewDeliveryOpen} onOpenChange={setIsNewDeliveryOpen}>
+        <DialogContent className="bg-zinc-950 border-zinc-900 text-white max-w-md rounded-[2rem]">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-black uppercase italic tracking-tighter">Новая Поставка</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-6 py-6">
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">ID Автомобиля</Label>
+              <Input
+                value={newDelivery.id}
+                onChange={e => setNewDelivery({...newDelivery, id: e.target.value})}
+                placeholder="#FIL-000"
+                className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white italic"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">Модель</Label>
+              <Input
+                value={newDelivery.title}
+                onChange={e => setNewDelivery({...newDelivery, title: e.target.value})}
+                placeholder="напр. Zeekr 001"
+                className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white italic"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              onClick={() => setIsNewDeliveryOpen(false)}
+              className="w-full h-14 bg-primary text-black font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all italic"
+            >
+              Создать карточку
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

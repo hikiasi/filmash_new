@@ -12,25 +12,30 @@ const prisma = new PrismaClient({
 
 async function main() {
   // Clear existing data
-  await prisma.configurationImage.deleteMany();
-  await prisma.inquiry.deleteMany();
-  await prisma.additionalOption.deleteMany();
-  await prisma.steeringWheel.deleteMany();
-  await prisma.interior.deleteMany();
-  await prisma.wheel.deleteMany();
-  await prisma.color.deleteMany();
-  await prisma.trim.deleteMany();
-  await prisma.model.deleteMany();
-  await prisma.brand.deleteMany();
+  console.log('Clearing existing data...');
+  try {
+    await prisma.configurationImage.deleteMany();
+    await prisma.inquiry.deleteMany();
+    await prisma.additionalOption.deleteMany();
+    await prisma.steeringWheel.deleteMany();
+    await prisma.interior.deleteMany();
+    await prisma.wheel.deleteMany();
+    await prisma.color.deleteMany();
+    await prisma.trim.deleteMany();
+    await prisma.model.deleteMany();
+    await prisma.brand.deleteMany();
+  } catch (e) {
+    console.log('Delete failed (might be empty or connection issue), continuing...');
+  }
 
   const brandsData = [
-    { name: 'ZEEKR', logo: 'https://example.com/zeekr.png', country: 'China' },
-    { name: 'BYD', logo: 'https://example.com/byd.png', country: 'China' },
-    { name: 'Lixiang', logo: 'https://example.com/li.png', country: 'China' },
-    { name: 'Tesla', logo: 'https://example.com/tesla.png', country: 'USA' },
-    { name: 'BMW', logo: 'https://example.com/bmw.png', country: 'Germany' },
-    { name: 'Xiaomi', logo: 'https://example.com/xiaomi.png', country: 'China' },
-    { name: 'Lynk & Co', logo: 'https://example.com/lynk.png', country: 'China' },
+    { name: 'ZEEKR', logo: '/images/brands/zeekr.png', country: 'Китай' },
+    { name: 'BYD', logo: '/images/brands/byd.png', country: 'Китай' },
+    { name: 'Lixiang', logo: '/images/brands/li.png', country: 'Китай' },
+    { name: 'Tesla', logo: '/images/brands/tesla.png', country: 'США' },
+    { name: 'BMW', logo: '/images/brands/bmw.png', country: 'Германия' },
+    { name: 'Xiaomi', logo: '/images/brands/xiaomi.png', country: 'Китай' },
+    { name: 'Lynk & Co', logo: '/images/brands/lynk.png', country: 'Китай' },
   ];
 
   const brands: Record<string, any> = {};
@@ -42,123 +47,115 @@ async function main() {
 
   const cars = [
     {
-      brand: 'ZEEKR',
-      name: '001FR',
-      year: 2024,
-      body_type: 'Лифтбек',
-      price_cny: 769000,
+      brand: 'ZEEKR', name: '001FR', year: 2024, body_type: 'Лифтбек', price_cny: 769000,
       specs: {
-        length: '5018', width: '1999', height: '1545', wheelbase: '3005',
-        seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
-        power: '1247', battery: '100 кВт·ч', acceleration: '2.02', top_speed: '280'
+        length: 5018, width: 1999, height: 1545, wheelbase: 3005, seats: 5,
+        engine_type: 'Электрический', drive: 'Полный (AWD)', power: 1247,
+        battery: '100 кВт·ч', acceleration: 2.02, top_speed: 280, torque: 1280
       }
     },
     {
-        brand: 'ZEEKR',
-        name: '007',
-        year: 2024,
-        body_type: 'Седан',
-        price_cny: 209900,
+      brand: 'ZEEKR', name: '007', year: 2024, body_type: 'Седан', price_cny: 209900,
+      specs: {
+        length: 4865, width: 1900, height: 1450, wheelbase: 2928, seats: 5,
+        engine_type: 'Электрический', drive: 'Полный (AWD)', power: 646,
+        battery: '75-100 кВт·ч', acceleration: 2.84, top_speed: 210, range: 870
+      }
+    },
+    {
+      brand: 'ZEEKR', name: '001', year: 2024, body_type: 'Лифтбек', price_cny: 269000,
+      specs: {
+        length: 4970, width: 1999, height: 1560, wheelbase: 3005, seats: 5,
+        engine_type: 'Электрический', drive: 'Задний (RWD)', power: 272,
+        battery: '100 кВт·ч', acceleration: 7.2, top_speed: 200, range: 620
+      }
+    },
+    {
+        brand: 'ZEEKR', name: '007GT', year: 2024, body_type: 'Седан', price_cny: 232900,
         specs: {
-          length: '4865', width: '1900', height: '1450', wheelbase: '2928',
-          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
-          power: '646', battery: '75-100 кВт·ч', acceleration: '2.84', top_speed: '210'
+            length: 4864, width: 1900, height: 1445, wheelbase: 2925, seats: 5,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 544,
+            battery: '90-98 кВт·ч', acceleration: 2.9, top_speed: 210, range: 720
         }
     },
     {
-        brand: 'ZEEKR',
-        name: '001',
-        year: 2024,
-        body_type: 'Лифтбек',
-        price_cny: 269000,
+        brand: 'ZEEKR', name: 'X', year: 2024, body_type: 'Кроссовер', price_cny: 149900,
         specs: {
-          length: '4970', width: '1999', height: '1560', wheelbase: '3005',
-          seats: '5', engine_type: 'Электрический', drive: 'Задний (RWD)',
-          power: '272', battery: '100 кВт·ч', acceleration: '7.2', top_speed: '200'
+            length: 4450, width: 1836, height: 1572, wheelbase: 2750, seats: 5,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 428,
+            battery: '66 кВт·ч', acceleration: 3.8, top_speed: 190, range: 500
         }
     },
     {
-        brand: 'Xiaomi',
-        name: 'SU7',
-        year: 2024,
-        body_type: 'Седан',
-        price_cny: 215900,
+        brand: 'ZEEKR', name: '9x', year: 2024, body_type: 'Внедорожник', price_cny: 465900,
         specs: {
-          length: '4997', width: '1963', height: '1455', wheelbase: '3000',
-          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
-          power: '673', battery: '101 кВт·ч', acceleration: '2.78', top_speed: '265'
+            length: 5239, width: 2029, height: 1819, wheelbase: 3169, seats: 6,
+            engine_type: 'Гибрид (PHEV)', drive: 'Полный (AWD)', power: 600,
+            battery: '55 кВт·ч', acceleration: 3.9, top_speed: 240, range: 1200
         }
     },
     {
-        brand: 'Lixiang',
-        name: 'L9',
-        year: 2024,
-        body_type: 'Внедорожник',
-        price_cny: 429800,
+        brand: 'ZEEKR', name: '009', year: 2024, body_type: 'Минивэн', price_cny: 469000,
         specs: {
-          length: '5218', width: '1998', height: '1800', wheelbase: '3105',
-          seats: '6', engine_type: 'Гибрид', drive: 'Полный (AWD)',
-          power: '449', battery: '52.3 кВт·ч', acceleration: '5.3', top_speed: '180'
+            length: 5167, width: 1998, height: 1782, wheelbase: 3110, seats: 7,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 544,
+            battery: '108 кВт·ч', acceleration: 4.5, top_speed: 210, range: 720
         }
     },
     {
-        brand: 'Tesla',
-        name: 'Cybertruck',
-        year: 2024,
-        body_type: 'Пикап',
-        price_cny: 1000000,
+        brand: 'BYD', name: 'Dolphin', year: 2024, body_type: 'Хэтчбек', price_cny: 125800,
         specs: {
-          length: '5885', width: '2027', height: '1905', wheelbase: '3810',
-          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
-          power: '845', battery: '123 кВт·ч', acceleration: '2.7', top_speed: '180'
+            length: 4290, width: 1770, height: 1570, wheelbase: 2700, seats: 5,
+            engine_type: 'Электрический', drive: 'Передний (FWD)', power: 95,
+            battery: '44.9 кВт·ч', acceleration: 12.3, top_speed: 150, range: 420
         }
     },
     {
-        brand: 'Lixiang',
-        name: 'Mega Ultra',
-        year: 2024,
-        body_type: 'Минивэн',
-        price_cny: 529800,
+        brand: 'BYD', name: 'Han L EV', year: 2024, body_type: 'Седан', price_cny: 219800,
         specs: {
-            length: '5350', width: '1965', height: '1850', wheelbase: '3300',
-            seats: '7', engine_type: 'Электрический', drive: 'Полный (AWD)',
-            power: '544', battery: '102.7 кВт·ч', acceleration: '5.5', top_speed: '180'
+            length: 5050, width: 1960, height: 1505, wheelbase: 2970, seats: 5,
+            engine_type: 'Гибрид', drive: 'Полный (AWD)', power: 544,
+            battery: '36.8 кВт·ч', acceleration: 3.9, top_speed: 200, range: 200
         }
     },
     {
-        brand: 'Xiaomi',
-        name: 'YU7',
-        year: 2024,
-        body_type: 'Кроссовер',
-        price_cny: 253500,
+        brand: 'Lixiang', name: 'Mega Ultra', year: 2024, body_type: 'Минивэн', price_cny: 529800,
         specs: {
-            length: '4999', width: '1996', height: '1608', wheelbase: '3000',
-            seats: '5', engine_type: 'Электрический', drive: 'Задний (RWD)',
-            power: '315', battery: '96.3 кВт·ч', acceleration: '5.9', top_speed: '240'
+            length: 5350, width: 1965, height: 1850, wheelbase: 3300, seats: 7,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 544,
+            battery: '102.7 кВт·ч', acceleration: 5.5, top_speed: 180, range: 770
         }
     },
     {
-        brand: 'BMW',
-        name: '318 i',
-        year: 2024,
-        body_type: 'Седан',
-        price_cny: 250000,
+        brand: 'Lixiang', name: 'L9', year: 2024, body_type: 'Внедорожник', price_cny: 429800,
         specs: {
-            length: '4709', width: '1827', height: '1442', wheelbase: '2851',
-            seats: '5', engine_type: 'Бензин', drive: 'Задний (RWD)',
-            power: '156', battery: 'N/A', acceleration: '8.4', top_speed: '223'
+            length: 5218, width: 1998, height: 1800, wheelbase: 3105, seats: 6,
+            engine_type: 'Гибрид', drive: 'Полный (AWD)', power: 449,
+            battery: '52.3 кВт·ч', acceleration: 5.3, top_speed: 180, range: 1315
         }
     },
     {
-        brand: 'Lynk & Co',
-        name: '900',
-        year: 2024,
-        body_type: 'Внедорожник',
-        price_cny: 304900,
+        brand: 'Tesla', name: 'Cybertruck', year: 2024, body_type: 'Пикап', price_cny: 1000000,
         specs: {
-            length: '5240', width: '1999', height: '1810', wheelbase: '3160',
-            seats: '6', engine_type: 'Гибрид (PHEV)', drive: 'Полный (AWD)',
-            power: '734', battery: '52.4 кВт·ч', acceleration: '4.3', top_speed: '240'
+            length: 5885, width: 2027, height: 1905, wheelbase: 3810, seats: 5,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 845,
+            battery: '123 кВт·ч', acceleration: 2.7, top_speed: 180, range: 515
+        }
+    },
+    {
+        brand: 'Xiaomi', name: 'SU7', year: 2024, body_type: 'Седан', price_cny: 215900,
+        specs: {
+            length: 4997, width: 1963, height: 1455, wheelbase: 3000, seats: 5,
+            engine_type: 'Электрический', drive: 'Полный (AWD)', power: 673,
+            battery: '101 кВт·ч', acceleration: 2.78, top_speed: 265, range: 800
+        }
+    },
+    {
+        brand: 'BMW', name: '318 i', year: 2024, body_type: 'Седан', price_cny: 250000,
+        specs: {
+            length: 4709, width: 1827, height: 1442, wheelbase: 2851, seats: 5,
+            engine_type: 'Бензин', drive: 'Задний (RWD)', power: 156,
+            battery: 'N/A', acceleration: 8.4, top_speed: 223
         }
     }
   ];
@@ -170,7 +167,7 @@ async function main() {
         name: car.name,
         body_type: car.body_type,
         year: car.year,
-        description: `Premium car from ${car.brand}`,
+        description: `Премиальный автомобиль от ${car.brand}`,
       }
     });
 
@@ -180,15 +177,14 @@ async function main() {
         name: 'Standard',
         base_price_cny: car.price_cny,
         base_price_rub: car.price_cny * 13.5,
-        specifications: car.specs,
+        specifications: car.specs as any,
       }
     });
 
-    // Default options for each car
     const colors = [
-        { name: 'Electric Blue', hex: '#0000FF', price: 0 },
-        { name: 'Matte Black', hex: '#111111', price: 10000 },
-        { name: 'Pearl White', hex: '#FFFFFF', price: 5000 },
+        { name: 'Electric Blue', hex: '#0000FF', price: 0, image: '/uploads/cars/zeekr-001.jpg' },
+        { name: 'Matte Black', hex: '#111111', price: 10000, image: '/uploads/cars/zeekr-001.jpg' },
+        { name: 'Pearl White', hex: '#FFFFFF', price: 5000, image: '/uploads/cars/zeekr-001.jpg' },
     ];
 
     for (const c of colors) {
@@ -197,7 +193,7 @@ async function main() {
                 trim_id: trim.id,
                 name: c.name,
                 hex_code: c.hex,
-                image_url: '', // Will be filled by admin
+                image_url: c.image || '',
                 is_premium: c.price > 0,
                 additional_price_cny: c.price,
                 additional_price_rub: c.price * 13.5,

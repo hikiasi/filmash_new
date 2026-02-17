@@ -66,7 +66,7 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
           <div>
             <div className="flex items-center gap-4 mb-3">
               <h1 className="text-4xl font-black tracking-tighter text-white uppercase italic leading-none">
-                {inquiry.trim.model.brand.name} {inquiry.trim.model.name}
+                {inquiry.trim?.model?.brand?.name || (inquiry.configuration_snapshot as any)?.model || 'Лид без модели'}
               </h1>
               <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                   inquiry.status === 'NEW' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)]' :

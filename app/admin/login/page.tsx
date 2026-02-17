@@ -10,7 +10,8 @@ export default function AdminLoginPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple demo logic: just redirect to dashboard
+    // Simple demo logic: set cookie and redirect to dashboard
+    document.cookie = 'filmash-auth=true; path=/; max-age=86400';
     router.push('/admin');
   };
 

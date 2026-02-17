@@ -474,11 +474,6 @@ export type ColorNullableScalarRelationFilter = {
   isNot?: Prisma.ColorWhereInput | null
 }
 
-export type ColorScalarRelationFilter = {
-  is?: Prisma.ColorWhereInput
-  isNot?: Prisma.ColorWhereInput
-}
-
 export type ColorCreateNestedManyWithoutTrimInput = {
   create?: Prisma.XOR<Prisma.ColorCreateWithoutTrimInput, Prisma.ColorUncheckedCreateWithoutTrimInput> | Prisma.ColorCreateWithoutTrimInput[] | Prisma.ColorUncheckedCreateWithoutTrimInput[]
   connectOrCreate?: Prisma.ColorCreateOrConnectWithoutTrimInput | Prisma.ColorCreateOrConnectWithoutTrimInput[]
@@ -555,10 +550,12 @@ export type ColorCreateNestedOneWithoutInquiriesInput = {
   connect?: Prisma.ColorWhereUniqueInput
 }
 
-export type ColorUpdateOneRequiredWithoutInquiriesNestedInput = {
+export type ColorUpdateOneWithoutInquiriesNestedInput = {
   create?: Prisma.XOR<Prisma.ColorCreateWithoutInquiriesInput, Prisma.ColorUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.ColorCreateOrConnectWithoutInquiriesInput
   upsert?: Prisma.ColorUpsertWithoutInquiriesInput
+  disconnect?: Prisma.ColorWhereInput | boolean
+  delete?: Prisma.ColorWhereInput | boolean
   connect?: Prisma.ColorWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ColorUpdateToOneWithWhereWithoutInquiriesInput, Prisma.ColorUpdateWithoutInquiriesInput>, Prisma.ColorUncheckedUpdateWithoutInquiriesInput>
 }
