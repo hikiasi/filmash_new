@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '../app/generated/prisma/client';
+import { PrismaClient } from '../app/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import 'dotenv/config';
 
@@ -11,169 +11,238 @@ const prisma = new PrismaClient({
 });
 
 async function main() {
-  // Create Brand
-  const tesla = await prisma.brand.create({
-    data: {
-      name: 'Tesla',
-      logo_url: 'https://example.com/tesla_logo.png',
-      country_of_origin: 'USA',
-    },
-  });
+  // Clear existing data
+  await prisma.configurationImage.deleteMany();
+  await prisma.inquiry.deleteMany();
+  await prisma.additionalOption.deleteMany();
+  await prisma.steeringWheel.deleteMany();
+  await prisma.interior.deleteMany();
+  await prisma.wheel.deleteMany();
+  await prisma.color.deleteMany();
+  await prisma.trim.deleteMany();
+  await prisma.model.deleteMany();
+  await prisma.brand.deleteMany();
 
-  // Create Model
-  const modelX = await prisma.model.create({
-    data: {
-      brand_id: tesla.id,
-      name: 'Model X',
-      body_type: 'Кроссовер',
+  const brandsData = [
+    { name: 'ZEEKR', logo: 'https://example.com/zeekr.png', country: 'China' },
+    { name: 'BYD', logo: 'https://example.com/byd.png', country: 'China' },
+    { name: 'Lixiang', logo: 'https://example.com/li.png', country: 'China' },
+    { name: 'Tesla', logo: 'https://example.com/tesla.png', country: 'USA' },
+    { name: 'BMW', logo: 'https://example.com/bmw.png', country: 'Germany' },
+    { name: 'Xiaomi', logo: 'https://example.com/xiaomi.png', country: 'China' },
+    { name: 'Lynk & Co', logo: 'https://example.com/lynk.png', country: 'China' },
+  ];
+
+  const brands: Record<string, any> = {};
+  for (const b of brandsData) {
+    brands[b.name] = await prisma.brand.create({
+      data: { name: b.name, logo_url: b.logo, country_of_origin: b.country }
+    });
+  }
+
+  const cars = [
+    {
+      brand: 'ZEEKR',
+      name: '001FR',
       year: 2024,
-      description: 'The most capable SUV ever built.',
+      body_type: 'Лифтбек',
+      price_cny: 769000,
+      specs: {
+        length: '5018', width: '1999', height: '1545', wheelbase: '3005',
+        seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
+        power: '1247', battery: '100 кВт·ч', acceleration: '2.02', top_speed: '280'
+      }
     },
-  });
-
-  const specs = {
-    brand: 'Tesla',
-    power: 670,
-    battery: '100 кВт·ч',
-    length: '5 057',
-    width: '2 271',
-    height: '1 680',
-    wheelbase: '2 965',
-    seats: '5/6/7',
-    engine_type: 'Электрический',
-    range: '576 км',
-    acceleration: '3.9 сек',
-    top_speed: '250 км/ч',
-    total_power: '500 кВт',
-    drive: 'Полный (AWD)',
-  };
-
-  const plaidSpecs = {
-    ...specs,
-    power: 1020,
-    acceleration: '2.6 сек',
-    top_speed: '262 км/ч',
-    total_power: '760 кВт',
-  };
-
-  // Trims
-  const standardTrim = await prisma.trim.create({
-    data: {
-      model_id: modelX.id,
-      name: 'Model X',
-      base_price_cny: 720000,
-      base_price_rub: 9500000,
-      specifications: specs,
+    {
+        brand: 'ZEEKR',
+        name: '007',
+        year: 2024,
+        body_type: 'Седан',
+        price_cny: 209900,
+        specs: {
+          length: '4865', width: '1900', height: '1450', wheelbase: '2928',
+          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
+          power: '646', battery: '75-100 кВт·ч', acceleration: '2.84', top_speed: '210'
+        }
     },
-  });
-
-  const plaidTrim = await prisma.trim.create({
-    data: {
-      model_id: modelX.id,
-      name: 'Plaid',
-      base_price_cny: 850000,
-      base_price_rub: 11500000,
-      specifications: plaidSpecs,
+    {
+        brand: 'ZEEKR',
+        name: '001',
+        year: 2024,
+        body_type: 'Лифтбек',
+        price_cny: 269000,
+        specs: {
+          length: '4970', width: '1999', height: '1560', wheelbase: '3005',
+          seats: '5', engine_type: 'Электрический', drive: 'Задний (RWD)',
+          power: '272', battery: '100 кВт·ч', acceleration: '7.2', top_speed: '200'
+        }
     },
-  });
+    {
+        brand: 'Xiaomi',
+        name: 'SU7',
+        year: 2024,
+        body_type: 'Седан',
+        price_cny: 215900,
+        specs: {
+          length: '4997', width: '1963', height: '1455', wheelbase: '3000',
+          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
+          power: '673', battery: '101 кВт·ч', acceleration: '2.78', top_speed: '265'
+        }
+    },
+    {
+        brand: 'Lixiang',
+        name: 'L9',
+        year: 2024,
+        body_type: 'Внедорожник',
+        price_cny: 429800,
+        specs: {
+          length: '5218', width: '1998', height: '1800', wheelbase: '3105',
+          seats: '6', engine_type: 'Гибрид', drive: 'Полный (AWD)',
+          power: '449', battery: '52.3 кВт·ч', acceleration: '5.3', top_speed: '180'
+        }
+    },
+    {
+        brand: 'Tesla',
+        name: 'Cybertruck',
+        year: 2024,
+        body_type: 'Пикап',
+        price_cny: 1000000,
+        specs: {
+          length: '5885', width: '2027', height: '1905', wheelbase: '3810',
+          seats: '5', engine_type: 'Электрический', drive: 'Полный (AWD)',
+          power: '845', battery: '123 кВт·ч', acceleration: '2.7', top_speed: '180'
+        }
+    },
+    {
+        brand: 'Lixiang',
+        name: 'Mega Ultra',
+        year: 2024,
+        body_type: 'Минивэн',
+        price_cny: 529800,
+        specs: {
+            length: '5350', width: '1965', height: '1850', wheelbase: '3300',
+            seats: '7', engine_type: 'Электрический', drive: 'Полный (AWD)',
+            power: '544', battery: '102.7 кВт·ч', acceleration: '5.5', top_speed: '180'
+        }
+    },
+    {
+        brand: 'Xiaomi',
+        name: 'YU7',
+        year: 2024,
+        body_type: 'Кроссовер',
+        price_cny: 253500,
+        specs: {
+            length: '4999', width: '1996', height: '1608', wheelbase: '3000',
+            seats: '5', engine_type: 'Электрический', drive: 'Задний (RWD)',
+            power: '315', battery: '96.3 кВт·ч', acceleration: '5.9', top_speed: '240'
+        }
+    },
+    {
+        brand: 'BMW',
+        name: '318 i',
+        year: 2024,
+        body_type: 'Седан',
+        price_cny: 250000,
+        specs: {
+            length: '4709', width: '1827', height: '1442', wheelbase: '2851',
+            seats: '5', engine_type: 'Бензин', drive: 'Задний (RWD)',
+            power: '156', battery: 'N/A', acceleration: '8.4', top_speed: '223'
+        }
+    },
+    {
+        brand: 'Lynk & Co',
+        name: '900',
+        year: 2024,
+        body_type: 'Внедорожник',
+        price_cny: 304900,
+        specs: {
+            length: '5240', width: '1999', height: '1810', wheelbase: '3160',
+            seats: '6', engine_type: 'Гибрид (PHEV)', drive: 'Полный (AWD)',
+            power: '734', battery: '52.4 кВт·ч', acceleration: '4.3', top_speed: '240'
+        }
+    }
+  ];
 
-  const trims = [standardTrim, plaidTrim];
+  for (const car of cars) {
+    const model = await prisma.model.create({
+      data: {
+        brand_id: brands[car.brand].id,
+        name: car.name,
+        body_type: car.body_type,
+        year: car.year,
+        description: `Premium car from ${car.brand}`,
+      }
+    });
 
-  for (const trim of trims) {
-    // Colors
-    const colorsData = [
-      { name: 'Mercury (Ртуть)', hex: '#7D7F7D' },
-      { name: 'Gray (Серый)', hex: '#4B4D4E' },
-      { name: 'Red (Красный)', hex: '#A11622' },
-      { name: 'Blue (Синий)', hex: '#1C315E' },
-      { name: 'Black (Черный)', hex: '#111111' },
-      { name: 'White (Белый)', hex: '#F0F0F0' },
+    const trim = await prisma.trim.create({
+      data: {
+        model_id: model.id,
+        name: 'Standard',
+        base_price_cny: car.price_cny,
+        base_price_rub: car.price_cny * 13.5,
+        specifications: car.specs,
+      }
+    });
+
+    // Default options for each car
+    const colors = [
+        { name: 'Electric Blue', hex: '#0000FF', price: 0 },
+        { name: 'Matte Black', hex: '#111111', price: 10000 },
+        { name: 'Pearl White', hex: '#FFFFFF', price: 5000 },
     ];
 
-    const colors = [];
-    for (const c of colorsData) {
-      colors.push(await prisma.color.create({
-        data: {
-          trim_id: trim.id,
-          name: c.name,
-          hex_code: c.hex,
-          image_url: `https://example.com/icons/color_${c.hex.replace('#','')}.png`,
-          is_premium: false,
-        }
-      }));
+    for (const c of colors) {
+        await prisma.color.create({
+            data: {
+                trim_id: trim.id,
+                name: c.name,
+                hex_code: c.hex,
+                image_url: '', // Will be filled by admin
+                is_premium: c.price > 0,
+                additional_price_cny: c.price,
+                additional_price_rub: c.price * 13.5,
+            }
+        });
     }
 
-    // Wheels
-    const wheelsData = [
-      { name: '22" Turbine Wheels', size: '22"' },
-      { name: '20" Cyber Wheels', size: '20"' },
+    const wheels = [
+        { name: '20" Sport', size: '20', price: 0 },
+        { name: '21" Performance', size: '21', price: 15000 },
     ];
 
-    const wheels = [];
-    for (const w of wheelsData) {
-      wheels.push(await prisma.wheel.create({
-        data: {
-          trim_id: trim.id,
-          name: w.name,
-          size: w.size,
-          image_url: `https://example.com/icons/wheel_${w.size.replace('"','')}.png`,
-        }
-      }));
+    for (const w of wheels) {
+        await prisma.wheel.create({
+            data: {
+                trim_id: trim.id,
+                name: w.name,
+                size: w.size,
+                additional_price_cny: w.price,
+                additional_price_rub: w.price * 13.5,
+                image_url: '',
+            }
+        });
     }
 
-    // Interiors
-    const interiorsData = [
-        { name: 'White', material: 'Nappa Leather', img: 'https://example.com/int_white.jpg' },
-        { name: 'Black', material: 'Premium', img: 'https://example.com/int_black.jpg' },
-        { name: 'Beige', material: 'Walnut', img: 'https://example.com/int_beige.jpg' },
+    const interiors = [
+        { name: 'Black Leather', material: 'Leather', price: 0 },
+        { name: 'White Nappa', material: 'Nappa', price: 12000 },
     ];
 
-    for (const int of interiorsData) {
+    for (const i of interiors) {
         await prisma.interior.create({
             data: {
                 trim_id: trim.id,
-                name: int.name,
-                material: int.material,
-                image_url: int.img,
+                name: i.name,
+                material: i.material,
+                additional_price_cny: i.price,
+                additional_price_rub: i.price * 13.5,
+                image_url: '',
             }
         });
-    }
-
-    // Steering Wheels (for Plaid)
-    if (trim.name === 'Plaid') {
-        await prisma.steeringWheel.create({
-            data: {
-                trim_id: trim.id,
-                name: 'Standard Steering Wheel',
-                image_url: 'https://example.com/steering_std.png',
-            }
-        });
-        await prisma.steeringWheel.create({
-            data: {
-                trim_id: trim.id,
-                name: 'Yoke Steering',
-                image_url: 'https://example.com/steering_yoke.png',
-            }
-        });
-    }
-
-    // Configuration Images (Combinations)
-    for (const wheel of wheels) {
-        for (const color of colors) {
-            await prisma.configurationImage.create({
-                data: {
-                    trim_id: trim.id,
-                    color_id: color.id,
-                    wheel_id: wheel.id,
-                    image_url: `https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&q=80&w=1200`, // Placeholder
-                    type: 'exterior'
-                }
-            });
-        }
     }
   }
 
-  console.log('Seeding finished.');
+  console.log('Seed completed successfully');
 }
 
 main()

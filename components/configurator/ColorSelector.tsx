@@ -32,10 +32,17 @@ export function ColorSelector() {
               style={{
                 width: isSelected ? '67px' : '53px',
                 height: isSelected ? '67px' : '53px',
-                backgroundColor: color.hex_code
+                backgroundColor: !color.image_url ? color.hex_code : undefined
               }}
             >
-              {/* If we had color-specific icons we would use them here */}
+              {color.image_url && (
+                <Image
+                    src={color.image_url}
+                    alt={color.name}
+                    fill
+                    className="object-cover"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
               {isSelected && (
                 <div className="bg-primary/20 backdrop-blur-sm size-full flex items-center justify-center">

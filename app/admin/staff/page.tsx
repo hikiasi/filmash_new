@@ -36,6 +36,11 @@ const StaffRow = ({ name, email, role, lastLogin, avatar, roleColor }: any) => (
 );
 
 export default function StaffPage() {
+  const handleNewStaff = () => {
+    const name = prompt('Имя сотрудника:');
+    if (name) alert(`Сотрудник ${name} добавлен (демо)`);
+  };
+
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-black">
       <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
@@ -44,7 +49,10 @@ export default function StaffPage() {
             <h1 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">Команда <span className="text-zinc-600">FILMASH</span></h1>
             <p className="text-zinc-500 text-xs font-bold uppercase tracking-[0.3em] mt-2 italic">Управление доступом и ролями</p>
           </div>
-          <button className="h-14 px-8 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic flex items-center gap-3 shadow-lg shadow-primary/10">
+          <button
+            onClick={handleNewStaff}
+            className="h-14 px-8 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic flex items-center gap-3 shadow-lg shadow-primary/10"
+          >
             <span className="material-symbols-outlined font-black">person_add</span>
             Новый сотрудник
           </button>

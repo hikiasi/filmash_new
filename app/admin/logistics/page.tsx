@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 const KanbanColumn = ({ title, count, color, children }: { title: string, count: number, color: string, children?: React.ReactNode }) => (
   <div className="flex flex-col w-80 shrink-0 bg-zinc-950 border border-zinc-900 rounded-[2.5rem] overflow-hidden h-full shadow-2xl">
@@ -17,8 +18,8 @@ const KanbanColumn = ({ title, count, color, children }: { title: string, count:
   </div>
 );
 
-const KanbanCard = ({ id, title, subtitle, icon, statusColor, image }: any) => (
-  <div className="group relative flex flex-col justify-end h-64 rounded-[2rem] overflow-hidden border border-zinc-900 hover:border-primary/50 transition-all cursor-pointer shadow-xl">
+const KanbanCard = ({ id, title, subtitle, icon, statusColor, image, onClick }: any) => (
+  <div onClick={onClick} className="group relative flex flex-col justify-end h-64 rounded-[2rem] overflow-hidden border border-zinc-900 hover:border-primary/50 transition-all cursor-pointer shadow-xl">
     <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" style={{ backgroundImage: `url("${image}")` }}></div>
     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
     <div className="relative z-10 p-6">
@@ -35,6 +36,8 @@ const KanbanCard = ({ id, title, subtitle, icon, statusColor, image }: any) => (
 );
 
 export default function LogisticsPage() {
+  const [selectedCar, setSelectedCar] = useState<any>(null);
+
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-black">
       <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
@@ -57,8 +60,8 @@ export default function LogisticsPage() {
       <div className="flex-1 overflow-x-auto p-8">
         <div className="flex h-full gap-8">
           <KanbanColumn title="Куплено" count={3} color="bg-blue-500">
-            <KanbanCard id="#FIL-001" title="Tesla Model X" subtitle="Ожидание документов" icon="description" image="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80" />
-            <KanbanCard id="#FIL-005" title="BMW i7 M70" subtitle="Ожидает оплаты" icon="payments" image="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80" />
+            <KanbanCard onClick={() => setSelectedCar({id: "#FIL-001", title: "Tesla Model X", status: "Ожидание документов", image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80"})} id="#FIL-001" title="Tesla Model X" subtitle="Ожидание документов" icon="description" image="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=800&q=80" />
+            <KanbanCard onClick={() => setSelectedCar({id: "#FIL-005", title: "BMW i7 M70", status: "Ожидает оплаты", image: "https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80"})} id="#FIL-005" title="BMW i7 M70" subtitle="Ожидает оплаты" icon="payments" image="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&w=800&q=80" />
           </KanbanColumn>
 
           <KanbanColumn title="Экспорт" count={1} color="bg-indigo-500">
@@ -78,6 +81,41 @@ export default function LogisticsPage() {
           </KanbanColumn>
         </div>
       </div>
+      <Dialog open={!!selectedCar} onOpenChange={() => setSelectedCar(null)}>
+        <DialogContent className="bg-zinc-950 border-zinc-900 text-white max-w-2xl rounded-[2.5rem] p-0 overflow-hidden shadow-2xl">
+          {selectedCar && (
+            <div className="flex flex-col md:flex-row h-full">
+              <div className="md:w-1/2 h-64 md:h-auto bg-cover bg-center" style={{ backgroundImage: `url("${selectedCar.image}")` }}></div>
+              <div className="md:w-1/2 p-10 flex flex-col gap-6">
+                <DialogHeader>
+                  <div className="text-primary text-[10px] font-black uppercase tracking-widest mb-2 italic">{selectedCar.id}</div>
+                  <DialogTitle className="text-3xl font-black uppercase italic tracking-tighter leading-tight text-white">{selectedCar.title}</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div className="p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+                    <p className="text-[10px] text-zinc-500 font-black uppercase tracking-widest mb-1">Текущий статус</p>
+                    <p className="text-white font-black uppercase italic">{selectedCar.status}</p>
+                  </div>
+                  <div className="space-y-2">
+                     <p className="text-[10px] text-zinc-600 font-black uppercase tracking-widest italic">Этапы доставки</p>
+                     <div className="flex items-center gap-3 text-xs text-primary font-bold">
+                        <span className="material-symbols-outlined text-sm">check_circle</span>
+                        <span>Покупка завершена</span>
+                     </div>
+                     <div className="flex items-center gap-3 text-xs text-zinc-400 font-bold animate-pulse">
+                        <span className="material-symbols-outlined text-sm">schedule</span>
+                        <span>Ожидание в порту</span>
+                     </div>
+                  </div>
+                </div>
+                <button className="mt-auto h-14 w-full bg-white text-black font-black uppercase tracking-widest rounded-2xl hover:bg-zinc-200 transition-all italic shadow-lg shadow-white/5">
+                    Подробнее в CRM
+                </button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

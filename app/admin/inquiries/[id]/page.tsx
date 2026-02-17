@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import InquiryDetailClient from './InquiryDetailClient';
+import InquiryStatusCard from './InquiryStatusCard';
 
 export default async function InquiryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -123,18 +124,7 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
           </div>
 
           {/* Actions */}
-          <div className="bg-zinc-950 rounded-3xl border border-zinc-900 p-8 shadow-2xl flex flex-col gap-4">
-            <h3 className="text-[10px] font-black text-zinc-600 uppercase tracking-[0.2em] mb-4 italic">Статус заявки</h3>
-            <select defaultValue={inquiry.status} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-6 text-[10px] font-black uppercase tracking-widest italic text-white outline-none focus:border-primary appearance-none">
-                <option value="NEW">НОВАЯ</option>
-                <option value="IN_PROGRESS">В РАБОТЕ</option>
-                <option value="COMPLETED">ЗАВЕРШЕНА</option>
-                <option value="CANCELLED">ОТМЕНЕНА</option>
-            </select>
-            <button className="h-14 bg-primary text-black text-[10px] font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10">
-                Сохранить статус
-            </button>
-          </div>
+          <InquiryStatusCard inquiryId={inquiry.id} currentStatus={inquiry.status} />
         </div>
       </div>
     </div>
