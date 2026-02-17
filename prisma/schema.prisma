@@ -185,6 +185,27 @@ model Inquiry {
   @@index([wheels_id])
   @@index([interior_id])
   @@index([status])
+
+  delivery               Delivery?
+}
+
+model Delivery {
+  id               String   @id @default(uuid()) @db.Uuid
+  inquiry_id       String?  @db.Uuid @unique
+  car_name         String
+  vin              String?
+  status           String   // 'PURCHASED', 'EXPORT', 'CUSTOMS', 'TRANSIT', 'DELIVERED'
+  current_location String?
+
+  // Documents & Photos
+  documents        Json?    // Array of { name, url, type }
+  loading_photos   String[]
+  unloading_photos String[]
+
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  inquiry          Inquiry? @relation(fields: [inquiry_id], references: [id])
 }
 
 model CurrencyRate {

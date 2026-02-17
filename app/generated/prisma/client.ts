@@ -90,6 +90,11 @@ export type AdditionalOption = Prisma.AdditionalOptionModel
  */
 export type Inquiry = Prisma.InquiryModel
 /**
+ * Model Delivery
+ *
+ */
+export type Delivery = Prisma.DeliveryModel
+/**
  * Model CurrencyRate
  * 
  */

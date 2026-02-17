@@ -61,6 +61,7 @@ export const ModelName = {
   ConfigurationImage: 'ConfigurationImage',
   AdditionalOption: 'AdditionalOption',
   Inquiry: 'Inquiry',
+  Delivery: 'Delivery',
   CurrencyRate: 'CurrencyRate'
 } as const
 
@@ -227,6 +228,23 @@ export const InquiryScalarFieldEnum = {
 export type InquiryScalarFieldEnum = (typeof InquiryScalarFieldEnum)[keyof typeof InquiryScalarFieldEnum]
 
 
+export const DeliveryScalarFieldEnum = {
+  id: 'id',
+  inquiry_id: 'inquiry_id',
+  car_name: 'car_name',
+  vin: 'vin',
+  status: 'status',
+  current_location: 'current_location',
+  documents: 'documents',
+  loading_photos: 'loading_photos',
+  unloading_photos: 'unloading_photos',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum]
+
+
 export const CurrencyRateScalarFieldEnum = {
   id: 'id',
   rate_cny_to_rub: 'rate_cny_to_rub',
@@ -252,6 +270,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
