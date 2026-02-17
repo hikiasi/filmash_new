@@ -28,9 +28,7 @@ export function SpecificationsAccordion() {
   const specs = selectedTrim.specifications as Record<string, any>;
 
   return (
-    <div className="p-10 bg-zinc-950 rounded-[2.5rem] border border-zinc-900 shadow-2xl relative overflow-hidden">
-      <div className="absolute top-0 left-0 size-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
-
+    <div className="p-10 bg-zinc-950 rounded-[2.5rem] border border-zinc-900 shadow-2xl relative">
       <h3 className="text-xl font-black mb-10 flex items-center gap-4 text-white uppercase italic tracking-tighter">
         <span className="size-10 rounded-xl bg-zinc-900 flex items-center justify-center text-primary border border-zinc-800">
             <span className="material-symbols-outlined">info</span>

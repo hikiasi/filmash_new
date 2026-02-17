@@ -30,7 +30,7 @@ export async function GET() {
 
     const csvContent = [
       headers.join(','),
-      ...rows.map(row => row.join(','))
+      ...rows.map(row => row.map(val => `"${String(val).replace(/"/g, '""')}"`).join(','))
     ].join('\n');
 
     return new NextResponse(csvContent, {

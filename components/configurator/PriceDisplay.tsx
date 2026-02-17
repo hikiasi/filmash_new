@@ -24,7 +24,7 @@ export function PriceDisplay() {
           <div className="text-3xl font-black text-white">
             {isLoading ? '...' : totalPriceRUB.toLocaleString(undefined, { maximumFractionDigits: 0 })} ₽
           </div>
-          <div className="text-sm text-zinc-500 font-bold">
+          <div className="text-sm text-white font-black opacity-80 uppercase italic tracking-widest mt-1">
             {totalPriceCNY.toLocaleString()} ¥
           </div>
           {exchangeRate && (

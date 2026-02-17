@@ -51,12 +51,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </nav>
         </div>
         <div className="mt-auto p-4 border-t border-zinc-900">
-          <div className="flex items-center gap-3 px-2">
+          <div className="flex items-center gap-3 px-2 mb-2">
             <div className="size-8 rounded-full bg-zinc-800" />
-            <div className="flex flex-col overflow-hidden">
-              <p className="text-white text-sm font-bold truncate uppercase tracking-tighter">Алексей М.</p>
-              <p className="text-zinc-500 text-[10px] truncate uppercase font-bold tracking-widest">Старший менеджер</p>
+            <div className="flex flex-col overflow-hidden flex-1">
+              <p className="text-white text-xs font-bold truncate uppercase tracking-tighter italic">Алексей М.</p>
+              <p className="text-zinc-500 text-[9px] truncate uppercase font-black tracking-widest opacity-70">Старший менеджер</p>
             </div>
+            <button
+              onClick={() => {
+                document.cookie = 'filmash-auth=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                window.location.href = '/admin/login';
+              }}
+              className="text-zinc-600 hover:text-white transition-colors"
+            >
+              <span className="material-symbols-outlined text-[18px]">logout</span>
+            </button>
           </div>
         </div>
       </aside>

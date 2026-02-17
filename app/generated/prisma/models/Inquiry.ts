@@ -243,8 +243,8 @@ export type InquiryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type InquiryGroupByOutputType = {
   id: string
-  trim_id: string
-  color_id: string
+  trim_id: string | null
+  color_id: string | null
   wheels_id: string | null
   interior_id: string | null
   selected_options: runtime.JsonValue
@@ -285,8 +285,8 @@ export type InquiryWhereInput = {
   OR?: Prisma.InquiryWhereInput[]
   NOT?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
   id?: Prisma.UuidFilter<"Inquiry"> | string
-  trim_id?: Prisma.UuidFilter<"Inquiry"> | string
-  color_id?: Prisma.UuidFilter<"Inquiry"> | string
+  trim_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
+  color_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   wheels_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   interior_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   selected_options?: Prisma.JsonFilter<"Inquiry">
@@ -300,16 +300,16 @@ export type InquiryWhereInput = {
   notes?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   created_at?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
-  trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
-  color?: Prisma.XOR<Prisma.ColorScalarRelationFilter, Prisma.ColorWhereInput>
+  trim?: Prisma.XOR<Prisma.TrimNullableScalarRelationFilter, Prisma.TrimWhereInput> | null
+  color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   wheels?: Prisma.XOR<Prisma.WheelNullableScalarRelationFilter, Prisma.WheelWhereInput> | null
   interior?: Prisma.XOR<Prisma.InteriorNullableScalarRelationFilter, Prisma.InteriorWhereInput> | null
 }
 
 export type InquiryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  trim_id?: Prisma.SortOrder
-  color_id?: Prisma.SortOrder
+  trim_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  color_id?: Prisma.SortOrderInput | Prisma.SortOrder
   wheels_id?: Prisma.SortOrderInput | Prisma.SortOrder
   interior_id?: Prisma.SortOrderInput | Prisma.SortOrder
   selected_options?: Prisma.SortOrder
@@ -334,8 +334,8 @@ export type InquiryWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
   OR?: Prisma.InquiryWhereInput[]
   NOT?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
-  trim_id?: Prisma.UuidFilter<"Inquiry"> | string
-  color_id?: Prisma.UuidFilter<"Inquiry"> | string
+  trim_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
+  color_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   wheels_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   interior_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   selected_options?: Prisma.JsonFilter<"Inquiry">
@@ -349,16 +349,16 @@ export type InquiryWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   created_at?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
-  trim?: Prisma.XOR<Prisma.TrimScalarRelationFilter, Prisma.TrimWhereInput>
-  color?: Prisma.XOR<Prisma.ColorScalarRelationFilter, Prisma.ColorWhereInput>
+  trim?: Prisma.XOR<Prisma.TrimNullableScalarRelationFilter, Prisma.TrimWhereInput> | null
+  color?: Prisma.XOR<Prisma.ColorNullableScalarRelationFilter, Prisma.ColorWhereInput> | null
   wheels?: Prisma.XOR<Prisma.WheelNullableScalarRelationFilter, Prisma.WheelWhereInput> | null
   interior?: Prisma.XOR<Prisma.InteriorNullableScalarRelationFilter, Prisma.InteriorWhereInput> | null
 }, "id">
 
 export type InquiryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  trim_id?: Prisma.SortOrder
-  color_id?: Prisma.SortOrder
+  trim_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  color_id?: Prisma.SortOrderInput | Prisma.SortOrder
   wheels_id?: Prisma.SortOrderInput | Prisma.SortOrder
   interior_id?: Prisma.SortOrderInput | Prisma.SortOrder
   selected_options?: Prisma.SortOrder
@@ -384,8 +384,8 @@ export type InquiryScalarWhereWithAggregatesInput = {
   OR?: Prisma.InquiryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InquiryScalarWhereWithAggregatesInput | Prisma.InquiryScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Inquiry"> | string
-  trim_id?: Prisma.UuidWithAggregatesFilter<"Inquiry"> | string
-  color_id?: Prisma.UuidWithAggregatesFilter<"Inquiry"> | string
+  trim_id?: Prisma.UuidNullableWithAggregatesFilter<"Inquiry"> | string | null
+  color_id?: Prisma.UuidNullableWithAggregatesFilter<"Inquiry"> | string | null
   wheels_id?: Prisma.UuidNullableWithAggregatesFilter<"Inquiry"> | string | null
   interior_id?: Prisma.UuidNullableWithAggregatesFilter<"Inquiry"> | string | null
   selected_options?: Prisma.JsonWithAggregatesFilter<"Inquiry">
@@ -414,16 +414,16 @@ export type InquiryCreateInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  trim: Prisma.TrimCreateNestedOneWithoutInquiriesInput
-  color: Prisma.ColorCreateNestedOneWithoutInquiriesInput
+  trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
+  color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -452,16 +452,16 @@ export type InquiryUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trim?: Prisma.TrimUpdateOneRequiredWithoutInquiriesNestedInput
-  color?: Prisma.ColorUpdateOneRequiredWithoutInquiriesNestedInput
+  trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
+  color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -479,8 +479,8 @@ export type InquiryUncheckedUpdateInput = {
 
 export type InquiryCreateManyInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -513,8 +513,8 @@ export type InquiryUpdateManyMutationInput = {
 
 export type InquiryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -784,14 +784,14 @@ export type InquiryCreateWithoutTrimInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  color: Prisma.ColorCreateNestedOneWithoutInquiriesInput
+  color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateWithoutTrimInput = {
   id?: string
-  color_id: string
+  color_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -838,8 +838,8 @@ export type InquiryScalarWhereInput = {
   OR?: Prisma.InquiryScalarWhereInput[]
   NOT?: Prisma.InquiryScalarWhereInput | Prisma.InquiryScalarWhereInput[]
   id?: Prisma.UuidFilter<"Inquiry"> | string
-  trim_id?: Prisma.UuidFilter<"Inquiry"> | string
-  color_id?: Prisma.UuidFilter<"Inquiry"> | string
+  trim_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
+  color_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   wheels_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   interior_id?: Prisma.UuidNullableFilter<"Inquiry"> | string | null
   selected_options?: Prisma.JsonFilter<"Inquiry">
@@ -868,14 +868,14 @@ export type InquiryCreateWithoutColorInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  trim: Prisma.TrimCreateNestedOneWithoutInquiriesInput
+  trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateWithoutColorInput = {
   id?: string
-  trim_id: string
+  trim_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -930,15 +930,15 @@ export type InquiryCreateWithoutWheelsInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  trim: Prisma.TrimCreateNestedOneWithoutInquiriesInput
-  color: Prisma.ColorCreateNestedOneWithoutInquiriesInput
+  trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
+  color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   interior?: Prisma.InteriorCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateWithoutWheelsInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name: string
@@ -992,15 +992,15 @@ export type InquiryCreateWithoutInteriorInput = {
   notes?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  trim: Prisma.TrimCreateNestedOneWithoutInquiriesInput
-  color: Prisma.ColorCreateNestedOneWithoutInquiriesInput
+  trim?: Prisma.TrimCreateNestedOneWithoutInquiriesInput
+  color?: Prisma.ColorCreateNestedOneWithoutInquiriesInput
   wheels?: Prisma.WheelCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateWithoutInteriorInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   wheels_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name: string
@@ -1043,7 +1043,7 @@ export type InquiryUpdateManyWithWhereWithoutInteriorInput = {
 
 export type InquiryCreateManyTrimInput = {
   id?: string
-  color_id: string
+  color_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1072,14 +1072,14 @@ export type InquiryUpdateWithoutTrimInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  color?: Prisma.ColorUpdateOneRequiredWithoutInquiriesNestedInput
+  color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutTrimInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1097,7 +1097,7 @@ export type InquiryUncheckedUpdateWithoutTrimInput = {
 
 export type InquiryUncheckedUpdateManyWithoutTrimInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1115,7 +1115,7 @@ export type InquiryUncheckedUpdateManyWithoutTrimInput = {
 
 export type InquiryCreateManyColorInput = {
   id?: string
-  trim_id: string
+  trim_id?: string | null
   wheels_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1144,14 +1144,14 @@ export type InquiryUpdateWithoutColorInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trim?: Prisma.TrimUpdateOneRequiredWithoutInquiriesNestedInput
+  trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutColorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1169,7 +1169,7 @@ export type InquiryUncheckedUpdateWithoutColorInput = {
 
 export type InquiryUncheckedUpdateManyWithoutColorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -1187,8 +1187,8 @@ export type InquiryUncheckedUpdateManyWithoutColorInput = {
 
 export type InquiryCreateManyWheelsInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   interior_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name: string
@@ -1216,15 +1216,15 @@ export type InquiryUpdateWithoutWheelsInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trim?: Prisma.TrimUpdateOneRequiredWithoutInquiriesNestedInput
-  color?: Prisma.ColorUpdateOneRequiredWithoutInquiriesNestedInput
+  trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
+  color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   interior?: Prisma.InteriorUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutWheelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1241,8 +1241,8 @@ export type InquiryUncheckedUpdateWithoutWheelsInput = {
 
 export type InquiryUncheckedUpdateManyWithoutWheelsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   interior_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1259,8 +1259,8 @@ export type InquiryUncheckedUpdateManyWithoutWheelsInput = {
 
 export type InquiryCreateManyInteriorInput = {
   id?: string
-  trim_id: string
-  color_id: string
+  trim_id?: string | null
+  color_id?: string | null
   wheels_id?: string | null
   selected_options: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name: string
@@ -1288,15 +1288,15 @@ export type InquiryUpdateWithoutInteriorInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  trim?: Prisma.TrimUpdateOneRequiredWithoutInquiriesNestedInput
-  color?: Prisma.ColorUpdateOneRequiredWithoutInquiriesNestedInput
+  trim?: Prisma.TrimUpdateOneWithoutInquiriesNestedInput
+  color?: Prisma.ColorUpdateOneWithoutInquiriesNestedInput
   wheels?: Prisma.WheelUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutInteriorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1313,8 +1313,8 @@ export type InquiryUncheckedUpdateWithoutInteriorInput = {
 
 export type InquiryUncheckedUpdateManyWithoutInteriorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  trim_id?: Prisma.StringFieldUpdateOperationsInput | string
-  color_id?: Prisma.StringFieldUpdateOperationsInput | string
+  trim_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  color_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   wheels_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   selected_options?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1348,8 +1348,8 @@ export type InquirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   notes?: boolean
   created_at?: boolean
   updated_at?: boolean
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
@@ -1371,8 +1371,8 @@ export type InquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   created_at?: boolean
   updated_at?: boolean
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
@@ -1394,8 +1394,8 @@ export type InquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   created_at?: boolean
   updated_at?: boolean
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
@@ -1421,20 +1421,20 @@ export type InquirySelectScalar = {
 
 export type InquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "trim_id" | "color_id" | "wheels_id" | "interior_id" | "selected_options" | "customer_name" | "customer_phone" | "customer_email" | "total_price_cny" | "total_price_rub" | "status" | "configuration_snapshot" | "notes" | "created_at" | "updated_at", ExtArgs["result"]["inquiry"]>
 export type InquiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }
 export type InquiryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }
 export type InquiryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  trim?: boolean | Prisma.TrimDefaultArgs<ExtArgs>
-  color?: boolean | Prisma.ColorDefaultArgs<ExtArgs>
+  trim?: boolean | Prisma.Inquiry$trimArgs<ExtArgs>
+  color?: boolean | Prisma.Inquiry$colorArgs<ExtArgs>
   wheels?: boolean | Prisma.Inquiry$wheelsArgs<ExtArgs>
   interior?: boolean | Prisma.Inquiry$interiorArgs<ExtArgs>
 }
@@ -1442,15 +1442,15 @@ export type InquiryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $InquiryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Inquiry"
   objects: {
-    trim: Prisma.$TrimPayload<ExtArgs>
-    color: Prisma.$ColorPayload<ExtArgs>
+    trim: Prisma.$TrimPayload<ExtArgs> | null
+    color: Prisma.$ColorPayload<ExtArgs> | null
     wheels: Prisma.$WheelPayload<ExtArgs> | null
     interior: Prisma.$InteriorPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    trim_id: string
-    color_id: string
+    trim_id: string | null
+    color_id: string | null
     wheels_id: string | null
     interior_id: string | null
     selected_options: runtime.JsonValue
@@ -1858,8 +1858,8 @@ readonly fields: InquiryFieldRefs;
  */
 export interface Prisma__InquiryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  trim<T extends Prisma.TrimDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TrimDefaultArgs<ExtArgs>>): Prisma.Prisma__TrimClient<runtime.Types.Result.GetResult<Prisma.$TrimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  color<T extends Prisma.ColorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ColorDefaultArgs<ExtArgs>>): Prisma.Prisma__ColorClient<runtime.Types.Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  trim<T extends Prisma.Inquiry$trimArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$trimArgs<ExtArgs>>): Prisma.Prisma__TrimClient<runtime.Types.Result.GetResult<Prisma.$TrimPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  color<T extends Prisma.Inquiry$colorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$colorArgs<ExtArgs>>): Prisma.Prisma__ColorClient<runtime.Types.Result.GetResult<Prisma.$ColorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   wheels<T extends Prisma.Inquiry$wheelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$wheelsArgs<ExtArgs>>): Prisma.Prisma__WheelClient<runtime.Types.Result.GetResult<Prisma.$WheelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   interior<T extends Prisma.Inquiry$interiorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$interiorArgs<ExtArgs>>): Prisma.Prisma__InteriorClient<runtime.Types.Result.GetResult<Prisma.$InteriorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -2300,6 +2300,44 @@ export type InquiryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Inquiries to delete.
    */
   limit?: number
+}
+
+/**
+ * Inquiry.trim
+ */
+export type Inquiry$trimArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Trim
+   */
+  select?: Prisma.TrimSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Trim
+   */
+  omit?: Prisma.TrimOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrimInclude<ExtArgs> | null
+  where?: Prisma.TrimWhereInput
+}
+
+/**
+ * Inquiry.color
+ */
+export type Inquiry$colorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Color
+   */
+  select?: Prisma.ColorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Color
+   */
+  omit?: Prisma.ColorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ColorInclude<ExtArgs> | null
+  where?: Prisma.ColorWhereInput
 }
 
 /**

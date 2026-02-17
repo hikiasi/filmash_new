@@ -481,6 +481,11 @@ export type TrimScalarRelationFilter = {
   isNot?: Prisma.TrimWhereInput
 }
 
+export type TrimNullableScalarRelationFilter = {
+  is?: Prisma.TrimWhereInput | null
+  isNot?: Prisma.TrimWhereInput | null
+}
+
 export type TrimCreateNestedManyWithoutModelInput = {
   create?: Prisma.XOR<Prisma.TrimCreateWithoutModelInput, Prisma.TrimUncheckedCreateWithoutModelInput> | Prisma.TrimCreateWithoutModelInput[] | Prisma.TrimUncheckedCreateWithoutModelInput[]
   connectOrCreate?: Prisma.TrimCreateOrConnectWithoutModelInput | Prisma.TrimCreateOrConnectWithoutModelInput[]
@@ -621,10 +626,12 @@ export type TrimCreateNestedOneWithoutInquiriesInput = {
   connect?: Prisma.TrimWhereUniqueInput
 }
 
-export type TrimUpdateOneRequiredWithoutInquiriesNestedInput = {
+export type TrimUpdateOneWithoutInquiriesNestedInput = {
   create?: Prisma.XOR<Prisma.TrimCreateWithoutInquiriesInput, Prisma.TrimUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.TrimCreateOrConnectWithoutInquiriesInput
   upsert?: Prisma.TrimUpsertWithoutInquiriesInput
+  disconnect?: Prisma.TrimWhereInput | boolean
+  delete?: Prisma.TrimWhereInput | boolean
   connect?: Prisma.TrimWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.TrimUpdateToOneWithWhereWithoutInquiriesInput, Prisma.TrimUpdateWithoutInquiriesInput>, Prisma.TrimUncheckedUpdateWithoutInquiriesInput>
 }

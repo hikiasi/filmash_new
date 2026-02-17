@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import prisma from '@/lib/db';
+import ImageOptimized from '@/components/shared/ImageOptimized';
 
 export default async function InventoryPage() {
   const models = await prisma.model.findMany({
@@ -70,9 +71,14 @@ export default async function InventoryPage() {
                     <tr key={model.id} className="group hover:bg-zinc-900/30 transition-all">
                       <td className="px-8 py-6">
                         <div className="flex items-center gap-4">
-                          <div className="h-12 w-20 bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800">
+                          <div className="h-12 w-20 bg-zinc-900 rounded-xl overflow-hidden border border-zinc-800 relative">
                             {imageUrl && (
-                              <img src={imageUrl} alt={model.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                              <ImageOptimized
+                                src={imageUrl}
+                                alt={model.name}
+                                fill
+                                imgClassName="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                              />
                             )}
                           </div>
                           <div>

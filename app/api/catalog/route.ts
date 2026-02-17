@@ -55,11 +55,13 @@ export async function GET(request: Request) {
     if (data.bodyTypes && data.bodyTypes.length > 0) {
       where.body_type = { in: data.bodyTypes };
     }
-    if (data.priceRange) {
+    if (data.priceRange && (data.priceRange[0] > 0 || data.priceRange[1] < 20000000)) {
       trimSomeFilter.push({ base_price_rub: { gte: data.priceRange[0], lte: data.priceRange[1] } });
     }
     
-    if (data.powerRange) {
+    if (data.powerRange && (data.powerRange[0] > 0 || data.powerRange[1] < 1000)) {
+        // Try both number and string comparison if possible, but Prisma JSON is limited.
+        // We'll stick to number and ensure seed data is correct.
         trimSomeFilter.push({
             specifications: {
                 path: ['power'],
