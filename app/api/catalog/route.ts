@@ -127,6 +127,10 @@ export async function GET(request: Request) {
             include: {
                 colors: {
                     take: 1,
+                },
+                config_images: {
+                    where: { type: 'exterior' },
+                    take: 1
                 }
             }
           },
@@ -143,6 +147,9 @@ export async function GET(request: Request) {
       const minPriceTrim = model.trims[0];
       const getSpec = (key: string) => (minPriceTrim && typeof minPriceTrim.specifications === 'object' && minPriceTrim.specifications !== null && key in (minPriceTrim.specifications as any)) ? (minPriceTrim.specifications as any)[key] : undefined;
 
+      // Use the first exterior config image if available, otherwise fall back to color icon
+      const carImage = minPriceTrim?.config_images?.[0]?.image_url || minPriceTrim?.colors?.[0]?.image_url || '';
+
       return {
         id: model.id,
         name: model.name,
@@ -150,7 +157,7 @@ export async function GET(request: Request) {
         model: model.name,
         year: model.year,
         bodyType: model.body_type,
-        imageUrl: minPriceTrim?.colors?.[0]?.image_url || '',
+        imageUrl: carImage,
         minPriceCny: minPriceTrim ? Number(minPriceTrim.base_price_cny) : 0,
         minPriceRub: minPriceTrim ? Number(minPriceTrim.base_price_rub) : 0,
         specifications: {
