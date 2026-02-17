@@ -21,6 +21,32 @@ export default function ModelEditorClient({ model }: { model: any }) {
   const [isAddTrimOpen, setIsAddTrimOpen] = useState(false);
   const [newTrim, setNewTrim] = useState({ name: '', base_price_cny: '' });
   const [isSaving, setIsSaving] = useState(false);
+  const [isSavingModel, setIsSavingModel] = useState(false);
+  const [modelData, setModelData] = useState({
+    name: model.name,
+    body_type: model.body_type,
+    year: model.year,
+    description: model.description || ''
+  });
+
+  const handleSaveModel = async () => {
+    setIsSavingModel(true);
+    try {
+      const res = await fetch(`/api/admin/models/${model.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(modelData),
+      });
+      if (res.ok) {
+        router.refresh();
+        alert('Изменения модели сохранены');
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSavingModel(false);
+    }
+  };
 
   const handleAddTrim = async () => {
     setIsSaving(true);
@@ -60,8 +86,12 @@ export default function ModelEditorClient({ model }: { model: any }) {
             <h1 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">Редактор <span className="text-zinc-600">Модели</span></h1>
           </div>
           <div className="flex gap-4">
-             <button className="h-14 px-10 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10">
-                Сохранить изменения
+             <button
+              onClick={handleSaveModel}
+              disabled={isSavingModel}
+              className="h-14 px-10 bg-primary text-black text-xs font-black uppercase tracking-widest rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10 disabled:opacity-50"
+             >
+                {isSavingModel ? 'Сохранение...' : 'Сохранить изменения'}
              </button>
           </div>
         </div>
@@ -78,15 +108,30 @@ export default function ModelEditorClient({ model }: { model: any }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="space-y-3">
                         <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Название</label>
-                        <input type="text" defaultValue={model.name} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary" />
+                        <input
+                          type="text"
+                          value={modelData.name}
+                          onChange={e => setModelData({...modelData, name: e.target.value})}
+                          className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary"
+                        />
                     </div>
                     <div className="space-y-3">
                         <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Тип кузова</label>
-                        <input type="text" defaultValue={model.body_type} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary" />
+                        <input
+                          type="text"
+                          value={modelData.body_type}
+                          onChange={e => setModelData({...modelData, body_type: e.target.value})}
+                          className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary"
+                        />
                     </div>
                     <div className="space-y-3">
                         <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Год</label>
-                        <input type="number" defaultValue={model.year} className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary" />
+                        <input
+                          type="number"
+                          value={modelData.year}
+                          onChange={e => setModelData({...modelData, year: parseInt(e.target.value)})}
+                          className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary"
+                        />
                     </div>
                 </div>
             </section>
@@ -137,14 +182,6 @@ export default function ModelEditorClient({ model }: { model: any }) {
                 </div>
             </section>
 
-            <VisualOptionsEditor
-                initialColors={serializePrisma(allColors)}
-                initialWheels={serializePrisma(allWheels)}
-                initialInteriors={serializePrisma(allInteriors)}
-                initialSteering={serializePrisma(allSteering)}
-                initialOptions={serializePrisma(allOptions)}
-                modelId={model.id}
-            />
         </div>
       </div>
 
