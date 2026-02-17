@@ -64,8 +64,8 @@ export default function TrimEditorClient({ trim, modelId }: { trim: any, modelId
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-black">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col bg-black">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-2 text-zinc-500 text-[10px] font-black uppercase tracking-widest mb-2 italic">
@@ -85,8 +85,8 @@ export default function TrimEditorClient({ trim, modelId }: { trim: any, modelId
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-8">
-        <div className="max-w-6xl mx-auto space-y-12">
+      <div className="p-8">
+        <div className="max-w-6xl mx-auto space-y-12 mb-12">
             <section className="bg-zinc-950 border border-zinc-900 p-10 rounded-[2.5rem] shadow-2xl">
                 <h3 className="text-lg font-black text-white mb-8 uppercase italic tracking-tighter flex items-center gap-3">
                     <span className="material-symbols-outlined text-primary">settings</span>

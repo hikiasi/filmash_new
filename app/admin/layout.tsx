@@ -26,10 +26,10 @@ const SidebarItem = ({ href, icon, label, badge }: { href: string, icon: string,
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-black text-white font-sans">
+    <div className="flex min-h-screen w-full bg-black text-white font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-zinc-950 border-r border-zinc-900 flex flex-col shrink-0 hidden lg:flex">
-        <div className="p-6">
+      <aside className="w-64 bg-zinc-950 border-r border-zinc-900 flex flex-col shrink-0 hidden lg:flex sticky top-0 h-screen">
+        <div className="p-6 overflow-y-auto flex-1">
           <div className="flex items-center gap-3 mb-8">
             <div className="size-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
                 <span className="material-symbols-outlined text-black font-black">dashboard</span>
@@ -71,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 relative overflow-hidden bg-black flex flex-col">
+      <main className="flex-1 relative bg-black flex flex-col min-w-0">
         {children}
       </main>
     </div>

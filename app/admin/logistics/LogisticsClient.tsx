@@ -163,8 +163,8 @@ export default function LogisticsClient({ initialDeliveries, availableInquiries 
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-black">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col bg-black">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
             <h1 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">Доска <span className="text-zinc-600">Логистики</span></h1>
@@ -181,8 +181,8 @@ export default function LogisticsClient({ initialDeliveries, availableInquiries 
         </div>
       </header>
 
-      <div className="flex-1 overflow-x-auto p-8">
-        <div className="flex h-full gap-8">
+      <div className="p-8 overflow-x-auto">
+        <div className="flex gap-8 min-h-[calc(100vh-200px)]">
           {columns.map(col => {
               const colDeliveries = initialDeliveries.filter((d: any) => d.status === col.status);
               return (
@@ -257,6 +257,7 @@ export default function LogisticsClient({ initialDeliveries, availableInquiries 
       {/* Detailed Delivery Modal */}
       <Dialog open={!!selectedDelivery} onOpenChange={() => setSelectedDelivery(null)}>
         <DialogContent className="bg-zinc-950 border-zinc-900 text-white max-w-4xl rounded-[2.5rem] p-0 overflow-hidden shadow-2xl">
+          <DialogTitle className="sr-only">Детали поставки</DialogTitle>
           {selectedDelivery && (
             <div className="flex flex-col h-[80vh]">
               <div className="h-48 bg-zinc-900 relative overflow-hidden shrink-0 border-b border-zinc-800">

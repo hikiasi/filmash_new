@@ -29,16 +29,16 @@ export default function SettingsClient({ initialRate }: { initialRate: number })
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-black">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col bg-black">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-8 py-6">
           <h1 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">Настройки <span className="text-zinc-600">Системы</span></h1>
           <p className="text-zinc-500 text-xs font-bold uppercase tracking-[0.3em] mt-2 italic">Конфигурация параметров платформы</p>
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-8">
-        <div className="max-w-4xl space-y-8">
+      <div className="p-8">
+        <div className="max-w-4xl space-y-8 mb-12">
             <section className="bg-zinc-950 border border-zinc-900 p-10 rounded-[2.5rem] shadow-2xl">
                  <h3 className="text-lg font-black text-white mb-8 uppercase italic tracking-tighter flex items-center gap-3">
                     <span className="material-symbols-outlined text-primary">currency_exchange</span>
