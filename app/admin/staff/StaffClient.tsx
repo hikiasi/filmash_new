@@ -56,8 +56,8 @@ export default function StaffClient() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-black">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col bg-black">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-8 py-6 flex items-center justify-between">
           <div>
             <h1 className="text-white text-4xl font-black italic uppercase tracking-tighter leading-none">Команда <span className="text-zinc-600">FILMASH</span></h1>
@@ -73,8 +73,8 @@ export default function StaffClient() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-8">
-        <div className="max-w-[1200px] mx-auto space-y-10">
+      <div className="p-8">
+        <div className="max-w-[1200px] mx-auto space-y-10 mb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { label: 'Всего', val: '24', icon: 'group', color: 'text-primary' },

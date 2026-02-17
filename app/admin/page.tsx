@@ -82,8 +82,8 @@ export default async function Dashboard() {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col bg-black">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-6 py-5 flex flex-col gap-4">
           <div className="flex flex-wrap justify-between items-center gap-4">
             <div>
@@ -104,7 +104,7 @@ export default async function Dashboard() {
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-6 space-y-8">
+      <div className="p-6 space-y-8 mb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { label: 'Всего заявок', val: stats.total, icon: 'inbox', color: 'text-primary' },

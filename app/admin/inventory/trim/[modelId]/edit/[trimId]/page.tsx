@@ -15,6 +15,14 @@ export default async function TrimEditorPage({ params }: { params: Promise<{ mod
       interiors: true,
       steering_wheels: true,
       additional_options: true,
+      config_images: {
+        include: {
+          color: true,
+          wheel: true,
+          interior: true,
+          steering_wheel: true,
+        }
+      },
       model: {
         include: { brand: true }
       }

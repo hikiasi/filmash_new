@@ -131,8 +131,8 @@ export default function InquiriesClient({ inquiries }: { inquiries: any[] }) {
   };
 
   return (
-    <div className="flex-1 flex flex-col min-h-0">
-      <header className="bg-black/95 backdrop-blur-sm z-10 border-b border-zinc-900 sticky top-0">
+    <div className="flex-1 flex flex-col">
+      <header className="bg-black/95 backdrop-blur-sm z-20 border-b border-zinc-900 sticky top-0">
         <div className="px-6 py-5 flex flex-col gap-4">
           <div className="flex flex-wrap justify-between items-center gap-4">
             <div>
@@ -159,8 +159,8 @@ export default function InquiriesClient({ inquiries }: { inquiries: any[] }) {
         </div>
       </header>
 
-      <div className="flex-1 overflow-auto p-6 pt-0">
-        <div className="border border-zinc-900 rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl">
+      <div className="p-6 pt-0">
+        <div className="border border-zinc-900 rounded-2xl overflow-hidden bg-zinc-950 shadow-2xl mb-12">
           <table className="min-w-full divide-y divide-zinc-900">
             <thead className="bg-zinc-900/50">
               <tr>

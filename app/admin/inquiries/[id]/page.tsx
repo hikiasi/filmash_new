@@ -52,7 +52,7 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
   ));
 
   return (
-    <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-y-auto bg-black">
+    <div className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-black">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <nav className="flex items-center text-[10px] font-black uppercase tracking-[0.2em]">
           <Link href="/admin/inquiries" className="text-zinc-500 hover:text-white transition-colors">Заявки</Link>

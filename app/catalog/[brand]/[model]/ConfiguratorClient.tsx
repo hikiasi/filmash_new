@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { ConfiguratorLayout } from '@/components/configurator/ConfiguratorLayout';
 import { useConfiguratorStore } from '@/lib/store/configurator-store';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { InquiryForm } from '@/components/configurator/InquiryForm';
 
 interface ConfiguratorClientProps {
@@ -31,6 +31,7 @@ export default function ConfiguratorClient({ model }: ConfiguratorClientProps) {
 
       <Dialog open={isOrderModalOpen} onOpenChange={setIsOrderModalOpen}>
         <DialogContent className="bg-zinc-950 border-zinc-900 max-w-lg p-0 overflow-hidden rounded-3xl">
+          <DialogTitle className="sr-only">Оформить заявку</DialogTitle>
           <InquiryForm onComplete={() => setIsOrderModalOpen(false)} />
         </DialogContent>
       </Dialog>
