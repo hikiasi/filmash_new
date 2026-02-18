@@ -47,6 +47,7 @@ export default async function ConfiguratorPage({ params }: ConfiguratorPageProps
           wheels: true,
           interiors: true,
           additional_options: true,
+          config_images: true,
         }
       },
     },
