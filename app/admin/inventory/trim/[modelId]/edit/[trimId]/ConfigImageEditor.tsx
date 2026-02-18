@@ -18,9 +18,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { Loader2, Upload, Plus, Pencil, Trash2, Image as ImageIcon } from 'lucide-react';
+import { Loader2, Upload, Plus, Pencil, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import ImageOptimized from '@/components/shared/ImageOptimized';
 
 export default function ConfigImageEditor({
   trimId,
@@ -98,7 +97,6 @@ export default function ConfigImageEditor({
         ? `/api/admin/config-images/${editingItem.id}`
         : `/api/admin/trims/${trimId}/config-images`;
 
-    // Clean up "none" values to null for DB
     const payload = {
         ...formData,
         color_id: formData.color_id === 'none' ? null : formData.color_id,
@@ -156,8 +154,12 @@ export default function ConfigImageEditor({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
         {configImages?.map((img: any) => (
           <div key={img.id} className="group bg-zinc-900/50 border border-zinc-900 rounded-3xl overflow-hidden hover:border-primary/30 transition-all">
-             <div className="aspect-[16/10] relative bg-black">
-                <ImageOptimized src={img.image_url} alt="Config View" fill imgClassName="object-contain" />
+             <div className="aspect-[16/10] relative bg-black flex items-center justify-center">
+                {img.image_url ? (
+                  <img src={img.image_url} alt="Config View" className="w-full h-full object-contain" />
+                ) : (
+                  <div className="text-zinc-800 font-black italic">ОШИБКА ФОТО</div>
+                )}
                 <div className="absolute top-4 left-4 flex flex-col gap-2">
                     <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[8px] font-black text-white uppercase tracking-widest border border-white/10">
                         {img.type === 'exterior' ? 'Экстерьер' : 'Интерьер'}
@@ -178,6 +180,9 @@ export default function ConfigImageEditor({
                     {img.wheel && <Tag icon="tire_repair" label={img.wheel.name} />}
                     {img.interior && <Tag icon="chair" label={img.interior.name} />}
                     {img.steering_wheel && <Tag icon="sports_steeringwheel" label={img.steering_wheel.name} />}
+                    {!img.color && !img.wheel && !img.interior && !img.steering_wheel && (
+                        <Tag icon="base" label="Базовый вид" />
+                    )}
                 </div>
              </div>
           </div>

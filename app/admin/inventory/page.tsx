@@ -11,6 +11,10 @@ export default async function InventoryPage() {
         include: {
             colors: {
                 take: 1
+            },
+            config_images: {
+              where: { type: 'exterior' },
+              take: 1
             }
         }
       },
@@ -64,8 +68,8 @@ export default async function InventoryPage() {
               </thead>
               <tbody className="divide-y divide-zinc-900">
                 {models.map((model: any) => {
-                  const firstTrimWithImage = model.trims.find((t: any) => t.colors?.[0]?.image_url);
-                  const imageUrl = firstTrimWithImage?.colors?.[0]?.image_url;
+                  const firstTrimWithImage = model.trims.find((t: any) => t.config_images?.[0]?.image_url || t.colors?.[0]?.image_url);
+                  const imageUrl = firstTrimWithImage?.config_images?.[0]?.image_url || firstTrimWithImage?.colors?.[0]?.image_url;
 
                   return (
                     <tr key={model.id} className="group hover:bg-zinc-900/30 transition-all">

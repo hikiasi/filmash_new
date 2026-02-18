@@ -21,7 +21,7 @@ export function ImageGallery() {
       img.color_id === selectedColor?.id &&
       !img.wheel_id
     )
-  )?.image_url || selectedColor?.image_url || selectedTrim?.colors?.[0]?.image_url;
+  )?.image_url || selectedTrim?.config_images?.find((i:any) => i.type === 'exterior')?.image_url;
 
   const interiorImage = (
     selectedTrim?.config_images?.find((img: any) =>
@@ -34,7 +34,7 @@ export function ImageGallery() {
       img.interior_id === selectedInterior?.id &&
       !img.steering_wheel_id
     )
-  )?.image_url || selectedInterior?.image_url;
+  )?.image_url || selectedTrim?.config_images?.find((i:any) => i.type === 'interior')?.image_url;
 
   const currentImage = view === 'exterior' ? exteriorImage : interiorImage;
 
