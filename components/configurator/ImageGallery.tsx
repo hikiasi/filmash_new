@@ -20,8 +20,11 @@ export function ImageGallery() {
       img.type === 'exterior' &&
       img.color_id === selectedColor?.id &&
       !img.wheel_id
+    ) ||
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'exterior'
     )
-  )?.image_url || selectedTrim?.config_images?.find((i:any) => i.type === 'exterior')?.image_url;
+  )?.image_url || '/placeholder-car.jpg';
 
   const interiorImage = (
     selectedTrim?.config_images?.find((img: any) =>
@@ -33,8 +36,11 @@ export function ImageGallery() {
       img.type === 'interior' &&
       img.interior_id === selectedInterior?.id &&
       !img.steering_wheel_id
+    ) ||
+    selectedTrim?.config_images?.find((img: any) =>
+      img.type === 'interior'
     )
-  )?.image_url || selectedTrim?.config_images?.find((i:any) => i.type === 'interior')?.image_url;
+  )?.image_url || '/placeholder-car.jpg';
 
   const currentImage = view === 'exterior' ? exteriorImage : interiorImage;
 

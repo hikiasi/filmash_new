@@ -148,7 +148,7 @@ export async function GET(request: Request) {
       const getSpec = (key: string) => (minPriceTrim && typeof minPriceTrim.specifications === 'object' && minPriceTrim.specifications !== null && key in (minPriceTrim.specifications as any)) ? (minPriceTrim.specifications as any)[key] : undefined;
 
       // Use the first exterior config image if available, otherwise fall back to color icon
-      const carImage = minPriceTrim?.config_images?.[0]?.image_url || minPriceTrim?.colors?.[0]?.image_url || '';
+      const carImage = minPriceTrim?.config_images?.[0]?.image_url || minPriceTrim?.colors?.[0]?.image_url || '/placeholder-car.jpg';
 
       return {
         id: model.id,
