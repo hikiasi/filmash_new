@@ -21,7 +21,7 @@ export async function GET() {
       inq.customer_name,
       inq.customer_phone,
       inq.customer_email,
-      `${inq.trim.model.brand.name} ${inq.trim.model.name} (${inq.trim.name})`,
+      inq.trim ? `${inq.trim.model.brand.name} ${inq.trim.model.name} (${inq.trim.name})` : 'Custom Order / Manually Created',
       inq.total_price_rub,
       inq.total_price_cny,
       inq.status,
