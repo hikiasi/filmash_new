@@ -349,6 +349,6 @@ function Section({ title, icon, items, onAdd, onEdit, onDelete, renderItem }: an
                     </div>
                 ))}
             </div>
-        </section> section
+        </section>
     );
 }
