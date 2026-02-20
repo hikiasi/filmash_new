@@ -40,6 +40,7 @@ export type ModelMinAggregateOutputType = {
   name: string | null
   body_type: string | null
   year: number | null
+  image_url: string | null
   description: string | null
   created_at: Date | null
   updated_at: Date | null
@@ -51,6 +52,7 @@ export type ModelMaxAggregateOutputType = {
   name: string | null
   body_type: string | null
   year: number | null
+  image_url: string | null
   description: string | null
   created_at: Date | null
   updated_at: Date | null
@@ -62,6 +64,7 @@ export type ModelCountAggregateOutputType = {
   name: number
   body_type: number
   year: number
+  image_url: number
   description: number
   created_at: number
   updated_at: number
@@ -83,6 +86,7 @@ export type ModelMinAggregateInputType = {
   name?: true
   body_type?: true
   year?: true
+  image_url?: true
   description?: true
   created_at?: true
   updated_at?: true
@@ -94,6 +98,7 @@ export type ModelMaxAggregateInputType = {
   name?: true
   body_type?: true
   year?: true
+  image_url?: true
   description?: true
   created_at?: true
   updated_at?: true
@@ -105,6 +110,7 @@ export type ModelCountAggregateInputType = {
   name?: true
   body_type?: true
   year?: true
+  image_url?: true
   description?: true
   created_at?: true
   updated_at?: true
@@ -203,6 +209,7 @@ export type ModelGroupByOutputType = {
   name: string
   body_type: string
   year: number
+  image_url: string | null
   description: string
   created_at: Date
   updated_at: Date
@@ -237,6 +244,7 @@ export type ModelWhereInput = {
   name?: Prisma.StringFilter<"Model"> | string
   body_type?: Prisma.StringFilter<"Model"> | string
   year?: Prisma.IntFilter<"Model"> | number
+  image_url?: Prisma.StringNullableFilter<"Model"> | string | null
   description?: Prisma.StringFilter<"Model"> | string
   created_at?: Prisma.DateTimeFilter<"Model"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Model"> | Date | string
@@ -250,6 +258,7 @@ export type ModelOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   body_type?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  image_url?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -266,6 +275,7 @@ export type ModelWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Model"> | string
   body_type?: Prisma.StringFilter<"Model"> | string
   year?: Prisma.IntFilter<"Model"> | number
+  image_url?: Prisma.StringNullableFilter<"Model"> | string | null
   description?: Prisma.StringFilter<"Model"> | string
   created_at?: Prisma.DateTimeFilter<"Model"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Model"> | Date | string
@@ -279,6 +289,7 @@ export type ModelOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   body_type?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  image_url?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -298,6 +309,7 @@ export type ModelScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Model"> | string
   body_type?: Prisma.StringWithAggregatesFilter<"Model"> | string
   year?: Prisma.IntWithAggregatesFilter<"Model"> | number
+  image_url?: Prisma.StringNullableWithAggregatesFilter<"Model"> | string | null
   description?: Prisma.StringWithAggregatesFilter<"Model"> | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"Model"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"Model"> | Date | string
@@ -308,6 +320,7 @@ export type ModelCreateInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -321,6 +334,7 @@ export type ModelUncheckedCreateInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -332,6 +346,7 @@ export type ModelUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -345,6 +360,7 @@ export type ModelUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -357,6 +373,7 @@ export type ModelCreateManyInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -367,6 +384,7 @@ export type ModelUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -378,6 +396,7 @@ export type ModelUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -399,6 +418,7 @@ export type ModelCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   body_type?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -414,6 +434,7 @@ export type ModelMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   body_type?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -425,6 +446,7 @@ export type ModelMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   body_type?: Prisma.SortOrder
   year?: Prisma.SortOrder
+  image_url?: Prisma.SortOrder
   description?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
@@ -489,6 +511,10 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type ModelCreateNestedOneWithoutTrimsInput = {
   create?: Prisma.XOR<Prisma.ModelCreateWithoutTrimsInput, Prisma.ModelUncheckedCreateWithoutTrimsInput>
   connectOrCreate?: Prisma.ModelCreateOrConnectWithoutTrimsInput
@@ -508,6 +534,7 @@ export type ModelCreateWithoutBrandInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -519,6 +546,7 @@ export type ModelUncheckedCreateWithoutBrandInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -560,6 +588,7 @@ export type ModelScalarWhereInput = {
   name?: Prisma.StringFilter<"Model"> | string
   body_type?: Prisma.StringFilter<"Model"> | string
   year?: Prisma.IntFilter<"Model"> | number
+  image_url?: Prisma.StringNullableFilter<"Model"> | string | null
   description?: Prisma.StringFilter<"Model"> | string
   created_at?: Prisma.DateTimeFilter<"Model"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"Model"> | Date | string
@@ -570,6 +599,7 @@ export type ModelCreateWithoutTrimsInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -582,6 +612,7 @@ export type ModelUncheckedCreateWithoutTrimsInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -608,6 +639,7 @@ export type ModelUpdateWithoutTrimsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -620,6 +652,7 @@ export type ModelUncheckedUpdateWithoutTrimsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -630,6 +663,7 @@ export type ModelCreateManyBrandInput = {
   name: string
   body_type: string
   year: number
+  image_url?: string | null
   description: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -640,6 +674,7 @@ export type ModelUpdateWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -651,6 +686,7 @@ export type ModelUncheckedUpdateWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -662,6 +698,7 @@ export type ModelUncheckedUpdateManyWithoutBrandInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   body_type?: Prisma.StringFieldUpdateOperationsInput | string
   year?: Prisma.IntFieldUpdateOperationsInput | number
+  image_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   description?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +741,7 @@ export type ModelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name?: boolean
   body_type?: boolean
   year?: boolean
+  image_url?: boolean
   description?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -718,6 +756,7 @@ export type ModelSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   body_type?: boolean
   year?: boolean
+  image_url?: boolean
   description?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -730,6 +769,7 @@ export type ModelSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   name?: boolean
   body_type?: boolean
   year?: boolean
+  image_url?: boolean
   description?: boolean
   created_at?: boolean
   updated_at?: boolean
@@ -742,12 +782,13 @@ export type ModelSelectScalar = {
   name?: boolean
   body_type?: boolean
   year?: boolean
+  image_url?: boolean
   description?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type ModelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "brand_id" | "name" | "body_type" | "year" | "description" | "created_at" | "updated_at", ExtArgs["result"]["model"]>
+export type ModelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "brand_id" | "name" | "body_type" | "year" | "image_url" | "description" | "created_at" | "updated_at", ExtArgs["result"]["model"]>
 export type ModelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brand?: boolean | Prisma.BrandDefaultArgs<ExtArgs>
   trims?: boolean | Prisma.Model$trimsArgs<ExtArgs>
@@ -772,6 +813,7 @@ export type $ModelPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     name: string
     body_type: string
     year: number
+    image_url: string | null
     description: string
     created_at: Date
     updated_at: Date
@@ -1205,6 +1247,7 @@ export interface ModelFieldRefs {
   readonly name: Prisma.FieldRef<"Model", 'String'>
   readonly body_type: Prisma.FieldRef<"Model", 'String'>
   readonly year: Prisma.FieldRef<"Model", 'Int'>
+  readonly image_url: Prisma.FieldRef<"Model", 'String'>
   readonly description: Prisma.FieldRef<"Model", 'String'>
   readonly created_at: Prisma.FieldRef<"Model", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"Model", 'DateTime'>

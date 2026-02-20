@@ -26,6 +26,7 @@ model Model {
   name        String
   body_type   String
   year        Int
+  image_url   String?
   description String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt

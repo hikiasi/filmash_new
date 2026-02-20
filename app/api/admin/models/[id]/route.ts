@@ -8,7 +8,7 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { name, body_type, year, description } = body;
+    const { name, body_type, year, description, image_url } = body;
 
     const model = await prisma.model.update({
       where: { id },
@@ -16,6 +16,7 @@ export async function PATCH(
         name,
         body_type,
         year: parseInt(year),
+        image_url,
         description,
       },
     });

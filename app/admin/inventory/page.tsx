@@ -65,9 +65,10 @@ export default async function InventoryPage() {
               </thead>
               <tbody className="divide-y divide-zinc-900">
                 {models.map((model: any) => {
-                  // Search all trims for an exterior image, then any color image
-                  let imageUrl = '/placeholder-car.jpg';
+                  // Prioritize model-level image, then search all trims
+                  let imageUrl = model.image_url || '/placeholder-car.jpg';
 
+                  if (imageUrl === '/placeholder-car.jpg') {
                   for (const trim of model.trims) {
                     const extImg = trim.config_images?.find((img: any) => img.image_url);
                     if (extImg) {
@@ -79,6 +80,7 @@ export default async function InventoryPage() {
                         imageUrl = colorImg.image_url;
                         break;
                     }
+                  }
                   }
 
                   return (

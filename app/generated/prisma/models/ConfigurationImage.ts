@@ -601,10 +601,6 @@ export type ConfigurationImageUncheckedUpdateManyWithoutSteering_wheelNestedInpu
   deleteMany?: Prisma.ConfigurationImageScalarWhereInput | Prisma.ConfigurationImageScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type ConfigurationImageCreateWithoutTrimInput = {
   id?: string
   image_url: string

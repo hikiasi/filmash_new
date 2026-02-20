@@ -26,8 +26,10 @@ export default function ModelEditorClient({ model }: { model: any }) {
     name: model.name,
     body_type: model.body_type,
     year: model.year,
+    image_url: model.image_url || '',
     description: model.description || ''
   });
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleSaveModel = async () => {
     setIsSavingModel(true);
@@ -131,6 +133,59 @@ export default function ModelEditorClient({ model }: { model: any }) {
                           value={modelData.year}
                           onChange={e => setModelData({...modelData, year: parseInt(e.target.value)})}
                           className="w-full h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary"
+                        />
+                    </div>
+                </div>
+
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 pt-10 border-t border-zinc-900">
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Главное изображение (Превью)</label>
+                        <div className="flex gap-4">
+                            <input
+                              type="text"
+                              value={modelData.image_url}
+                              onChange={e => setModelData({...modelData, image_url: e.target.value})}
+                              placeholder="/uploads/..."
+                              className="flex-1 h-14 bg-zinc-900 border border-zinc-800 rounded-2xl px-5 text-white font-black italic outline-none focus:border-primary"
+                            />
+                            <div className="relative">
+                                <input
+                                    type="file"
+                                    onChange={async (e) => {
+                                        const file = e.target.files?.[0];
+                                        if (!file) return;
+                                        setIsUploading(true);
+                                        const data = new FormData();
+                                        data.append('file', file);
+                                        data.append('folder', 'cars');
+                                        try {
+                                            const res = await fetch('/api/upload', { method: 'POST', body: data });
+                                            const result = await res.json();
+                                            if (result.url) setModelData({ ...modelData, image_url: result.url });
+                                        } finally {
+                                            setIsUploading(false);
+                                        }
+                                    }}
+                                    className="absolute inset-0 opacity-0 cursor-pointer"
+                                />
+                                <button className="h-14 px-6 bg-zinc-800 rounded-2xl text-white flex items-center justify-center">
+                                    {isUploading ? <span className="material-symbols-outlined animate-spin">sync</span> : <span className="material-symbols-outlined">upload</span>}
+                                </button>
+                            </div>
+                        </div>
+                        {modelData.image_url && (
+                            <div className="mt-4 aspect-video bg-black rounded-2xl overflow-hidden border border-zinc-800">
+                                <img src={modelData.image_url} className="w-full h-full object-contain" alt="Preview" />
+                            </div>
+                        )}
+                    </div>
+                    <div className="space-y-3">
+                        <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest block ml-2">Описание</label>
+                        <textarea
+                          value={modelData.description}
+                          onChange={e => setModelData({...modelData, description: e.target.value})}
+                          placeholder="Введите описание модели..."
+                          className="w-full h-[250px] bg-zinc-900 border border-zinc-800 rounded-2xl p-5 text-white font-black italic outline-none focus:border-primary"
                         />
                     </div>
                 </div>
