@@ -24,7 +24,9 @@ export function ConfiguratorLayout({ model, onOrderClick }: ConfiguratorLayoutPr
       {/* Left Column: Visualization & Specs */}
       <div className="lg:w-2/3 space-y-12">
         <ImageGallery />
-        <SpecificationsAccordion />
+        <div className="hidden lg:block">
+          <SpecificationsAccordion />
+        </div>
       </div>
 
       {/* Right Column: Controls */}
@@ -56,6 +58,10 @@ export function ConfiguratorLayout({ model, onOrderClick }: ConfiguratorLayoutPr
             <InteriorSelector />
             <SteeringWheelSelector />
             <AdditionalOptions />
+          </div>
+
+          <div className="lg:hidden mt-12">
+            <SpecificationsAccordion />
           </div>
         </div>
       </div>

@@ -6,13 +6,32 @@ import { useRouter } from 'next/navigation';
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple demo logic: set cookie and redirect to dashboard
-    document.cookie = 'filmash-auth=true; path=/; max-age=86400';
-    router.push('/admin');
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.ok) {
+        router.push('/admin');
+      } else {
+        setError('Неверный логин или пароль');
+      }
+    } catch (err) {
+      setError('Ошибка сервера. Попробуйте позже.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -47,6 +66,12 @@ export default function AdminLoginPage() {
                  </div>
               </div>
 
+              {error && (
+                <div className="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 text-red-500 text-[10px] font-black uppercase tracking-widest text-center italic">
+                  {error}
+                </div>
+              )}
+
               <div className="space-y-3">
                  <label className="text-[10px] font-black text-zinc-600 uppercase tracking-widest ml-4 italic">Пароль</label>
                  <div className="relative group">
@@ -65,9 +90,10 @@ export default function AdminLoginPage() {
 
            <button
               type="submit"
-              className="w-full h-16 bg-primary text-black text-xs font-black uppercase tracking-[0.2em] rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10 active:scale-[0.98]"
+              disabled={isLoading}
+              className="w-full h-16 bg-primary text-black text-xs font-black uppercase tracking-[0.2em] rounded-2xl hover:opacity-90 transition-all italic shadow-lg shadow-primary/10 active:scale-[0.98] disabled:opacity-50"
            >
-              ВХОД В СИСТЕМУ
+              {isLoading ? 'ЗАГРУЗКА...' : 'ВХОД В СИСТЕМУ'}
            </button>
 
            <div className="text-center">

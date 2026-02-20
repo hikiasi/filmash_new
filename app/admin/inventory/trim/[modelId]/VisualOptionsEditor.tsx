@@ -98,10 +98,15 @@ export default function VisualOptionsEditor({
   };
 
   return (
-    <div className="space-y-10">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-        {/* Colors */}
-        <Section
+    <div className="space-y-16">
+      <div className="space-y-8">
+        <div className="flex items-center gap-4">
+            <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Опции Экстерьера</h2>
+            <div className="flex-1 h-px bg-zinc-900" />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Colors */}
+          <Section
             title="Цвета"
             icon="palette"
             items={initialColors}
@@ -121,8 +126,8 @@ export default function VisualOptionsEditor({
             )}
         />
 
-        {/* Wheels */}
-        <Section
+          {/* Wheels */}
+          <Section
             title="Диски"
             icon="tire_repair"
             items={initialWheels}
@@ -142,29 +147,36 @@ export default function VisualOptionsEditor({
             )}
         />
 
-        {/* Interior */}
-        <Section
-            title="Интерьер"
-            icon="chair"
-            items={initialInteriors}
-            onAdd={() => handleOpenModal('interior')}
-            onEdit={(item: any) => handleOpenModal('interior', item)}
-            onDelete={(id: string) => handleDelete('interior', id)}
-            renderItem={(item: any) => (
-                <div className="flex items-center gap-4">
-                    <div className="size-10 bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
-                        {item.image_url && <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-white text-[10px] font-black uppercase tracking-widest truncate">{item.name}</p>
-                        <p className="text-[10px] text-zinc-600">{item.material}</p>
-                    </div>
-                </div>
-            )}
-        />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <div className="space-y-8">
+        <div className="flex items-center gap-4">
+            <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Опции Интерьера</h2>
+            <div className="flex-1 h-px bg-zinc-900" />
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          {/* Interior */}
+          <Section
+              title="Варианты отделки"
+              icon="chair"
+              items={initialInteriors}
+              onAdd={() => handleOpenModal('interior')}
+              onEdit={(item: any) => handleOpenModal('interior', item)}
+              onDelete={(id: string) => handleDelete('interior', id)}
+              renderItem={(item: any) => (
+                  <div className="flex items-center gap-4">
+                      <div className="size-10 bg-zinc-950 border border-zinc-800 rounded-lg overflow-hidden">
+                          {item.image_url && <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                          <p className="text-white text-[10px] font-black uppercase tracking-widest truncate">{item.name}</p>
+                          <p className="text-[10px] text-zinc-600">{item.material}</p>
+                      </div>
+                  </div>
+              )}
+          />
+
           <Section
             title="Варианты руля"
             icon="sports_steeringwheel"
@@ -184,7 +196,15 @@ export default function VisualOptionsEditor({
             )}
           />
 
-          <Section
+        </div>
+      </div>
+
+      <div className="space-y-8">
+        <div className="flex items-center gap-4">
+            <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Дополнительно</h2>
+            <div className="flex-1 h-px bg-zinc-900" />
+        </div>
+        <Section
             title="Дополнительные опции"
             icon="add_circle"
             items={initialOptions}

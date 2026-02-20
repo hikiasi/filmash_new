@@ -46,13 +46,33 @@ const StaffRow = ({ name, email, role, lastLogin, avatar, roleColor }: any) => (
   </tr>
 );
 
-export default function StaffClient() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newStaff, setNewStaff] = useState({ name: '', email: '', role: 'MANAGER' });
+import { useRouter } from 'next/navigation';
 
-  const handleAddStaff = () => {
-    alert(`Сотрудник ${newStaff.name} добавлен (демо)`);
-    setIsModalOpen(false);
+export default function StaffClient({ staff: initialStaff }: { staff: any[] }) {
+  const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [newStaff, setNewStaff] = useState({ name: '', email: '', role: 'MANAGER', password: '' });
+
+  const handleAddStaff = async () => {
+    setIsSaving(true);
+    try {
+      const res = await fetch('/api/admin/staff', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newStaff),
+      });
+
+      if (res.ok) {
+        setIsModalOpen(false);
+        setNewStaff({ name: '', email: '', role: 'MANAGER', password: '' });
+        router.refresh();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -103,9 +123,23 @@ export default function StaffClient() {
                 </tr>
               </thead>
               <tbody>
-                <StaffRow name="Алексей М." email="alex@filmash.com" role="Администратор" lastLogin="2 мин назад" avatar="" roleColor="red" />
-                <StaffRow name="Сара К." email="sarah@filmash.com" role="Менеджер" lastLogin="1 час назад" avatar="" roleColor="purple" />
-                <StaffRow name="Джеймс Б." email="007@filmash.com" role="Логист" lastLogin="1 день назад" avatar="" roleColor="blue" />
+                {initialStaff?.map((member: any) => (
+                  <StaffRow
+                    key={member.id}
+                    name={member.name}
+                    email={member.email}
+                    role={
+                      member.role === 'ADMIN' ? 'Администратор' :
+                      member.role === 'LOGISTICS' ? 'Логист' : 'Менеджер'
+                    }
+                    lastLogin={member.last_login ? new Date(member.last_login).toLocaleString() : 'Никогда'}
+                    avatar={member.avatar_url}
+                    roleColor={
+                      member.role === 'ADMIN' ? 'red' :
+                      member.role === 'LOGISTICS' ? 'blue' : 'purple'
+                    }
+                  />
+                ))}
               </tbody>
             </table>
           </div>
@@ -137,6 +171,16 @@ export default function StaffClient() {
               />
             </div>
             <div className="space-y-2">
+              <Label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">Пароль</Label>
+              <Input
+                type="password"
+                value={newStaff.password}
+                onChange={e => setNewStaff({...newStaff, password: e.target.value})}
+                placeholder="••••••••"
+                className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:border-primary text-white italic"
+              />
+            </div>
+            <div className="space-y-2">
               <Label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-2">Роль</Label>
               <Select value={newStaff.role} onValueChange={v => setNewStaff({...newStaff, role: v})}>
                 <SelectTrigger className="bg-zinc-900 border-zinc-800 h-14 rounded-2xl focus:ring-primary text-white italic">
@@ -152,10 +196,11 @@ export default function StaffClient() {
           </div>
           <DialogFooter>
             <Button
+              disabled={isSaving}
               onClick={handleAddStaff}
               className="w-full h-14 bg-primary text-black font-black uppercase tracking-widest rounded-xl hover:opacity-90 transition-all italic"
             >
-              Создать аккаунт
+              {isSaving ? 'Сохранение...' : 'Создать аккаунт'}
             </Button>
           </DialogFooter>
         </DialogContent>

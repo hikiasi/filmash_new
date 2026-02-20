@@ -1,6 +1,7 @@
 import { PrismaClient } from '../app/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import 'dotenv/config';
+import bcrypt from 'bcryptjs';
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -24,6 +25,7 @@ async function main() {
     await prisma.trim.deleteMany();
     await prisma.model.deleteMany();
     await prisma.brand.deleteMany();
+    await prisma.staff.deleteMany();
   } catch (e) {
     console.log('Delete failed (might be empty or connection issue), continuing...');
   }
@@ -237,6 +239,17 @@ async function main() {
         });
     }
   }
+
+  // Create default admin
+  console.log('Creating default admin...');
+  await prisma.staff.create({
+    data: {
+      name: 'Admin',
+      email: 'admin@filmash.com',
+      password: await bcrypt.hash('admin123', 10),
+      role: 'ADMIN',
+    }
+  });
 
   console.log('Seed completed successfully');
 }

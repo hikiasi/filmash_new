@@ -77,3 +77,8 @@ export type Delivery = Prisma.DeliveryModel
  * 
  */
 export type CurrencyRate = Prisma.CurrencyRateModel
+/**
+ * Model Staff
+ *
+ */
+export type Staff = Prisma.StaffModel

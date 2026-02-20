@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import sharp from 'sharp';
 
 export async function POST(request: Request) {
   try {
@@ -14,9 +15,22 @@ export async function POST(request: Request) {
     }
 
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    let buffer = Buffer.from(bytes);
 
-    const filename = `${uuidv4()}-${file.name.replace(/\s+/g, '-')}`;
+    const isImage = file.type.startsWith('image/');
+    let filename = `${uuidv4()}-${file.name.replace(/\s+/g, '-')}`;
+
+    if (isImage && !file.name.endsWith('.svg')) {
+      // Optimize image
+      buffer = await sharp(buffer)
+        .resize(1920, 1080, { fit: 'inside', withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toBuffer();
+
+      // Change extension to .webp
+      filename = filename.replace(/\.[^/.]+$/, "") + ".webp";
+    }
+
     const relativePath = `/uploads/${folder}/${filename}`;
     const absolutePath = join(process.cwd(), 'public', 'uploads', folder, filename);
 
