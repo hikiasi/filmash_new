@@ -62,7 +62,8 @@ export const ModelName = {
   AdditionalOption: 'AdditionalOption',
   Inquiry: 'Inquiry',
   Delivery: 'Delivery',
-  CurrencyRate: 'CurrencyRate'
+  CurrencyRate: 'CurrencyRate',
+  Staff: 'Staff'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -255,6 +256,21 @@ export const CurrencyRateScalarFieldEnum = {
 } as const
 
 export type CurrencyRateScalarFieldEnum = (typeof CurrencyRateScalarFieldEnum)[keyof typeof CurrencyRateScalarFieldEnum]
+
+
+export const StaffScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  role: 'role',
+  avatar_url: 'avatar_url',
+  last_login: 'last_login',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type StaffScalarFieldEnum = (typeof StaffScalarFieldEnum)[keyof typeof StaffScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -6,6 +6,25 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     const { id: trimId } = await params;
     const body = await request.json();
 
+    if (Array.isArray(body.image_urls)) {
+      const configImages = await Promise.all(
+        body.image_urls.map((url: string) =>
+          prisma.configurationImage.create({
+            data: {
+              trim_id: trimId,
+              type: body.type,
+              color_id: body.color_id,
+              wheel_id: body.wheel_id,
+              interior_id: body.interior_id,
+              steering_wheel_id: body.steering_wheel_id,
+              image_url: url,
+            },
+          })
+        )
+      );
+      return NextResponse.json(configImages);
+    }
+
     const configImage = await prisma.configurationImage.create({
       data: {
         trim_id: trimId,

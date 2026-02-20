@@ -61,7 +61,7 @@ export function ImageGallery() {
 
   return (
     <div className="space-y-6">
-      <div className="relative aspect-[16/10] bg-zinc-100 rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-2xl group/gallery">
+      <div className="relative aspect-[4/3] sm:aspect-[16/10] bg-zinc-100 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-zinc-200 shadow-2xl group/gallery">
         {/* Background glow / shadow for depth */}
         <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/5 to-transparent pointer-events-none" />
 
@@ -74,9 +74,11 @@ export function ImageGallery() {
                     src={img.image_url}
                     alt={`Car ${view} view ${idx + 1}`}
                     fill
-                    imgClassName="object-contain scale-90"
+                    imgClassName={view === 'interior' ? "object-cover" : "object-contain scale-100 sm:scale-110"}
                     className="w-full h-full"
                     priority={idx === 0}
+                    loading={idx === 0 ? "eager" : "lazy"}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
                   />
                 </div>
               ))
@@ -110,7 +112,7 @@ export function ImageGallery() {
 
         {/* Dots Indicator */}
         {currentImages.length > 1 && (
-          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-1.5 p-2 bg-black/5 backdrop-blur-sm rounded-full">
+          <div className="absolute bottom-24 sm:bottom-28 left-1/2 -translate-x-1/2 flex gap-1.5 p-2 bg-black/5 backdrop-blur-sm rounded-full z-10">
             {currentImages.map((_, i) => (
               <div
                 key={i}
@@ -121,19 +123,19 @@ export function ImageGallery() {
         )}
 
         {/* View Switcher Overlay */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 bg-white/80 backdrop-blur-xl p-1.5 rounded-2xl border border-zinc-200 shadow-2xl">
+        <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2 bg-white/80 backdrop-blur-xl p-1 sm:p-1.5 rounded-xl sm:rounded-2xl border border-zinc-200 shadow-2xl z-20">
             <button
                 onClick={() => setView('exterior')}
-                className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${view === 'exterior' ? 'bg-primary text-black shadow-lg shadow-primary/20' : 'text-zinc-500 hover:text-zinc-900'}`}
+                className={`px-4 sm:px-8 py-2 sm:py-3 rounded-lg sm:rounded-xl text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-1 sm:gap-2 ${view === 'exterior' ? 'bg-primary text-black shadow-lg shadow-primary/20' : 'text-zinc-500 hover:text-zinc-900'}`}
             >
-                <span className="material-symbols-outlined text-sm">directions_car</span>
+                <span className="material-symbols-outlined text-xs sm:text-sm">directions_car</span>
                 Экстерьер
             </button>
             <button
                 onClick={() => setView('interior')}
-                className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-2 ${view === 'interior' ? 'bg-primary text-black shadow-lg shadow-primary/20' : 'text-zinc-500 hover:text-zinc-900'}`}
+                className={`px-4 sm:px-8 py-2 sm:py-3 rounded-lg sm:rounded-xl text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] transition-all flex items-center gap-1 sm:gap-2 ${view === 'interior' ? 'bg-primary text-black shadow-lg shadow-primary/20' : 'text-zinc-500 hover:text-zinc-900'}`}
             >
-                <span className="material-symbols-outlined text-sm">event_seat</span>
+                <span className="material-symbols-outlined text-xs sm:text-sm">event_seat</span>
                 Интерьер
             </button>
         </div>
