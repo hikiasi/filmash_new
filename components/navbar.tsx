@@ -34,6 +34,7 @@ export function Navbar() {
             alt="Филмаш Логотип"
             width={90}
             height={40}
+            style={{ height: 'auto' }}
             className="object-contain transition-all duration-300" 
           />
         </Link>

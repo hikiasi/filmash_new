@@ -129,12 +129,50 @@ async function main() {
         }
     },
     {
-        brand: 'Lixiang', name: 'L9', year: 2024, body_type: 'Внедорожник', price_cny: 429800,
-        specs: {
-            length: 5218, width: 1998, height: 1800, wheelbase: 3105, seats: 6,
-            engine_type: 'Гибрид', drive: 'Полный (AWD)', power: 449,
-            battery: '52.3 кВт·ч', acceleration: 5.3, top_speed: 180, range: 1315
-        }
+        brand: 'Lixiang', name: 'L9', year: 2024, body_type: 'Внедорожник', price_cny: 409800,
+        trims: [
+          {
+            name: 'L9 Pro',
+            base_price_cny: 409800,
+            specs: {"drive": "4WD", "power": 449, "range": "1100", "seats": "6", "width": "1998", "height": "1800", "length": "5218", "battery": "44,5 кВт·ч", "top_speed": "180", "wheelbase": "3105", "engine_type": "330 кВт", "acceleration": "5,3 с"},
+            colors: [
+              { name: 'Белый перламутр', hex: '#FFFFFF', image: '/uploads/color/bb5be34e-c927-4977-84ef-5d4599edab74-bel2.png' },
+              { name: 'Зеленый перламутр', hex: '#006400', image: '/uploads/color/9ec7ca65-0928-4674-a625-c35efdd4eb94-zel2.png' },
+              { name: 'Черный металлик', hex: '#000000', image: '/uploads/color/9eec25f4-660e-4724-a607-0d55b91cad6a-black2.png' },
+              { name: 'Холодный глянец', hex: '#A9A9A9', image: '/uploads/color/43aa7c10-76ee-4dd3-bb92-6a78c640e2e1-cold2.png' },
+              { name: 'Серый металлик', hex: '#808080', image: '/uploads/color/e293ec46-c09e-4432-b7dc-faf7b661c19a-gray2.png' },
+              { name: 'Фиолетовый перламутровый', hex: '#4B0082', image: '/uploads/color/832ccc5e-41e9-4181-b672-00979e300fcb-purple2.png' },
+              { name: 'Серебряный металлик', hex: '#C0C0C0', image: '/uploads/color/07864a9c-33f3-4d5e-bd63-48d7af37b027-serebr2.png' },
+            ],
+            interiors: [
+              { name: 'Коричневый', material: 'Кожа Наппа', image: '/uploads/interior/db975855-28a1-4dec-b87f-91277137ce84-brown1.png' },
+              { name: 'Черный', material: 'Кожа Наппа', image: '/uploads/interior/f855023a-a2a0-4011-9c5a-0b2a35be0301-black1.png' },
+              { name: 'Оранжевый', material: 'Кожа Наппа', image: '/uploads/interior/4236f7d0-be9d-467e-a9f0-1752c19d73c6-orange1.png' },
+              { name: 'Белый', material: 'Кожа Наппа', image: '/uploads/interior/9b536434-95ad-40c5-8f02-6a108f6cf17d-white1.png' },
+            ],
+            wheels: [
+              { name: '21" серебристо-серые', size: '21', image: '/uploads/wheel/8b02bfe7-70d1-4491-b880-ceb227714b4e-jgpa1vmvaf4uxc32lksd9o8btospet5i.png' },
+              { name: '21" черно-серые', size: '21', image: '/uploads/wheel/47c32bf8-1d0a-4a25-b84a-c291ee9d45b1-black_rims.png' },
+            ],
+            images: [
+                // White
+                { type: 'exterior', color: 'Белый перламутр', wheel: '21" серебристо-серые', url: '/uploads/config-views/7588566d-1053-470b-a861-75b2084142e1-bel.png' },
+                { type: 'exterior', color: 'Белый перламутр', wheel: '21" серебристо-серые', url: '/uploads/config-views/ea9e0ff4-4ae8-4827-b627-65d1138a4f94-bel1.png' },
+                // Green
+                { type: 'exterior', color: 'Зеленый перламутр', wheel: '21" серебристо-серые', url: '/uploads/config-views/f72225b4-296d-4e90-ace2-8a54d2a03a18-zel.png' },
+                { type: 'exterior', color: 'Зеленый перламутр', wheel: '21" серебристо-серые', url: '/uploads/config-views/578e9355-8e80-44e8-af4f-02f4e6fcaf3e-zel1.png' },
+                // Brown Interior
+                { type: 'interior', interior: 'Коричневый', url: '/uploads/config-views/eb5084cf-cd4d-432f-a8fe-ae5ee7c3e2e2-brown.png' },
+                { type: 'interior', interior: 'Коричневый', url: '/uploads/config-views/4be4ed7d-54a8-455b-8e26-0e96dfef0c09-brown2.png' },
+                // Black Interior
+                { type: 'interior', interior: 'Черный', url: '/uploads/config-views/24c683a7-cf8a-4c18-8e0b-d7fc93e21280-black.png' },
+                { type: 'interior', interior: 'Черный', url: '/uploads/config-views/57afba15-3bd5-409a-a172-710e7816cd7e-black2.png' },
+                // Orange Interior
+                { type: 'interior', interior: 'Оранжевый', url: '/uploads/config-views/510d7733-65f3-41f0-9a1d-858e3958de3c-orange.png' },
+                { type: 'interior', interior: 'Оранжевый', url: '/uploads/config-views/59de0cf3-2dc0-4dda-afb2-e4acebcc1ea6-orange2.png' },
+            ]
+          }
+        ]
     },
     {
         brand: 'Tesla', name: 'Cybertruck', year: 2024, body_type: 'Пикап', price_cny: 1000000,
@@ -173,70 +211,98 @@ async function main() {
       }
     });
 
-    const trim = await prisma.trim.create({
-      data: {
-        model_id: model.id,
-        name: 'Standard',
-        base_price_cny: car.price_cny,
-        base_price_rub: car.price_cny * 13.5,
-        specifications: car.specs as any,
-      }
-    });
-
-    const colors = [
-        { name: 'Electric Blue', hex: '#0000FF', price: 0, image: '/uploads/cars/zeekr-001.jpg' },
-        { name: 'Matte Black', hex: '#111111', price: 10000, image: '/uploads/cars/zeekr-001.jpg' },
-        { name: 'Pearl White', hex: '#FFFFFF', price: 5000, image: '/uploads/cars/zeekr-001.jpg' },
+    const carTrims = (car as any).trims || [
+        {
+            name: 'Standard',
+            base_price_cny: car.price_cny,
+            specs: (car as any).specs
+        }
     ];
 
-    for (const c of colors) {
-        await prisma.color.create({
-            data: {
-                trim_id: trim.id,
-                name: c.name,
-                hex_code: c.hex,
-                image_url: c.image || '',
-                is_premium: c.price > 0,
-                additional_price_cny: c.price,
-                additional_price_rub: c.price * 13.5,
-            }
+    for (const trimData of carTrims) {
+        const trim = await prisma.trim.create({
+          data: {
+            model_id: model.id,
+            name: trimData.name,
+            base_price_cny: trimData.base_price_cny,
+            base_price_rub: Number(trimData.base_price_cny) * 13.5,
+            specifications: trimData.specs as any,
+          }
         });
-    }
 
-    const wheels = [
-        { name: '20" Sport', size: '20', price: 0 },
-        { name: '21" Performance', size: '21', price: 15000 },
-    ];
+        const colors = trimData.colors || [
+            { name: 'Electric Blue', hex: '#0000FF', price: 0, image: '/uploads/cars/zeekr-001.jpg' },
+            { name: 'Matte Black', hex: '#111111', price: 10000, image: '/uploads/cars/zeekr-001.jpg' },
+            { name: 'Pearl White', hex: '#FFFFFF', price: 5000, image: '/uploads/cars/zeekr-001.jpg' },
+        ];
 
-    for (const w of wheels) {
-        await prisma.wheel.create({
-            data: {
-                trim_id: trim.id,
-                name: w.name,
-                size: w.size,
-                additional_price_cny: w.price,
-                additional_price_rub: w.price * 13.5,
-                image_url: '',
+        const createdColors: Record<string, any> = {};
+        for (const c of colors) {
+            createdColors[c.name] = await prisma.color.create({
+                data: {
+                    trim_id: trim.id,
+                    name: c.name,
+                    hex_code: c.hex,
+                    image_url: c.image || '',
+                    is_premium: (c.price || 0) > 0,
+                    additional_price_cny: c.price || 0,
+                    additional_price_rub: (c.price || 0) * 13.5,
+                }
+            });
+        }
+
+        const wheels = trimData.wheels || [
+            { name: '20" Sport', size: '20', price: 0 },
+            { name: '21" Performance', size: '21', price: 15000 },
+        ];
+
+        const createdWheels: Record<string, any> = {};
+        for (const w of wheels) {
+            createdWheels[w.name] = await prisma.wheel.create({
+                data: {
+                    trim_id: trim.id,
+                    name: w.name,
+                    size: w.size,
+                    additional_price_cny: w.price || 0,
+                    additional_price_rub: (w.price || 0) * 13.5,
+                    image_url: w.image || '',
+                }
+            });
+        }
+
+        const interiors = trimData.interiors || [
+            { name: 'Black Leather', material: 'Leather', price: 0 },
+            { name: 'White Nappa', material: 'Nappa', price: 12000 },
+        ];
+
+        const createdInteriors: Record<string, any> = {};
+        for (const i of interiors) {
+            createdInteriors[i.name] = await prisma.interior.create({
+                data: {
+                    trim_id: trim.id,
+                    name: i.name,
+                    material: i.material,
+                    additional_price_cny: i.price || 0,
+                    additional_price_rub: (i.price || 0) * 13.5,
+                    image_url: i.image || '',
+                }
+            });
+        }
+
+        if (trimData.images) {
+            for (const img of trimData.images) {
+                await prisma.configurationImage.create({
+                    data: {
+                        trim_id: trim.id,
+                        type: img.type,
+                        image_url: img.url,
+                        color_id: img.color ? createdColors[img.color]?.id : null,
+                        wheel_id: img.wheel ? createdWheels[img.wheel]?.id : null,
+                        interior_id: img.interior ? createdInteriors[img.interior]?.id : null,
+                    }
+                });
             }
-        });
-    }
-
-    const interiors = [
-        { name: 'Black Leather', material: 'Leather', price: 0 },
-        { name: 'White Nappa', material: 'Nappa', price: 12000 },
-    ];
-
-    for (const i of interiors) {
-        await prisma.interior.create({
-            data: {
-                trim_id: trim.id,
-                name: i.name,
-                material: i.material,
-                additional_price_cny: i.price,
-                additional_price_rub: i.price * 13.5,
-                image_url: '',
-            }
-        });
+        }
     }
   }
 

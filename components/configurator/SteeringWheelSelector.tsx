@@ -26,7 +26,7 @@ export function SteeringWheelSelector() {
                 "relative rounded-2xl border-2 transition-all duration-500 flex items-center justify-center overflow-hidden bg-zinc-900",
                 isSelected
                     ? "border-primary shadow-[0_0_20px_rgba(207,249,2,0.3)] z-10"
-                    : "border-zinc-800 opacity-60 hover:opacity-100"
+                    : "border-zinc-800 opacity-80 hover:opacity-100"
               )}
               style={{
                 width: isSelected ? '67px' : '53px',

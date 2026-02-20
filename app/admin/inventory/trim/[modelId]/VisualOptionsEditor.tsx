@@ -29,6 +29,11 @@ export default function VisualOptionsEditor({
   const [formData, setFormData] = useState<any>({});
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
+
+  const toggleSection = (id: string) => {
+    setCollapsedSections(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   const handleOpenModal = (type: string, item: any = null) => {
     setEditingItem(item);
@@ -100,11 +105,21 @@ export default function VisualOptionsEditor({
   return (
     <div className="space-y-16">
       <div className="space-y-8">
-        <div className="flex items-center gap-4">
+        <div
+            className="flex items-center gap-4 cursor-pointer group/header"
+            onClick={() => toggleSection('exterior')}
+        >
             <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Опции Экстерьера</h2>
-            <div className="flex-1 h-px bg-zinc-900" />
+            <div className="flex-1 h-px bg-zinc-900 group-hover/header:bg-primary/30 transition-colors" />
+            <span className={cn(
+                "material-symbols-outlined text-zinc-500 transition-transform duration-300",
+                collapsedSections['exterior'] ? "rotate-180" : ""
+            )}>
+                keyboard_arrow_up
+            </span>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {!collapsedSections['exterior'] && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in fade-in slide-in-from-top-4 duration-500">
           {/* Colors */}
           <Section
             title="Цвета"
@@ -148,14 +163,25 @@ export default function VisualOptionsEditor({
         />
 
         </div>
+        )}
       </div>
 
       <div className="space-y-8">
-        <div className="flex items-center gap-4">
+        <div
+            className="flex items-center gap-4 cursor-pointer group/header"
+            onClick={() => toggleSection('interior')}
+        >
             <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Опции Интерьера</h2>
-            <div className="flex-1 h-px bg-zinc-900" />
+            <div className="flex-1 h-px bg-zinc-900 group-hover/header:bg-primary/30 transition-colors" />
+            <span className={cn(
+                "material-symbols-outlined text-zinc-500 transition-transform duration-300",
+                collapsedSections['interior'] ? "rotate-180" : ""
+            )}>
+                keyboard_arrow_up
+            </span>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {!collapsedSections['interior'] && (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 animate-in fade-in slide-in-from-top-4 duration-500">
           {/* Interior */}
           <Section
               title="Варианты отделки"
@@ -197,14 +223,26 @@ export default function VisualOptionsEditor({
           />
 
         </div>
+        )}
       </div>
 
       <div className="space-y-8">
-        <div className="flex items-center gap-4">
+        <div
+            className="flex items-center gap-4 cursor-pointer group/header"
+            onClick={() => toggleSection('additional')}
+        >
             <h2 className="text-xl font-black text-white uppercase italic tracking-tighter">Дополнительно</h2>
-            <div className="flex-1 h-px bg-zinc-900" />
+            <div className="flex-1 h-px bg-zinc-900 group-hover/header:bg-primary/30 transition-colors" />
+            <span className={cn(
+                "material-symbols-outlined text-zinc-500 transition-transform duration-300",
+                collapsedSections['additional'] ? "rotate-180" : ""
+            )}>
+                keyboard_arrow_up
+            </span>
         </div>
-        <Section
+        {!collapsedSections['additional'] && (
+        <div className="animate-in fade-in slide-in-from-top-4 duration-500">
+          <Section
             title="Дополнительные опции"
             icon="add_circle"
             items={initialOptions}

@@ -30,13 +30,25 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
     notFound();
   }
 
-  // Get the exterior image for the config
-  const configImage = await prisma.configurationImage.findFirst({
+  // Get all images matching the configuration (exterior and interior)
+  const configImages = await prisma.configurationImage.findMany({
     where: {
-      trim_id: inquiry.trim_id,
-      color_id: inquiry.color_id,
-      wheel_id: inquiry.wheels_id,
-      type: 'exterior'
+      trim_id: inquiry.trim_id as string,
+      OR: [
+        {
+          type: 'exterior',
+          color_id: inquiry.color_id,
+          OR: [
+              { wheel_id: inquiry.wheels_id },
+              { wheel_id: null }
+          ]
+        },
+        {
+          type: 'interior',
+          interior_id: inquiry.interior_id,
+          // steering wheel matching could be added if inquiry had steering_wheel_id
+        }
+      ]
     }
   });
 
@@ -90,7 +102,7 @@ export default async function InquiryDetailPage({ params }: { params: Promise<{ 
         <div className="lg:col-span-8 flex flex-col gap-8">
           <InquiryDetailClient
             inquiry={serializedInquiry}
-            configImage={configImage?.image_url}
+            configImages={serializePrisma(configImages)}
           />
         </div>
 

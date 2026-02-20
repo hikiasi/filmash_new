@@ -3,13 +3,20 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import useEmblaCarousel from 'embla-carousel-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 interface InquiryDetailClientProps {
   inquiry: any;
-  configImage?: string;
+  configImages?: any[];
 }
 
-export default function InquiryDetailClient({ inquiry, configImage }: InquiryDetailClientProps) {
+export default function InquiryDetailClient({ inquiry, configImages = [] }: InquiryDetailClientProps) {
   const [showConfig, setShowConfig] = useState(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+
+  const scrollPrev = React.useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = React.useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
   const [status, setStatus] = useState(inquiry.status);
   const [isUpdating, setIsUpdating] = useState(false);
   const router = useRouter();
@@ -103,16 +110,44 @@ export default function InquiryDetailClient({ inquiry, configImage }: InquiryDet
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl transition-all" onClick={() => setShowConfig(false)} />
           <div className="relative bg-zinc-950 border border-zinc-900 rounded-[3rem] w-full max-w-6xl overflow-hidden shadow-2xl flex flex-col lg:flex-row h-[85vh] animate-in fade-in zoom-in duration-300">
-             <div className="lg:w-2/3 bg-black flex items-center justify-center relative p-12 overflow-hidden border-r border-zinc-900">
-                {configImage ? (
-                    <img
-                        src={configImage}
-                        className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative z-10"
-                        alt="Configuration Preview"
-                    />
-                ) : (
-                    <div className="text-zinc-800 font-black italic uppercase tracking-widest text-xl relative z-10">Изображение отсутствует</div>
+             <div className="lg:w-2/3 bg-black flex flex-col items-center justify-center relative overflow-hidden border-r border-zinc-900">
+
+                <div className="w-full h-full overflow-hidden" ref={emblaRef}>
+                    <div className="flex h-full">
+                        {configImages.length > 0 ? (
+                            configImages.map((img, idx) => (
+                                <div key={img.id} className="flex-[0_0_100%] min-w-0 relative flex items-center justify-center p-12">
+                                    <img
+                                        src={img.image_url}
+                                        className={`w-full h-full ${img.type === 'interior' ? 'object-cover' : 'object-contain'} drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative z-10`}
+                                        alt={`Configuration Preview ${idx + 1}`}
+                                    />
+                                    <div className="absolute top-10 right-10 flex gap-2">
+                                        <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded-lg text-[8px] font-black text-white uppercase tracking-widest border border-white/10 z-20">
+                                            {img.type === 'exterior' ? 'Экстерьер' : 'Интерьер'}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="flex-[0_0_100%] min-w-0 flex items-center justify-center">
+                                <div className="text-zinc-800 font-black italic uppercase tracking-widest text-xl relative z-10">Изображения отсутствуют</div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {configImages.length > 1 && (
+                    <>
+                        <button onClick={scrollPrev} className="absolute left-6 top-1/2 -translate-y-1/2 size-12 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 flex items-center justify-center text-white z-30 hover:bg-primary hover:text-black transition-all">
+                            <ChevronLeft className="size-6" />
+                        </button>
+                        <button onClick={scrollNext} className="absolute right-6 top-1/2 -translate-y-1/2 size-12 rounded-full bg-zinc-900/80 backdrop-blur-md border border-zinc-800 flex items-center justify-center text-white z-30 hover:bg-primary hover:text-black transition-all">
+                            <ChevronRight className="size-6" />
+                        </button>
+                    </>
                 )}
+
                 <div className="absolute top-10 left-10 z-20">
                     <div className="bg-zinc-900/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/5 shadow-2xl">
                         <span className="text-primary text-[10px] font-black uppercase tracking-[0.3em] italic">ВИЗУАЛИЗАЦИЯ КЛИЕНТА</span>

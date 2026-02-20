@@ -9,12 +9,9 @@ export default async function InventoryPage() {
       brand: true,
       trims: {
         include: {
-            colors: {
-                take: 1
-            },
+            colors: true,
             config_images: {
               where: { type: 'exterior' },
-              take: 1
             }
         }
       },
@@ -68,8 +65,21 @@ export default async function InventoryPage() {
               </thead>
               <tbody className="divide-y divide-zinc-900">
                 {models.map((model: any) => {
-                  const firstTrimWithImage = model.trims.find((t: any) => t.config_images?.[0]?.image_url || t.colors?.[0]?.image_url);
-                  const imageUrl = firstTrimWithImage?.config_images?.[0]?.image_url || firstTrimWithImage?.colors?.[0]?.image_url || '/placeholder-car.jpg';
+                  // Search all trims for an exterior image, then any color image
+                  let imageUrl = '/placeholder-car.jpg';
+
+                  for (const trim of model.trims) {
+                    const extImg = trim.config_images?.find((img: any) => img.image_url);
+                    if (extImg) {
+                        imageUrl = extImg.image_url;
+                        break;
+                    }
+                    const colorImg = trim.colors?.find((c: any) => c.image_url);
+                    if (colorImg) {
+                        imageUrl = colorImg.image_url;
+                        break;
+                    }
+                  }
 
                   return (
                     <tr key={model.id} className="group hover:bg-zinc-900/30 transition-all">

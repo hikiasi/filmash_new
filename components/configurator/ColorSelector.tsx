@@ -27,7 +27,7 @@ export function ColorSelector() {
                 "relative rounded-full border-2 transition-all duration-500 flex items-center justify-center overflow-hidden group",
                 isSelected
                     ? "border-primary scale-100 shadow-[0_0_20px_rgba(207,249,2,0.3)] z-10"
-                    : "border-zinc-800 scale-100 grayscale hover:grayscale-0"
+                    : "border-zinc-800 scale-100 opacity-70 hover:opacity-100"
               )}
               style={{
                 width: isSelected ? '67px' : '53px',

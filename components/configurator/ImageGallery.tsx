@@ -5,7 +5,8 @@ import { useConfiguratorStore } from '@/lib/store/configurator-store';
 import useEmblaCarousel from 'embla-carousel-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ImageOptimized from '@/components/shared/ImageOptimized';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 
 export function ImageGallery() {
   const {
@@ -19,6 +20,7 @@ export function ImageGallery() {
   const [view, setView] = useState<'exterior' | 'interior'>('exterior');
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -69,17 +71,24 @@ export function ImageGallery() {
           <div className="flex h-full">
             {currentImages.length > 0 ? (
               currentImages.map((img: any, idx: number) => (
-                <div key={`${img.id}-${idx}`} className="flex-[0_0_100%] min-w-0 relative">
+                <div
+                    key={`${img.id}-${idx}`}
+                    className="flex-[0_0_100%] min-w-0 relative cursor-zoom-in group/item"
+                    onClick={() => setIsLightboxOpen(true)}
+                >
                   <ImageOptimized
                     src={img.image_url}
                     alt={`Car ${view} view ${idx + 1}`}
                     fill
                     imgClassName={view === 'interior' ? "object-cover" : "object-contain scale-100 sm:scale-110"}
-                    className="w-full h-full"
+                    className="w-full h-full transition-transform duration-500 group-hover/item:scale-[1.02]"
                     priority={idx === 0}
                     loading={idx === 0 ? "eager" : "lazy"}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
                   />
+                  <div className="absolute top-8 right-8 size-12 rounded-full bg-white/20 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover/item:opacity-100 transition-all scale-75 group-hover/item:scale-100">
+                    <ZoomIn className="size-6" />
+                  </div>
                 </div>
               ))
             ) : (
@@ -140,6 +149,48 @@ export function ImageGallery() {
             </button>
         </div>
       </div>
+
+      {/* Lightbox Dialog */}
+      <Dialog open={isLightboxOpen} onOpenChange={setIsLightboxOpen}>
+        <DialogContent className="max-w-[95vw] w-full h-[90vh] p-0 bg-black/90 border-zinc-800 overflow-hidden rounded-[2rem]">
+          <DialogTitle className="sr-only">Просмотр изображения</DialogTitle>
+          <div className="relative w-full h-full flex items-center justify-center p-4">
+             <button
+                onClick={() => setIsLightboxOpen(false)}
+                className="absolute top-6 right-6 z-50 size-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 flex items-center justify-center text-white transition-all"
+             >
+                <X className="size-6" />
+             </button>
+
+             {currentImages[selectedIndex] && (
+                <div className="relative w-full h-full">
+                    <ImageOptimized
+                        src={currentImages[selectedIndex].image_url}
+                        alt="Enlarged car view"
+                        fill
+                        imgClassName={view === 'interior' ? "object-cover" : "object-contain"}
+                        className="w-full h-full"
+                        priority
+                    />
+                </div>
+             )}
+
+             {currentImages.length > 1 && (
+                 <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-4 bg-black/50 backdrop-blur-md p-3 rounded-2xl border border-white/5">
+                    <button onClick={scrollPrev} className="size-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+                        <ChevronLeft className="size-5" />
+                    </button>
+                    <div className="flex items-center px-4 border-x border-white/10">
+                        <span className="text-white font-black italic text-sm">{selectedIndex + 1} / {currentImages.length}</span>
+                    </div>
+                    <button onClick={scrollNext} className="size-10 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+                        <ChevronRight className="size-5" />
+                    </button>
+                 </div>
+             )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* Thumbnails / Comparison views */}
       <div className="grid grid-cols-2 gap-6">
